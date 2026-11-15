@@ -142,6 +142,44 @@ def audit_rule_sources(path: Path | str = ROOT / "kb/enviropermit.ttl") -> dict[
     return mapping
 
 
+def load_obligation_rules(path: Path | str = ROOT / "kb/enviropermit.ttl") -> dict[str, tuple[str, ...]]:
+    text = Path(path).read_text(encoding="utf-8")
+    class_block_re = re.compile(
+        r"(?m)^:([A-Za-z0-9_]+)\s+rdf:type\s+owl:Class\s*;(.*?)(?=\n###|\n#################################################################)",
+        re.DOTALL,
+    )
+    obligation_re = re.compile(
+        r"owl:onProperty\s+:(?:activityObligation|scenarioObligation|satisfiesObligation|exemptFromDecision)\s*;\s*owl:hasValue\s+:([A-Za-z0-9_]+)",
+        re.DOTALL,
+    )
+    mapping: dict[str, set[str]] = {}
+    for match in class_block_re.finditer(text):
+        class_name, body = match.group(1), match.group(2)
+        for ob_match in obligation_re.finditer(body):
+            ob_id = ob_match.group(1)
+            mapping.setdefault(ob_id, set()).add(class_name)
+    return {k: tuple(sorted(v)) for k, v in mapping.items()}
+
+
+def load_decision_sources(path: Path | str = ROOT / "kb/enviropermit.ttl") -> dict[str, tuple[str, ...]]:
+    text = Path(path).read_text(encoding="utf-8")
+    rule_sources = audit_rule_sources(path)
+    decision_re = re.compile(
+        r"(?m)^:([A-Za-z0-9_]+)\s+a\s+owl:NamedIndividual\s*,\s*:DecisionQuery\s*;(.*?\.)",
+        re.DOTALL,
+    )
+    branch_token_re = re.compile(r":([A-Za-z0-9_]+)")
+    result: dict[str, tuple[str, ...]] = {}
+    for match in decision_re.finditer(text):
+        dec_id, body = match.group(1), match.group(2)
+        chunk = _extract_predicate_chunk(body, ":branchClass") or ""
+        sources: set[str] = set()
+        for branch_name in branch_token_re.findall(chunk):
+            sources.update(rule_sources.get(branch_name, ()))
+        result[dec_id] = tuple(sorted(sources))
+    return result
+
+
 def snapshot_scopes(snapshot: CaseSnapshot) -> tuple[str, ...]:
     scopes: list[str] = []
     if snapshot.existing_environmental_approval or snapshot.project_changes:
@@ -153,6 +191,8 @@ def snapshot_scopes(snapshot: CaseSnapshot) -> tuple[str, ...]:
         scopes.append("activity_screening")
     if any(activity.kind == "WaterActivity" for activity in snapshot.activities):
         scopes.append("wastewater_pertek")
+    if any(activity.kind == "AirActivity" for activity in snapshot.activities):
+        scopes.append("emission_pertek")
     scopes.append("modeling_assumption")
     return tuple(scopes)
 

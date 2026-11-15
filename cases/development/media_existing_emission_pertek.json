@@ -1,0 +1,28 @@
+{
+  "context": {
+    "assessment_id": "assessment-media-existing-emission",
+    "scenario_id": "scenario-media-existing-emission",
+    "evidence_snapshot_id": "snapshot-media-existing-emission",
+    "assessed_on": "2026-11-15",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Boiler eksisting berpersetujuan teknis emisi tanpa perubahan teknis sumber emisi",
+  "period_id": "proposed-configuration",
+  "activities": [
+    {
+      "id": "air-1",
+      "scope_id": "boiler-stack-1",
+      "kind": "AirActivity",
+      "stationary_emission": true,
+      "existing_emission_pertek": true
+    }
+  ],
+  "observations": [],
+  "project_changes": [
+    "IdentityChange"
+  ],
+  "changes_complete": true,
+  "screening": "UKL",
+  "existing_environmental_approval": true
+}

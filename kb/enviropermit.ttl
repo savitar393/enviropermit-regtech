@@ -141,6 +141,31 @@
 :hasScaleAssessment rdf:type owl:ObjectProperty .
 
 
+###  https://example.org/enviropermit#emitsFrom
+:emitsFrom rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#exemptFromDecision
+:exemptFromDecision rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasCurrentEmissionPertek
+:hasCurrentEmissionPertek rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasEmissionAssessment
+:hasEmissionAssessment rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasEmissionTechnicalChange
+:hasEmissionTechnicalChange rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :hasTechnicalChange .
+
+
+###  https://example.org/enviropermit#satisfiesObligation
+:satisfiesObligation rdf:type owl:ObjectProperty .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -149,6 +174,12 @@
 :extentChanges rdf:type owl:DatatypeProperty ,
                         owl:FunctionalProperty ;
                rdfs:range xsd:boolean .
+
+
+###  https://example.org/enviropermit#isNonEmittingSource
+:isNonEmittingSource rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:range xsd:boolean .
 
 
 ###  https://example.org/enviropermit#hasLandAreaHa
@@ -831,6 +862,224 @@
                           :source_id "P4:penapisan-industri" .
 
 
+###  https://example.org/enviropermit#AirActivity
+:AirActivity rdf:type owl:Class ;
+             rdfs:subClassOf :SupportingActivity .
+
+
+###  https://example.org/enviropermit#EmissionSource
+:EmissionSource rdf:type owl:Class ;
+                rdfs:subClassOf :Scope .
+
+
+###  https://example.org/enviropermit#StationaryEmissionPoint
+:StationaryEmissionPoint rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#EmissionPertek
+:EmissionPertek rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#EmissionAssessment
+:EmissionAssessment rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#TechnicalEmissionChange
+:TechnicalEmissionChange rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#BoilerAddition
+:BoilerAddition rdf:type owl:Class ;
+                rdfs:subClassOf :TechnicalEmissionChange .
+
+
+###  https://example.org/enviropermit#EmissionControlChange
+:EmissionControlChange rdf:type owl:Class ;
+                       rdfs:subClassOf :TechnicalEmissionChange .
+
+
+###  https://example.org/enviropermit#FuelSwitchChange
+:FuelSwitchChange rdf:type owl:Class ;
+                  rdfs:subClassOf :TechnicalEmissionChange .
+
+
+###  https://example.org/enviropermit#RegulatedStationaryEmission
+:RegulatedStationaryEmission rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( :AirActivity
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :emitsFrom ;
+                                                                          owl:someValuesFrom :StationaryEmissionPoint
+                                                                        ]
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :isActivityOf ;
+                                                                          owl:someValuesFrom :ScreenedCase
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] ;
+                             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                               owl:onProperty :activityObligation ;
+                                               owl:hasValue :emission_pertek_required
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty :activityObligation ;
+                                               owl:hasValue :emission_slo_required
+                                             ] ;
+                             :source_id "P5:28-emisi" .
+
+
+###  https://example.org/enviropermit#ExemptNonEmittingActivity
+:ExemptNonEmittingActivity rdf:type owl:Class ;
+                           owl:equivalentClass [ owl:intersectionOf ( :AirActivity
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :hasEmissionAssessment ;
+                                                                        owl:someValuesFrom [ owl:intersectionOf ( :EmissionAssessment
+                                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                                    owl:onProperty :isNonEmittingSource ;
+                                                                                                                    owl:hasValue "true"^^xsd:boolean
+                                                                                                                  ]
+                                                                                                                ) ;
+                                                                                             rdf:type owl:Class
+                                                                                           ]
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :exemptFromDecision ;
+                                             owl:hasValue :emission_obligation_status
+                                           ] ;
+                           owl:disjointWith :RegulatedStationaryEmission ;
+                           :source_id "P5:28-emisi" .
+
+
+###  https://example.org/enviropermit#MaintainedWaterPertekActivity
+:MaintainedWaterPertekActivity rdf:type owl:Class ;
+                               owl:equivalentClass [ owl:intersectionOf ( :RegulatedSurfaceDischarge
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasCurrentPertek ;
+                                                                            owl:someValuesFrom :WaterPertek
+                                                                          ]
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasTechnicalChange ;
+                                                                            owl:allValuesFrom owl:Nothing
+                                                                          ]
+                                                                        ) ;
+                                                     rdf:type owl:Class
+                                                   ] ;
+                               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :satisfiesObligation ;
+                                                 owl:hasValue :water_pertek_required
+                                               ] ;
+                               :source_id "MODEL:closure" ,
+                                          "P5:15" ,
+                                          "P5:3" .
+
+
+###  https://example.org/enviropermit#MaintainedEmissionPertekActivity
+:MaintainedEmissionPertekActivity rdf:type owl:Class ;
+                                  owl:equivalentClass [ owl:intersectionOf ( :RegulatedStationaryEmission
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasCurrentEmissionPertek ;
+                                                                               owl:someValuesFrom :EmissionPertek
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :hasTechnicalChange ;
+                                                                               owl:allValuesFrom owl:Nothing
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ] ;
+                                  rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :satisfiesObligation ;
+                                                    owl:hasValue :emission_pertek_required
+                                                  ] ;
+                                  :source_id "MODEL:closure" ,
+                                             "P5:28-emisi" ,
+                                             "P5:40-emisi-perubahan" .
+
+
+###  https://example.org/enviropermit#EmissionTechnicalRevision
+:EmissionTechnicalRevision rdf:type owl:Class ;
+                           owl:equivalentClass [ owl:intersectionOf ( :AirActivity
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :emitsFrom ;
+                                                                        owl:someValuesFrom :StationaryEmissionPoint
+                                                                      ]
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :hasCurrentEmissionPertek ;
+                                                                        owl:someValuesFrom :EmissionPertek
+                                                                      ]
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :hasTechnicalChange ;
+                                                                        owl:someValuesFrom :TechnicalEmissionChange
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :activityObligation ;
+                                             owl:hasValue :amend_emission_pertek
+                                           ] ;
+                           :source_id "P5:40-emisi-perubahan" .
+
+
+###  https://example.org/enviropermit#EmissionStudyBranch
+:EmissionStudyBranch rdf:type owl:Class ;
+                     owl:equivalentClass [ owl:intersectionOf ( :EmissionTechnicalRevision
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty :hasImpactAssessment ;
+                                                                  owl:someValuesFrom [ owl:intersectionOf ( :ImpactAssessment
+                                                                                                            [ rdf:type owl:Restriction ;
+                                                                                                              owl:onProperty :extentChanges ;
+                                                                                                              owl:hasValue "true"^^xsd:boolean
+                                                                                                            ]
+                                                                                                          ) ;
+                                                                                       rdf:type owl:Class
+                                                                                     ]
+                                                                ]
+                                                              ) ;
+                                           rdf:type owl:Class
+                                         ] ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty :activityObligation ;
+                                       owl:hasValue :prepare_emission_technical_study
+                                     ] ;
+                     owl:disjointWith :EmissionStandardBranch ;
+                     :source_id "P5:29.2-emisi-kajian" .
+
+
+###  https://example.org/enviropermit#EmissionStandardBranch
+:EmissionStandardBranch rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :EmissionTechnicalRevision
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasImpactAssessment ;
+                                                                     owl:someValuesFrom [ owl:intersectionOf ( :ImpactAssessment
+                                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                                 owl:onProperty :extentChanges ;
+                                                                                                                 owl:hasValue "false"^^xsd:boolean
+                                                                                                               ]
+                                                                                                             ) ;
+                                                                                          rdf:type owl:Class
+                                                                                        ]
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty :activityObligation ;
+                                          owl:hasValue :prepare_emission_standard_technical_documentation
+                                        ] ;
+                        :source_id "P5:29.3-emisi-standar" .
+
+
+###  https://example.org/enviropermit#EmissionStudyAttachmentCandidate
+:EmissionStudyAttachmentCandidate rdf:type owl:Class ;
+                                  rdfs:subClassOf :ReviewableCandidate ;
+                                  :source_id "MODEL:candidate-workflow" ,
+                                             "P5:29.2-emisi-kajian" .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -937,6 +1186,31 @@
                              :ObligationKind .
 
 
+###  https://example.org/enviropermit#emission_pertek_required
+:emission_pertek_required rdf:type owl:NamedIndividual ,
+                                   :ObligationKind .
+
+
+###  https://example.org/enviropermit#emission_slo_required
+:emission_slo_required rdf:type owl:NamedIndividual ,
+                                :ObligationKind .
+
+
+###  https://example.org/enviropermit#amend_emission_pertek
+:amend_emission_pertek rdf:type owl:NamedIndividual ,
+                                :ObligationKind .
+
+
+###  https://example.org/enviropermit#prepare_emission_technical_study
+:prepare_emission_technical_study rdf:type owl:NamedIndividual ,
+                                           :ObligationKind .
+
+
+###  https://example.org/enviropermit#prepare_emission_standard_technical_documentation
+:prepare_emission_standard_technical_documentation rdf:type owl:NamedIndividual ,
+                                                            :ObligationKind .
+
+
 #################################################################
 #    General axioms
 #################################################################
@@ -973,6 +1247,18 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
    ) ;
    swrl:head (
      [ a swrl:ClassAtom ; swrl:classPredicate :TechnicalStudyAttachmentCandidate ; swrl:argument1 :candidate ]
+   ) .
+[] a swrl:Imp ;
+   rdfs:label "emission-study-candidate" ;
+   rdfs:comment "Kandidat lampiran kajian teknis emisi untuk review, bukan dokumen yang sudah diterbitkan." ;
+   :source_id "P5:29.2-emisi-kajian", "MODEL:candidate-workflow" ;
+   swrla:isRuleEnabled true ;
+   swrl:body (
+     [ a swrl:ClassAtom ; swrl:classPredicate :EmissionStudyBranch ; swrl:argument1 :activity ]
+     [ a swrl:IndividualPropertyAtom ; swrl:propertyPredicate :hasStudyCandidate ; swrl:argument1 :activity ; swrl:argument2 :candidate ]
+   ) ;
+   swrl:head (
+     [ a swrl:ClassAtom ; swrl:classPredicate :EmissionStudyAttachmentCandidate ; swrl:argument1 :candidate ]
    ) .
 
 #################################################################
@@ -1021,6 +1307,18 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
 :boundary_ambiguity_gap a owl:NamedIndividual, :EvidenceRequirement ;
    :subjectClass :FoodManufacturingBoundaryAmbiguous ; :missingProperty :hasBoundaryClarification ;
    :missingEvidence "source_boundary_issue:P4:lampiran-i-pangan-batas:250_ton_per_year" .
+:emission_obligation_status a owl:NamedIndividual, :DecisionQuery ;
+   :subjectClass :AirActivity ;
+   :branchClass :RegulatedStationaryEmission, :ExemptNonEmittingActivity ;
+   :missingEvidence "stationary_emission_or_exemption_evidence" .
+:emission_document_route a owl:NamedIndividual, :DecisionQuery ;
+   :subjectClass :EmissionTechnicalRevision ;
+   :branchClass :EmissionStudyBranch, :EmissionStandardBranch ;
+   :missingEvidence "emission_impact_extent_assessment" .
+:prior_emission_pertek a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :AirActivity ; :whenProperty :hasEmissionTechnicalChange ;
+   :missingProperty :hasCurrentEmissionPertek ;
+   :missingEvidence "prior_emission_pertek_or_initial_application_route" .
 
 #################################################################
 # Sources, version intervals, scopes, and rule mappings (T2)
@@ -1060,8 +1358,8 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :locator "Pasal 3(1)-(2)(a)" ;
  :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
- :ruleId "RegulatedSurfaceDischarge" ;
- :caseId "A", "B", "U", "M", "X", "D", "C" ;
+ :ruleId "MaintainedWaterPertekActivity", "RegulatedSurfaceDischarge" ;
+ :caseId "A", "B", "U", "M", "I", "X", "D", "C" ;
  rdfs:comment "AMDAL/UKL-UPL activities conducting surface-water wastewater discharge must have technical approval and SLO. Obligation existence does not mean a new issuance is always needed or already satisfied." .
 
 :provision_3 a owl:NamedIndividual, :Provision ;
@@ -1069,8 +1367,8 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :locator "Pasal 15(1)-(2)" ;
  :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
- :ruleId "InteractingAmendments", "WaterTechnicalRevision" ;
- :caseId "A", "B", "U", "M", "X", "D", "C" ;
+ :ruleId "InteractingAmendments", "MaintainedWaterPertekActivity", "WaterTechnicalRevision" ;
+ :caseId "A", "B", "U", "M", "I", "X", "D", "C" ;
  rdfs:comment "Technical wastewater changes including treatment design and wastewater management require technical approval amendment. The spike assumes evidenced prior Pertek and a direct surface-water discharge route." .
 
 :provision_4 a owl:NamedIndividual, :Provision ;
@@ -1131,8 +1429,8 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :source_id "MODEL:closure" ; :documentId "MODEL_ASSUMPTION" ;
  :locator "Modeling assumption, not legislation" ;
  :provisionScope "modeling_assumption" ; :reviewStatus "MODEL_ASSUMPTION" ;
- :ruleId "WithoutNewEnvironmentalDocumentation" ;
- :caseId "I", "M", "X" ;
+ :ruleId "MaintainedEmissionPertekActivity", "MaintainedWaterPertekActivity", "WithoutNewEnvironmentalDocumentation" ;
+ :caseId "I", "M", "X", "media_existing_emission_pertek" ;
  rdfs:comment "Universal closure over project changes is asserted only if the fixture explicitly certifies a complete inventory. Open-world absence does not establish exclusivity." .
 
 :provision_11 a owl:NamedIndividual, :Provision ;
@@ -1147,8 +1445,8 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :source_id "MODEL:candidate-workflow" ; :documentId "MODEL_ASSUMPTION" ;
  :locator "Modeling assumption, not legislation" ;
  :provisionScope "modeling_assumption" ; :reviewStatus "MODEL_ASSUMPTION" ;
- :ruleId "TechnicalStudyAttachmentCandidate", "water-study-candidate" ;
- :caseId "A", "D", "M", "X" ;
+ :ruleId "EmissionStudyAttachmentCandidate", "TechnicalStudyAttachmentCandidate", "emission-study-candidate", "water-study-candidate" ;
+ :caseId "A", "D", "M", "X", "media_water_and_air" ;
  rdfs:comment "Persiapan kandidat bernama untuk review, bukan bukti pemenuhan atau penerbitan." .
 
 :provision_feed_repealed a owl:NamedIndividual, :Provision ;
@@ -1255,11 +1553,43 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
 
 :provision_p5_emisi a owl:NamedIndividual, :Provision ;
  :source_id "P5:28-emisi" ; :documentId "PERMEN_LHK_5_2021" ;
- :locator "Pasal 28-29 (Pertek dan SLO Pemenuhan Baku Mutu Emisi)" ;
+ :locator "Pasal 28(1)-(2) (Pertek dan SLO Pemenuhan Baku Mutu Emisi)" ;
  :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ;
  :provisionScope "emission_pertek" ; :reviewStatus "VERIFIED" ;
- rdfs:comment "Stationary emission sources in mandatory AMDAL/UKL-UPL activities require emission technical approval and SLO." .
+ :ruleId "ExemptNonEmittingActivity", "MaintainedEmissionPertekActivity", "RegulatedStationaryEmission" ;
+ :caseId "media_existing_emission_pertek", "media_unverified_emission", "media_water_and_air" ;
+ rdfs:comment "Stationary emission sources in mandatory AMDAL/UKL-UPL activities require emission technical approval and SLO; existing valid Pertek without technical source changes satisfies the ongoing obligation without requiring re-issuance." .
+
+:provision_p5_emisi_perubahan a owl:NamedIndividual, :Provision ;
+ :source_id "P5:40-emisi-perubahan" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 40(1)-(2) (Perubahan Pertek Pemenuhan Baku Mutu Emisi)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "emission_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "EmissionTechnicalRevision", "MaintainedEmissionPertekActivity" ;
+ :caseId "media_existing_emission_pertek", "media_water_and_air" ;
+ rdfs:comment "Technical changes to stationary emission sources, including boiler additions, fuel switching, or control device modifications, require an emission technical approval amendment." .
+
+:provision_p5_emisi_kajian a owl:NamedIndividual, :Provision ;
+ :source_id "P5:29.2-emisi-kajian" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 29(2), Pasal 41(1)(a) (Kajian Teknis Emisi)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "emission_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "EmissionStudyAttachmentCandidate", "EmissionStudyBranch", "emission-study-candidate" ;
+ :caseId "media_water_and_air" ;
+ rdfs:comment "Stationary emission changes with expanded impact/dispersion extent require an emission technical study attachment." .
+
+:provision_p5_emisi_standar a owl:NamedIndividual, :Provision ;
+ :source_id "P5:29.3-emisi-standar" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 29(3), Pasal 41(1)(b) (Standar Teknis Emisi)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "emission_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "EmissionStandardBranch" ;
+ :caseId "media_water_and_air" ;
+ rdfs:comment "Stationary emission changes with evidenced unchanged impact/dispersion extent follow the emission technical standards documentation route." .
 
 :provision_p22_2025 a owl:NamedIndividual, :Provision ;
  :source_id "P22_2025:kewenangan" ; :documentId "PERMEN_LH_22_2025" ;

@@ -44,12 +44,21 @@ class ReasoningContext(Contract):
 
 class Activity(Contract):
     id: str = Field(min_length=1)
-    kind: Literal["WaterActivity", "MainActivity", "SupportingActivity", "FoodManufacturingActivity"] = "WaterActivity"
+    kind: Literal[
+        "WaterActivity",
+        "AirActivity",
+        "MainActivity",
+        "SupportingActivity",
+        "FoodManufacturingActivity",
+    ] = "WaterActivity"
     scope_id: str = Field(min_length=1)
     kbli: str | None = None
     surface_discharge: bool = False
     existing_water_pertek: bool = False
     water_change: Literal["TreatmentDesignChange", "WastewaterManagementChange"] | None = None
+    stationary_emission: bool = False
+    existing_emission_pertek: bool = False
+    emission_change: Literal["BoilerAddition", "EmissionControlChange", "FuelSwitchChange"] | None = None
 
 
 class Observation(Contract):
@@ -61,6 +70,7 @@ class Observation(Contract):
     extent_changes: tuple[bool, ...] = ()
     in_protected_area: tuple[bool, ...] = ()
     protected_area_exception: tuple[bool, ...] = ()
+    non_emitting_source: tuple[bool, ...] = ()
     origin: Literal["HYPOTHETICAL", "OBSERVED", "EXPECTED_EFFECT"] = "HYPOTHETICAL"
 
 
@@ -207,6 +217,22 @@ class ObligationAssessment(Contract):
     evidence_ids: tuple[str, ...]
     provision_ids: tuple[str, ...]
     rule_ids: tuple[str, ...]
+
+
+class AssessmentResult(Contract):
+    assessment_id: str
+    context: ReasoningContext
+    kb_version: str
+    consistency_status: Literal["CONSISTENT", "INCONSISTENT", "INVALID_PROFILE", "NONCONVERGENT", "VERSION_CONFLICT"]
+    obligation_assessments: tuple[ObligationAssessment, ...] = ()
+    project_obligations: tuple[str, ...] = ()
+    decisions: tuple[DecisionFinding, ...] = ()
+    precedence: tuple[tuple[str, str], ...] = ()
+    evidence_gaps: tuple[str, ...] = ()
+    conflicts: tuple[str, ...] = ()
+    explanations: tuple[dict, ...] = ()
+    input_issues: tuple[str, ...] = ()
+    inference: InferenceResult | None = None
 
 
 class VersionConflictError(ValueError):

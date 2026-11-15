@@ -1,0 +1,55 @@
+{
+  "context": {
+    "assessment_id": "assessment-media-two-outlets",
+    "scenario_id": "scenario-media-two-outlets",
+    "evidence_snapshot_id": "snapshot-media-two-outlets",
+    "assessed_on": "2026-11-15",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Perubahan desain pengelolaan air limbah pada dua titik penaatan berbeda",
+  "period_id": "proposed-configuration",
+  "activities": [
+    {
+      "id": "water-1",
+      "scope_id": "outlet-1",
+      "kind": "WaterActivity",
+      "surface_discharge": true,
+      "existing_water_pertek": true,
+      "water_change": "TreatmentDesignChange"
+    },
+    {
+      "id": "water-2",
+      "scope_id": "outlet-2",
+      "kind": "WaterActivity",
+      "surface_discharge": true,
+      "existing_water_pertek": true,
+      "water_change": "TreatmentDesignChange"
+    }
+  ],
+  "observations": [
+    {
+      "id": "obs-outlet-1",
+      "context": {
+        "assessment_id": "assessment-media-two-outlets",
+        "scenario_id": "scenario-media-two-outlets",
+        "evidence_snapshot_id": "snapshot-media-two-outlets",
+        "assessed_on": "2026-11-15",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "water-1",
+      "scope_id": "outlet-1",
+      "period_id": "proposed-configuration",
+      "extent_changes": [
+        false
+      ],
+      "origin": "HYPOTHETICAL"
+    }
+  ],
+  "project_changes": [
+    "CapacityIncrease"
+  ],
+  "changes_complete": true,
+  "screening": "UKL",
+  "existing_environmental_approval": true
+}

@@ -77,17 +77,36 @@ def prepare_facts(snapshot: CaseSnapshot) -> FactBundle:
     for activity in snapshot.activities:
         act_kind = "FoodManufacturingActivity" if (activity.kind == "MainActivity" and activity.kbli == "10799") else activity.kind
         subject = typed("activity-" + activity.id, act_kind)
-        scope = typed("scope-" + activity.scope_id, "WastewaterOutlet" if activity.kind == "WaterActivity" else "Scope")
+        scope_kind = (
+            "WastewaterOutlet" if activity.kind == "WaterActivity"
+            else "EmissionSource" if activity.kind == "AirActivity"
+            else "Scope"
+        )
+        scope = typed("scope-" + activity.scope_id, scope_kind)
         activity_map[activity.id] = (activity, subject)
         add(scenario, NS + "hasActivity", subject)
         add(subject, NS + "onScope", scope)
+        activity_tech_changes = []
         if activity.surface_discharge:
             add(subject, NS + "dischargesTo", typed("receiving-" + activity.id, "SurfaceWater"))
         if activity.existing_water_pertek:
             add(subject, NS + "hasCurrentPertek", typed("pertek-" + activity.id, "WaterPertek"))
         if activity.water_change:
-            add(subject, NS + "hasWaterTechnicalChange", typed("water-change-" + activity.id, activity.water_change))
-        if activity.kind == "WaterActivity":
+            w_change = typed("water-change-" + activity.id, activity.water_change)
+            activity_tech_changes.append(w_change)
+            add(subject, NS + "hasWaterTechnicalChange", w_change)
+        if activity.stationary_emission:
+            add(subject, NS + "emitsFrom", typed("emission-point-" + activity.id, "StationaryEmissionPoint"))
+        if activity.existing_emission_pertek:
+            add(subject, NS + "hasCurrentEmissionPertek", typed("emission-pertek-" + activity.id, "EmissionPertek"))
+        if activity.emission_change:
+            em_change = typed("emission-change-" + activity.id, activity.emission_change)
+            activity_tech_changes.append(em_change)
+            add(subject, NS + "hasEmissionTechnicalChange", em_change)
+        if snapshot.changes_complete and activity.kind in ("WaterActivity", "AirActivity") and not activity_tech_changes:
+            closures.append(Closure(subject=subject, predicate=NS + "hasTechnicalChange",
+                                    members=(), evidence_id="complete-change-inventory"))
+        if activity.kind in ("WaterActivity", "AirActivity"):
             candidate = typed("study-candidate-" + activity.id, "ObligationCandidate")
             add(subject, NS + "hasStudyCandidate", candidate)
             add(candidate, NS + "hasAssessment", assessment)
@@ -118,6 +137,12 @@ def prepare_facts(snapshot: CaseSnapshot) -> FactBundle:
             exceptions = observation.protected_area_exception or ((False,) if True in observation.in_protected_area else ())
             for exc_value in exceptions:
                 add(loc_evidence, NS + "hasProtectedAreaException", str(exc_value).lower(), observation.id,
+                    XSD + "boolean", observation.origin)
+        if observation.non_emitting_source:
+            em_evidence = typed("emission-obs-" + observation.id, "EmissionAssessment")
+            add(matching[1], NS + "hasEmissionAssessment", em_evidence, observation.id, origin=observation.origin)
+            for value in observation.non_emitting_source:
+                add(em_evidence, NS + "isNonEmittingSource", str(value).lower(), observation.id,
                     XSD + "boolean", observation.origin)
 
     normalized_values = []

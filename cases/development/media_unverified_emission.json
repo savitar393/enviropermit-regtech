@@ -1,0 +1,28 @@
+{
+  "context": {
+    "assessment_id": "assessment-media-unverified-emission",
+    "scenario_id": "scenario-media-unverified-emission",
+    "evidence_snapshot_id": "snapshot-media-unverified-emission",
+    "assessed_on": "2026-11-15",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Penilaian unit pemanas tanpa data karakterisasi sumber emisi stasioner",
+  "period_id": "proposed-configuration",
+  "activities": [
+    {
+      "id": "air-1",
+      "scope_id": "boiler-stack-1",
+      "kind": "AirActivity",
+      "stationary_emission": false,
+      "existing_emission_pertek": false
+    }
+  ],
+  "observations": [],
+  "project_changes": [
+    "CapacityIncrease"
+  ],
+  "changes_complete": false,
+  "screening": "UKL",
+  "existing_environmental_approval": true
+}

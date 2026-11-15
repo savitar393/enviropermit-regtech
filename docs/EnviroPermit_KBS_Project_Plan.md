@@ -328,16 +328,16 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 
 ### T4 — Kewajiban air limbah dan emisi
 
-**Files:** `kb/modules/water.owl`, `air.owl`, `kb/rules/{water,air}.swrl`, `tests/test_water_air.py`, `cases/development/media_*.json`.
+**Files:** `kb/enviropermit.ttl`, `assessment.py`, `tests/test_water_air.py`, `cases/development/media_*.json`.
 
 **Consumes:** hasil screening, aktivitas, outlet, sumber emisi, persetujuan awal, bukti teknis.  
 **Produces:** `ObligationAssessment` per subjek melalui `assess(snapshot: CaseSnapshot, release: KBRelease) -> AssessmentResult` di `assessment.py`.
 
-- [ ] Tulis `test_water_and_air_coexist`, `test_outlet_one_evidence_does_not_satisfy_outlet_two`, dan `test_no_emission_fact_is_not_emission_exemption`.
-- [ ] Jalankan test; pastikan pencampuran bukti dan default exemption tertangkap.
-- [ ] Pindahkan cabang water yang sudah diuji; tambah cabang air berdasarkan ketentuan yang diekstrak. Representasikan kebutuhan kajian dan kewajiban mempunyai persetujuan tanpa mengasumsikan penerbitan ulang selalu diperlukan.
-- [ ] Jalankan `pytest tests/test_water_air.py tests/regression -q`; keluaran harus mempunyai subject, scope, provision, dan evidence IDs.
-- [ ] Commit `feat: infer water and air obligations`.
+- [x] Tulis `test_water_and_air_coexist`, `test_outlet_one_evidence_does_not_satisfy_outlet_two`, dan `test_no_emission_fact_is_not_emission_exemption`.
+- [x] Jalankan test; pastikan pencampuran bukti dan default exemption tertangkap.
+- [x] Pindahkan cabang water yang sudah diuji; tambah cabang air berdasarkan ketentuan yang diekstrak. Representasikan kebutuhan kajian dan kewajiban mempunyai persetujuan tanpa mengasumsikan penerbitan ulang selalu diperlukan.
+- [x] Jalankan `pytest tests/test_water_air.py tests/regression -q`; keluaran harus mempunyai subject, scope, provision, dan evidence IDs.
+- [x] Commit `feat: infer water and air obligations`.
 
 ### T5 — Komposisi multiaktivitas dan fulfillment
 
