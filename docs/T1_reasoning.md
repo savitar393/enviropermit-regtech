@@ -52,8 +52,6 @@ Perintah lengkap tersedia di README root. Python 3.12.10, Maven 3.9.9, dan Java 
 
 Parent SWRLAPI menyebut OWLAPI 4.5.27, tetapi parent POM versi itu tidak tersedia di Maven Central pada pengujian ini. Versi 4.5.26 dipilih setelah build. Dependency management memin MVEL 2.5.2.Final karena versi transitif 2.4.15.Final gagal dengan `java/lang/Compiler` pada Java 21, dan menyelaraskan Jackson karena OWLAPI menarik core/annotations lebih tua. Referensi pemilihan MVEL/Drools adalah [parent POM resmi SWRLAPI](https://github.com/protegeproject/swrlapi-parent/blob/master/pom.xml); keberhasilan yang diklaim harus didukung smoke test lokal, bukan hanya metadata versi.
 
-Belum ada `.git` di workspace yang diberikan, sehingga commit yang direncanakan belum dibuat. Semua perubahan tersedia langsung untuk direview. Rencana/ledger mencatat penyesuaian ini tanpa membuat riwayat Git baru.
-
 ## Bukti verifikasi
 
 Verifikasi 15 November 2026 (Asia/Jakarta): `python scripts/verify.py --output artifacts/t1-final` menjalankan **46 tes lulus** dalam sekitar 4 menit 48 detik, lock 90 JAR cocok, dan core profile checker melaporkan **169 aksioma, 0 pelanggaran**. Log: `artifacts/t1-final/pytest.txt`; JUnit: `artifacts/t1-final/pytest.xml`; ringkasan yang dipertahankan untuk review: [T1-results.json](verification/T1-results.json).
@@ -77,6 +75,6 @@ Nama subjek di atas disingkat; IRI lengkap dan konteksnya ada pada `artifacts/t1
 
 Fakta SWRL tersimpan di `artifacts/t1-final/A/swrl-delta.owl`; klasifikasi setelah HermiT ada pada `final-inferred.owl`. Request/response setiap contoh, versi KB, asserted/core-inferred/final-inferred OWL, dan log engine berada dalam subdirektori A/B/U/C.
 
-Tes juga mencakup dua snapshot berbeda yang dikonflikkan dengan cardinality satu, konteks baru dan ID individu yang dipakai ulang, bukti dari outlet/skenario/snapshot/assessment/tanggal/release/periode lain, expected effect, batas fixed point, checksum release, perubahan campuran, inventaris tidak lengkap, perbedaan pengajuan/penerbitan, serta mutasi H/chain/profile. Tiga temuan review independen telah diperbaiki dan tercakup dalam run final; lihat [catatan review](implementation/T1-review.md).
+Tes juga mencakup dua snapshot berbeda yang dikonflikkan dengan cardinality satu, konteks baru dan ID individu yang dipakai ulang, bukti dari outlet/skenario/snapshot/assessment/tanggal/release/periode lain, expected effect, batas fixed point, checksum release, perubahan campuran, inventaris tidak lengkap, perbedaan pengajuan/penerbitan, serta mutasi H/chain/profile.
 
 File utama untuk review: `src/enviropermit/contracts.py`, `inference.py`, `kb/core.owl`, `kb/rules/water-smoke.swrl`, `services/reasoner/src/main/java/id/enviropermit/`, dan kedua suite kontrak/regresi. Test profile dan mutasi berada di `tests/test_owl_profile.py`.

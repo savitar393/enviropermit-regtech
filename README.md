@@ -1,38 +1,35 @@
 # EnviroPermit-KBS
 
-**KB aktif: [`kb/enviropermit.ttl`](kb/enviropermit.ttl)** — satu file OWL + SWRL yang dapat diedit di Protégé. Baca [panduan Protégé](docs/KB_dengan_Protege.md).
+EnviroPermit-KBS adalah prototipe sistem pendukung keputusan untuk menilai kewajiban lingkungan dari kegiatan dan perubahan suatu proyek. Contoh yang dapat dijalankan saat ini menggunakan kasus sintetis perubahan pengelolaan air limbah.
 
-T1: model kasus dengan cakupan snapshot, core OWL 2 DL, HermiT, dan tahap SWRLAPI/Drools terpisah. Contoh pertama mempertahankan kasus sintetis air limbah dari spike. Modul regulasi lengkap, registry versi hukum, planner, API, dan UI mengikuti task berikutnya.
+**Status pengembangan.** Tahap T1 menyediakan model kasus, CLI, dan rangkaian tes penalaran. Pemilihan versi ketentuan berdasarkan tanggal, penapisan lintas kegiatan, perencanaan, API, dan antarmuka web masih dalam rencana. [Rencana proyek](docs/EnviroPermit_KBS_Project_Plan.md)
 
-Gunakan Python 3.12 dan Java 21; Maven 3.9.9. Versi library yang benar-benar diuji dicatat dalam `pyproject.toml`, `requirements.lock.txt`, `services/reasoner/pom.xml`, dan `services/reasoner/dependencies.lock.json`. Workspace ini sudah mempunyai `.venv` dan Maven lokal; perintah tes/CLI dapat langsung dijalankan. Blok persiapan berikut untuk environment baru dengan Python/Maven yang terpasang.
+## Menjalankan contoh
+
+Gunakan Python 3.12, JDK 21, dan Maven 3.9.9. Jalankan perintah berikut dari root repositori di PowerShell.
 
 ```powershell
-# Dari D:\EnviroPermit; Maven dan Java tersedia di PATH.
 py -3.12 -m venv .venv
-.venv/Scripts/python.exe -m pip install -r requirements.lock.txt
-.venv/Scripts/python.exe -m pip install --no-deps -e .
+.\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
+.\.venv\Scripts\python.exe -m pip install --no-deps -e .
 mvn -f services/reasoner/pom.xml package
-
-# Jika menggunakan tool lokal yang sudah disiapkan dalam workspace ini:
-./scripts/build_reasoner.ps1
-
-.venv/Scripts/python.exe -m pytest tests/test_reasoner_contract.py tests/regression -q
-.venv/Scripts/python.exe -m enviropermit.cli --case cases/regression/water_spike/A.json --output artifacts/demo-A
-.venv/Scripts/python.exe -m enviropermit.cli --case cases/regression/water_spike/U.json --output artifacts/demo-U
-.venv/Scripts/python.exe scripts/verify.py --output artifacts/verification-new
 ```
-
-Setiap direktori output harus baru/kosong. `verify.py` memeriksa lock dependency, menjalankan **seluruh** tes, profile checker OWLAPI, dan ekspor A/B/U/C. Log Maven “No tests to run” hanya berarti tes Java tidak berada di Surefire: suite integrasi Python memanggil CLI Java/HermiT/Drools yang sebenarnya.
-
-CLI langsung memakai JSON request/response yang sama dengan adapter:
 
 ```powershell
-$cp = 'services/reasoner/target/classes;services/reasoner/target/dependency/*'
-New-Item -ItemType Directory -Path artifacts/direct-A
-java -cp $cp id.enviropermit.ReasoningCli infer artifacts/demo-A/request.json artifacts/direct-A/response.json
-java -cp $cp id.enviropermit.ReasoningCli profile kb/enviropermit.ttl artifacts/core-profile.json
+.\.venv\Scripts\python.exe -m enviropermit.cli --case cases/regression/water_spike/A.json --output artifacts/demo-A
+.\.venv\Scripts\python.exe -m enviropermit.cli --case cases/regression/water_spike/U.json --output artifacts/demo-U
 ```
 
-Exit code Python CLI: `0` konsisten, `2` konflik/profile invalid/tidak konvergen. CLI Java menulis status reasoning dalam JSON; exit `1` berarti kesalahan request/engine, dan perintah `profile` mengembalikan `2` untuk profile invalid.
+Pada kasus A, HermiT menurunkan kewajiban SLO proyek dari relasi kegiatan. Pada kasus U, jenis dokumen teknis tetap `UNRESOLVED` karena bukti mengenai perubahan luas sebaran dampak belum tersedia. Setiap perintah membutuhkan direktori output baru atau kosong. Hasil JSON tersimpan sebagai `response.json` di direktori tersebut.
 
-Lihat [kontrak, keputusan pemodelan, dan bukti T1](docs/T1_reasoning.md), [rencana proyek](docs/EnviroPermit_KBS_Project_Plan.md), serta [README spike asli](reference/spike/EnviroPermit_KBS_Test/README.md).
+## Basis pengetahuan
+
+Aturan domain, aksioma OWL, aturan SWRL, dan kebutuhan bukti tersimpan dalam satu file Turtle yang bisa dibuka di Protégé. CLI menjalankan HermiT pada inti OWL 2 DL, lalu menjalankan aturan SWRL melalui Drools pada tahap terpisah. [Basis pengetahuan](kb/enviropermit.ttl) · [Panduan Protégé dan versi basis pengetahuan](docs/KB_dengan_Protege.md)
+
+## Verifikasi
+
+```powershell
+.\.venv\Scripts\python.exe scripts/verify.py --output artifacts/verification
+```
+
+Verifikasi memeriksa versi dependensi Java, menjalankan tes, memeriksa profil OWL 2 DL, dan mengekspor hasil kasus regresi. [Ringkasan verifikasi T1](docs/verification/TTL-results.json)

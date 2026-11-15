@@ -205,6 +205,5 @@
       "project_slo_asserted": false,
       "project_slo_inferred_by_hermit": false
     }
-  },
-  "review": "docs/implementation/single-ttl-review.md"
+  }
 }

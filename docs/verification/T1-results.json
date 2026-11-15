@@ -205,6 +205,5 @@
       "project_slo_inferred_by_hermit": false
     }
   },
-  "artifacts": "artifacts/t1-final",
-  "review": "docs/implementation/T1-review.md"
+  "artifacts": "artifacts/t1-final"
 }

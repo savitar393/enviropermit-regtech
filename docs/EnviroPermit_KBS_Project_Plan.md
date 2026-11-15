@@ -1,7 +1,5 @@
 # EnviroPermit-KBS — Project and Implementation Plan
 
-> **For agentic workers:** implement task by task using the executing-plans workflow. Track the checkboxes below. This file contains both the product specification and implementation plan; read both before changing the project. The user has selected the original multiactivity concept and wants progress with practical mitigation of obstacles.
-
 **Goal:** Membangun sistem pakar yang menalar kewajiban lingkungan dari konfigurasi proyek multiaktivitas, mendiagnosis hambatan, menyusun rencana persetujuan, dan menjelaskan perbedaan antaralternatif proyek.
 
 **Architecture:** Knowledge base OWL 2 DL memodelkan kegiatan, bukti, ketentuan, kewajiban, dan ketergantungan. Reasoner DL dan tahap SWRL terbatas menghasilkan keputusan; planner generik menyusun tindakan dari pengetahuan tersebut. Setiap alternatif diproses sebagai snapshot terpisah dan memiliki penjelasan yang menghubungkan hasil dengan fakta serta sumbernya.
@@ -254,8 +252,8 @@ Tampilan utama: editor konfigurasi, kewajiban per kegiatan, graph rencana, tabel
 
 Artefak sebelumnya:
 
-- [Laporan feasibility](https://chatgpt.com/library?file_id=libfile_ca95203e2a088191a6135b58b111be67&account_id=personal).
-- [Paket spike](https://chatgpt.com/library?file_id=libfile_acb7bfdd19688191be4f7579f1172368&account_id=personal).
+- [Laporan feasibility](../reference/spike/EnviroPermit_KBS_Test/EnviroPermit_KBS_Feasibility_Test.md).
+- [Paket spike](../reference/spike/EnviroPermit_KBS_Test/README.md).
 
 Hasil yang telah dilaporkan dan terekam: 16 uji perilaku lulus; delapan ontology contoh lolos OWL 2 DL profile checker; empat mutasi kesalahan terdeteksi. Angka tersebut berlaku untuk spike, tidak untuk aplikasi multiaktivitas yang akan dibangun.
 
@@ -298,9 +296,9 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 - [x] Jalankan test terhadap implementation stub dan pastikan kegagalan berupa expected behavior yang belum tersedia.
 - [x] Buat core ontology, adapter, dan CLI; kunci dependency yang terbukti menjalankan HermiT serta satu rule SWRL dengan fakta keluaran yang tersimpan. Impor regression fixtures.
 - [x] Jalankan `pytest tests/test_reasoner_contract.py tests/regression -q` dan profile check. Semua case konsisten harus sesuai expected; case konflik harus terdeteksi.
-- [ ] Commit `feat: establish scoped reasoning pipeline`.
+- [x] Commit `feat: establish scoped reasoning pipeline`.
 
-**Hasil T1, 15 November 2026:** seluruh suite `pytest -q` (superset perintah T1) **46 passed**; core OWL 2 DL **169 aksioma, 0 pelanggaran**. HermiT menghasilkan kewajiban SLO proyek yang tidak diassert; smoke SWRLAPI/Drools menyimpan fakta kandidat dan HermiT mengklasifikasi ulang; U tetap UNRESOLVED; konflik dan isolasi teruji. Detail: `docs/T1_reasoning.md`, `docs/verification/T1-results.json`. Commit belum dibuat karena workspace yang diberikan belum memiliki metadata `.git`.
+**Hasil T1, 15 November 2026:** seluruh suite `pytest -q` (superset perintah T1) **55 passed** (46 pada v1, 55 setelah sentralisasi TTL v2); core OWL 2 DL lolos tanpa pelanggaran. HermiT menghasilkan kewajiban SLO proyek yang tidak diassert; smoke SWRLAPI/Drools menyimpan fakta kandidat dan HermiT mengklasifikasi ulang; U tetap UNRESOLVED; konflik dan isolasi teruji. Detail: `docs/KB_dengan_Protege.md`, `docs/T1_reasoning.md`, `docs/verification/TTL-results.json`.
 
 ### T2 — Registry sumber dan pengetahuan awal
 

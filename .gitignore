@@ -5,5 +5,17 @@ __pycache__/
 .pytest_cache/
 services/reasoner/target/
 artifacts/
-.superpowers/
+
+# Local AI assistant configuration and work notes
+/.agents/
+/.claude/
+/.codex/
+/.cursor/
+/.gemini/
+/.superpowers/
+/.github/copilot-instructions.md
+/AGENTS.md
+/CLAUDE.md
+/GEMINI.md
+/docs/implementation/
 

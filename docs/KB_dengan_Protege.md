@@ -46,4 +46,4 @@ Pakai direktori output baru/kosong. Test `tests/test_single_kb.py` membuktikan b
 
 Hasil final 15 November 2026: **55 tes lulus** dalam 260,34 detik. Seluruh regresi T1 tetap lulus; A/B/U konsisten, C dikarantina. U tetap `UNRESOLVED`, dan kewajiban SLO proyek A tetap dihasilkan HermiT dari relasi kegiatan. Core yang diekstrak lolos OWL 2 DL tanpa pelanggaran. SWRL menghasilkan fakta kandidat yang tersimpan, lalu HermiT mengklasifikasinya kembali.
 
-Ringkasan: [TTL-results.json](verification/TTL-results.json). Log, request/response, `core-schema.owl`, asserted/inferred OWL, dan delta SWRL: `artifacts/ttl-reviewed/`. Review independen dan perbaikannya: [catatan review](implementation/single-ttl-review.md).
+Ringkasan hasil tersedia di [TTL-results.json](verification/TTL-results.json). Perintah verifikasi menyimpan log, request/response, `core-schema.owl`, asserted/inferred OWL, dan delta SWRL di direktori output yang dipilih.
