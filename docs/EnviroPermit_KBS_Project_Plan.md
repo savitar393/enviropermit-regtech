@@ -354,16 +354,16 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 
 ### T6 — Rencana, ketergantungan, dan diagnosis hambatan
 
-**Files:** `planning.py`, `kb/modules/planning.owl`, `kb/action_templates.json`, `tests/test_planning.py`.
+**Files:** `planning.py`, `kb/enviropermit.ttl`, `kb/action_templates.json`, `tests/test_planning.py`.
 
 **Consumes:** composed `AssessmentResult`, action templates, status bukti.  
 **Produces:** `build_plans(result: AssessmentResult, max_candidates: int = 8) -> list[PlanCandidate]`.
 
-- [ ] Tulis `test_or_group_does_not_require_all_options`, `test_application_does_not_imply_issuance`, `test_unknown_prerequisite_requests_evidence`, dan `test_cycle_reports_conflicting_dependencies`.
-- [ ] Jalankan test; pastikan planner linear yang menyamakan semua langkah gagal.
-- [ ] Instansiasi tindakan per assessment; inferensikan eligibility dan dependency dari KB; pilih cabang finite dan gunakan traversal generik untuk urutan. Pisahkan expected effect dari observed fulfillment.
-- [ ] Jalankan `pytest tests/test_planning.py -q`; setiap edge hukum harus mempunyai sumber, dan setiap blocker harus mempunyai alasan serta subjek yang tepat.
-- [ ] Commit `feat: generate evidence-aware approval plans`.
+- [x] Tulis `test_or_group_does_not_require_all_options`, `test_application_does_not_imply_issuance`, `test_unknown_prerequisite_requests_evidence`, dan `test_cycle_reports_conflicting_dependencies`.
+- [x] Jalankan test; pastikan planner linear yang menyamakan semua langkah gagal.
+- [x] Instansiasi tindakan per assessment; inferensikan eligibility dan dependency dari KB; pilih cabang finite dan gunakan traversal generik untuk urutan. Pisahkan expected effect dari observed fulfillment.
+- [x] Jalankan `pytest tests/test_planning.py -q`; setiap edge hukum harus mempunyai sumber, dan setiap blocker harus mempunyai alasan serta subjek yang tepat.
+- [x] Commit `feat: generate evidence-aware approval plans`.
 
 ### T7 — Alternatif konfigurasi dan perbandingan
 

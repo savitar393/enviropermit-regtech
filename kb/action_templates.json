@@ -1,0 +1,246 @@
+{
+  "templates": [
+    {
+      "id": "prepare_amdal",
+      "title": "Penyusunan Dokumen AMDAL",
+      "stage": "ENVIRONMENTAL_DOCUMENTATION",
+      "kind": "ACTION",
+      "scope_level": "SCENARIO",
+      "for_obligations": ["prepare_amdal"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:amdal_document_prepared"],
+      "required_evidence": ["protected_area_location_verification", "production_capacity_measurement"],
+      "supported_by": ["P4:penapisan-industri", "P4:lampiran-i-pangan-amdal", "P4:pasal-3-lokasi-lindung"]
+    },
+    {
+      "id": "prepare_ukl_upl",
+      "title": "Penyusunan Formulir UKL-UPL",
+      "stage": "ENVIRONMENTAL_DOCUMENTATION",
+      "kind": "ACTION",
+      "scope_level": "SCENARIO",
+      "for_obligations": ["prepare_ukl_upl"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:ukl_upl_document_prepared"],
+      "required_evidence": ["protected_area_location_verification", "production_capacity_measurement"],
+      "supported_by": ["P4:penapisan-industri", "P4:lampiran-i-pangan-ukl"]
+    },
+    {
+      "id": "register_sppl",
+      "title": "Pendaftaran SPPL",
+      "stage": "ENVIRONMENTAL_APPROVAL",
+      "kind": "ACTION",
+      "scope_level": "SCENARIO",
+      "for_obligations": ["register_sppl"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:sppl_registered"],
+      "required_evidence": ["protected_area_location_verification", "production_capacity_measurement"],
+      "supported_by": ["P4:penapisan-industri", "P4:lampiran-i-pangan-sppl"]
+    },
+    {
+      "id": "prepare_technical_study",
+      "title": "Penyusunan Kajian Teknis Air Limbah",
+      "stage": "TECHNICAL_DOCUMENTATION",
+      "kind": "ACTION",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["prepare_technical_study"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:water_technical_study_prepared"],
+      "required_evidence": ["impact_extent_assessment"],
+      "supported_by": ["P5:16.1.a"]
+    },
+    {
+      "id": "prepare_standard_technical_documentation",
+      "title": "Penyusunan Standar Teknis Air Limbah",
+      "stage": "TECHNICAL_DOCUMENTATION",
+      "kind": "ACTION",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["prepare_standard_technical_documentation"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:water_technical_standard_prepared"],
+      "required_evidence": ["impact_extent_assessment"],
+      "supported_by": ["P5:16.1.b"]
+    },
+    {
+      "id": "submit_water_pertek_change",
+      "title": "Pengajuan Perubahan Pertek Air Limbah",
+      "stage": "TECHNICAL_APPROVAL",
+      "kind": "ACTION",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["amend_water_pertek"],
+      "preconditions": [],
+      "requirement_groups": [
+        {
+          "id": "rg_water_technical_doc",
+          "operator": "ANY_OF",
+          "member_step_ids": [
+            "prepare_technical_study",
+            "prepare_standard_technical_documentation"
+          ],
+          "provision_ids": ["P5:16.1.a", "P5:16.1.b"]
+        }
+      ],
+      "expected_effects": ["EXPECTED_EFFECT:water_pertek_amendment_submitted"],
+      "required_evidence": ["impact_extent_assessment", "prior_water_pertek_or_initial_application_route"],
+      "supported_by": ["P5:15", "P5:16.1.a", "P5:16.1.b"]
+    },
+    {
+      "id": "water_pertek_change_issued",
+      "title": "Penerbitan Perubahan Pertek Air Limbah",
+      "stage": "TECHNICAL_APPROVAL",
+      "kind": "MILESTONE",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["amend_water_pertek"],
+      "preconditions": ["submit_water_pertek_change"],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:water_pertek_amendment_issued"],
+      "required_evidence": [],
+      "supported_by": ["P5:14", "P5:15"]
+    },
+    {
+      "id": "verify_water_slo",
+      "title": "Verifikasi SLO Pemenuhan Baku Mutu Air Limbah",
+      "stage": "POST_APPROVAL_SLO",
+      "kind": "MILESTONE",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["water_slo_required"],
+      "preconditions": ["water_pertek_change_issued"],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:water_slo_verified"],
+      "required_evidence": [],
+      "supported_by": ["P5:3"]
+    },
+    {
+      "id": "prepare_emission_technical_study",
+      "title": "Penyusunan Kajian Teknis Emisi",
+      "stage": "TECHNICAL_DOCUMENTATION",
+      "kind": "ACTION",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["prepare_emission_technical_study"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:emission_technical_study_prepared"],
+      "required_evidence": ["emission_impact_extent_assessment"],
+      "supported_by": ["P5:29.2-emisi-kajian"]
+    },
+    {
+      "id": "prepare_emission_standard_technical_documentation",
+      "title": "Penyusunan Standar Teknis Emisi",
+      "stage": "TECHNICAL_DOCUMENTATION",
+      "kind": "ACTION",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["prepare_emission_standard_technical_documentation"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:emission_technical_standard_prepared"],
+      "required_evidence": ["emission_impact_extent_assessment"],
+      "supported_by": ["P5:29.3-emisi-standar"]
+    },
+    {
+      "id": "submit_emission_pertek_change",
+      "title": "Pengajuan Perubahan Pertek Emisi",
+      "stage": "TECHNICAL_APPROVAL",
+      "kind": "ACTION",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["amend_emission_pertek"],
+      "preconditions": [],
+      "requirement_groups": [
+        {
+          "id": "rg_emission_technical_doc",
+          "operator": "ANY_OF",
+          "member_step_ids": [
+            "prepare_emission_technical_study",
+            "prepare_emission_standard_technical_documentation"
+          ],
+          "provision_ids": ["P5:29.2-emisi-kajian", "P5:29.3-emisi-standar"]
+        }
+      ],
+      "expected_effects": ["EXPECTED_EFFECT:emission_pertek_amendment_submitted"],
+      "required_evidence": ["emission_impact_extent_assessment", "prior_emission_pertek_or_initial_application_route"],
+      "supported_by": ["P5:40-emisi-perubahan", "P5:29.2-emisi-kajian", "P5:29.3-emisi-standar"]
+    },
+    {
+      "id": "emission_pertek_change_issued",
+      "title": "Penerbitan Perubahan Pertek Emisi",
+      "stage": "TECHNICAL_APPROVAL",
+      "kind": "MILESTONE",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["amend_emission_pertek"],
+      "preconditions": ["submit_emission_pertek_change"],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:emission_pertek_amendment_issued"],
+      "required_evidence": [],
+      "supported_by": ["P5:28-emisi", "P5:40-emisi-perubahan"]
+    },
+    {
+      "id": "verify_emission_slo",
+      "title": "Verifikasi SLO Pemenuhan Baku Mutu Emisi",
+      "stage": "POST_APPROVAL_SLO",
+      "kind": "MILESTONE",
+      "scope_level": "ACTIVITY",
+      "for_obligations": ["emission_slo_required"],
+      "preconditions": ["emission_pertek_change_issued"],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:emission_slo_verified"],
+      "required_evidence": [],
+      "supported_by": ["P5:28-emisi"]
+    },
+    {
+      "id": "prepare_new_environmental_documentation",
+      "title": "Penyusunan Dokumen Lingkungan Baru untuk Perubahan",
+      "stage": "ENVIRONMENTAL_DOCUMENTATION",
+      "kind": "ACTION",
+      "scope_level": "SCENARIO",
+      "for_obligations": ["prepare_new_environmental_documentation"],
+      "preconditions": [],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:new_environmental_documentation_prepared"],
+      "required_evidence": [],
+      "supported_by": ["PP22:89-90"]
+    },
+    {
+      "id": "submit_environmental_change",
+      "title": "Pengajuan Perubahan Persetujuan Lingkungan",
+      "stage": "ENVIRONMENTAL_APPROVAL",
+      "kind": "ACTION",
+      "scope_level": "SCENARIO",
+      "for_obligations": ["amend_environmental_approval"],
+      "preconditions": ["prepare_new_environmental_documentation"],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:environmental_approval_amendment_submitted"],
+      "required_evidence": ["proposed_activity_screening", "complete_project_change_inventory"],
+      "supported_by": ["PP22:89-90", "P5:8.1", "P5:8.2", "P5:16.2"]
+    },
+    {
+      "id": "environmental_change_issued",
+      "title": "Penerbitan Perubahan Persetujuan Lingkungan",
+      "stage": "ENVIRONMENTAL_APPROVAL",
+      "kind": "MILESTONE",
+      "scope_level": "SCENARIO",
+      "for_obligations": ["amend_environmental_approval"],
+      "preconditions": ["submit_environmental_change"],
+      "requirement_groups": [],
+      "expected_effects": ["EXPECTED_EFFECT:environmental_approval_amendment_issued"],
+      "required_evidence": [],
+      "supported_by": ["PP22:89-90", "P5:14", "P5:28-emisi"]
+    }
+  ],
+  "precedence_edge_sources": {
+    "submit_water_pertek_change->submit_environmental_change": {
+      "provision_ids": ["P5:8.2", "P5:16.2"],
+      "rule_ids": ["UKLSubmissionSequence"]
+    },
+    "water_pertek_change_issued->environmental_change_issued": {
+      "provision_ids": ["P5:14", "P5:15"],
+      "rule_ids": ["InteractingAmendments"]
+    },
+    "emission_pertek_change_issued->environmental_change_issued": {
+      "provision_ids": ["P5:28-emisi", "P5:40-emisi-perubahan"],
+      "rule_ids": ["InteractingEmissionAmendments"]
+    }
+  }
+}

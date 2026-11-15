@@ -34,6 +34,14 @@ class Fulfillment(StrEnum):
     CONFLICTING = "CONFLICTING"
 
 
+class StepStatus(StrEnum):
+    AVAILABLE_NOW = "AVAILABLE_NOW"
+    WAITING_FOR_PREDECESSOR = "WAITING_FOR_PREDECESSOR"
+    NEEDS_EVIDENCE = "NEEDS_EVIDENCE"
+    BLOCKED_BY_KNOWN_CONDITION = "BLOCKED_BY_KNOWN_CONDITION"
+    SATISFIED = "SATISFIED"
+
+
 class ReasoningContext(Contract):
     assessment_id: str = Field(min_length=1)
     scenario_id: str = Field(min_length=1)
@@ -244,6 +252,85 @@ class AssessmentResult(Contract):
     input_issues: tuple[str, ...] = ()
     facts: FactBundle | None = None
     inference: InferenceResult | None = None
+
+
+class RequirementGroup(Contract):
+    id: str
+    operator: Literal["ALL_OF", "ANY_OF"]
+    member_step_ids: tuple[str, ...]
+    provision_ids: tuple[str, ...] = ()
+
+
+class ActionTemplate(Contract):
+    id: str
+    title: str
+    stage: Literal[
+        "EVIDENCE_ACQUISITION",
+        "TECHNICAL_DOCUMENTATION",
+        "TECHNICAL_APPROVAL",
+        "ENVIRONMENTAL_DOCUMENTATION",
+        "ENVIRONMENTAL_APPROVAL",
+        "POST_APPROVAL_SLO",
+    ]
+    kind: Literal["ACTION", "MILESTONE"] = "ACTION"
+    scope_level: Literal["ACTIVITY", "SCENARIO"] = "ACTIVITY"
+    for_obligations: tuple[str, ...]
+    preconditions: tuple[str, ...] = ()
+    requirement_groups: tuple[RequirementGroup, ...] = ()
+    expected_effects: tuple[str, ...] = ()
+    required_evidence: tuple[str, ...] = ()
+    supported_by: tuple[str, ...] = ()
+
+
+class PlanEdgeSpec(Contract):
+    before_step_id: str
+    after_step_id: str
+    provision_ids: tuple[str, ...] = ()
+    rule_ids: tuple[str, ...] = ()
+
+
+class PlanBlocker(Contract):
+    step_id: str
+    subject_id: str
+    scope_id: str
+    status: Literal["NEEDS_EVIDENCE", "BLOCKED_BY_KNOWN_CONDITION", "CONFLICTING_DEPENDENCIES"]
+    reason: str
+    missing_evidence: tuple[str, ...] = ()
+    provision_ids: tuple[str, ...] = ()
+
+
+class ActionInstance(Contract):
+    id: str
+    template_id: str
+    title: str
+    subject_id: str
+    scope_id: str
+    stage: str
+    kind: Literal["ACTION", "MILESTONE"] = "ACTION"
+    status: StepStatus
+    predecessor_ids: tuple[str, ...] = ()
+    transitive_predecessor_ids: tuple[str, ...] = ()
+    expected_effects: tuple[str, ...] = ()
+    observed_fulfillment: Fulfillment = Fulfillment.UNKNOWN
+    required_evidence: tuple[str, ...] = ()
+    missing_evidence: tuple[str, ...] = ()
+    provision_ids: tuple[str, ...] = ()
+
+
+class PlanCandidate(Contract):
+    id: str
+    assessment_id: str
+    branch_label: str
+    consistent: bool = True
+    truncated: bool = False
+    action_instances: tuple[ActionInstance, ...] = ()
+    prerequisite_groups: tuple[RequirementGroup, ...] = ()
+    graph_edges: tuple[PlanEdgeSpec, ...] = ()
+    topological_order: tuple[str, ...] = ()
+    parallel_groups: tuple[tuple[str, ...], ...] = ()
+    step_statuses: dict[str, StepStatus] = Field(default_factory=dict)
+    blockers: tuple[PlanBlocker, ...] = ()
+    source_trace: tuple[dict, ...] = ()
 
 
 class VersionConflictError(ValueError):

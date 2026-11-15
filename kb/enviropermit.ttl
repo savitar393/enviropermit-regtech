@@ -1159,7 +1159,8 @@
 
 ###  https://example.org/enviropermit#environmental_change_issued
 :environmental_change_issued rdf:type owl:NamedIndividual ,
-                                      :StepKind .
+                                      :StepKind ;
+                             :requiresStep :submit_environmental_change .
 
 
 ###  https://example.org/enviropermit#prepare_new_environmental_documentation
@@ -1203,7 +1204,8 @@
 
 ###  https://example.org/enviropermit#water_pertek_change_issued
 :water_pertek_change_issued rdf:type owl:NamedIndividual ,
-                                     :StepKind .
+                                     :StepKind ;
+                            :requiresStep :submit_water_pertek_change .
 
 
 ###  https://example.org/enviropermit#water_pertek_required
@@ -1241,9 +1243,15 @@
                                                             :ObligationKind .
 
 
+###  https://example.org/enviropermit#submit_emission_pertek_change
+:submit_emission_pertek_change rdf:type owl:NamedIndividual ,
+                                        :StepKind .
+
+
 ###  https://example.org/enviropermit#emission_pertek_change_issued
 :emission_pertek_change_issued rdf:type owl:NamedIndividual ,
-                                        :StepKind .
+                                        :StepKind ;
+                               :requiresStep :submit_emission_pertek_change .
 
 
 ###  https://example.org/enviropermit#emission_technical_issue_before_environmental_issue
