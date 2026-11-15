@@ -1,0 +1,57 @@
+{
+  "context": {
+    "assessment_id": "assessment-screening-boundary-250",
+    "scenario_id": "scenario-screening-boundary-250",
+    "evidence_snapshot_id": "snapshot-screening-boundary-250",
+    "assessed_on": "2026-11-14",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Produksi makanan tepat pada batas ambang bawah",
+  "period_id": "proposed-configuration",
+  "location": "Kawasan peruntukan industri non-lindung",
+  "activities": [
+    {
+      "id": "prod-1",
+      "kind": "FoodManufacturingActivity",
+      "scope_id": "line-1",
+      "kbli": "10799"
+    }
+  ],
+  "observations": [
+    {
+      "id": "loc-1",
+      "context": {
+        "assessment_id": "assessment-screening-boundary-250",
+        "scenario_id": "scenario-screening-boundary-250",
+        "evidence_snapshot_id": "snapshot-screening-boundary-250",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "prod-1",
+      "scope_id": "line-1",
+      "period_id": "proposed-configuration",
+      "in_protected_area": [false],
+      "origin": "OBSERVED"
+    }
+  ],
+  "measurements": [
+    {
+      "id": "cap-1",
+      "context": {
+        "assessment_id": "assessment-screening-boundary-250",
+        "scenario_id": "scenario-screening-boundary-250",
+        "evidence_snapshot_id": "snapshot-screening-boundary-250",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "prod-1",
+      "scope_id": "line-1",
+      "period_id": "proposed-configuration",
+      "metric": "production_capacity",
+      "value": 250.0,
+      "unit": "ton/year",
+      "origin": "HYPOTHETICAL"
+    }
+  ]
+}

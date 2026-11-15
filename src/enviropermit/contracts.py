@@ -44,8 +44,9 @@ class ReasoningContext(Contract):
 
 class Activity(Contract):
     id: str = Field(min_length=1)
-    kind: Literal["WaterActivity", "MainActivity", "SupportingActivity"] = "WaterActivity"
+    kind: Literal["WaterActivity", "MainActivity", "SupportingActivity", "FoodManufacturingActivity"] = "WaterActivity"
     scope_id: str = Field(min_length=1)
+    kbli: str | None = None
     surface_discharge: bool = False
     existing_water_pertek: bool = False
     water_change: Literal["TreatmentDesignChange", "WastewaterManagementChange"] | None = None
@@ -58,6 +59,20 @@ class Observation(Contract):
     scope_id: str
     period_id: str
     extent_changes: tuple[bool, ...] = ()
+    in_protected_area: tuple[bool, ...] = ()
+    protected_area_exception: tuple[bool, ...] = ()
+    origin: Literal["HYPOTHETICAL", "OBSERVED", "EXPECTED_EFFECT"] = "HYPOTHETICAL"
+
+
+class Measurement(Contract):
+    id: str = Field(min_length=1)
+    context: ReasoningContext
+    subject_id: str = Field(min_length=1)
+    scope_id: str = Field(min_length=1)
+    period_id: str = Field(min_length=1)
+    metric: str = Field(min_length=1)
+    value: float
+    unit: str = Field(min_length=1)
     origin: Literal["HYPOTHETICAL", "OBSERVED", "EXPECTED_EFFECT"] = "HYPOTHETICAL"
 
 
@@ -69,9 +84,10 @@ class CaseSnapshot(Contract):
     location: str | None = None
     activities: tuple[Activity, ...]
     observations: tuple[Observation, ...] = ()
+    measurements: tuple[Measurement, ...] = ()
     project_changes: tuple[Literal["CapacityIncrease", "IdentityChange", "ManagementMonitoringChange"], ...] = ()
     changes_complete: bool = False
-    screening: Literal["UKL", "AMDAL"] | None = None
+    screening: Literal["UKL", "AMDAL", "SPPL"] | None = None
     existing_environmental_approval: bool = False
     outsourcing_claim: bool = False
 

@@ -125,6 +125,22 @@
                                            ) .
 
 
+###  https://example.org/enviropermit#activityScreening
+:activityScreening rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasBoundaryClarification
+:hasBoundaryClarification rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasLocationAssessment
+:hasLocationAssessment rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasScaleAssessment
+:hasScaleAssessment rdf:type owl:ObjectProperty .
+
+
 #################################################################
 #    Data properties
 #################################################################
@@ -133,6 +149,36 @@
 :extentChanges rdf:type owl:DatatypeProperty ,
                         owl:FunctionalProperty ;
                rdfs:range xsd:boolean .
+
+
+###  https://example.org/enviropermit#hasLandAreaHa
+:hasLandAreaHa rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:range xsd:decimal .
+
+
+###  https://example.org/enviropermit#hasProductionCapacityTonPerYear
+:hasProductionCapacityTonPerYear rdf:type owl:DatatypeProperty ,
+                                          owl:FunctionalProperty ;
+                                 rdfs:range xsd:decimal .
+
+
+###  https://example.org/enviropermit#hasProtectedAreaException
+:hasProtectedAreaException rdf:type owl:DatatypeProperty ,
+                                    owl:FunctionalProperty ;
+                           rdfs:range xsd:boolean .
+
+
+###  https://example.org/enviropermit#hasWastewaterFlowM3PerDay
+:hasWastewaterFlowM3PerDay rdf:type owl:DatatypeProperty ,
+                                    owl:FunctionalProperty ;
+                           rdfs:range xsd:decimal .
+
+
+###  https://example.org/enviropermit#inProtectedArea
+:inProtectedArea rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:range xsd:boolean .
 
 
 #################################################################
@@ -540,6 +586,251 @@
                                                  "PP22:89-90" .
 
 
+###  https://example.org/enviropermit#FoodManufacturingActivity
+:FoodManufacturingActivity rdf:type owl:Class ;
+                           rdfs:subClassOf :MainActivity .
+
+
+###  https://example.org/enviropermit#LocationAssessment
+:LocationAssessment rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#ScaleAssessment
+:ScaleAssessment rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#LocationClearedForScaleScreening
+:LocationClearedForScaleScreening rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#OutsideProtectedAreaActivity
+:OutsideProtectedAreaActivity rdf:type owl:Class ;
+                              owl:equivalentClass [ owl:intersectionOf ( :MainActivity
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty :hasLocationAssessment ;
+                                                                           owl:someValuesFrom [ owl:intersectionOf ( :LocationAssessment
+                                                                                                                     [ rdf:type owl:Restriction ;
+                                                                                                                       owl:onProperty :inProtectedArea ;
+                                                                                                                       owl:hasValue "false"^^xsd:boolean
+                                                                                                                     ]
+                                                                                                                   ) ;
+                                                                                                rdf:type owl:Class
+                                                                                              ]
+                                                                         ]
+                                                                       ) ;
+                                                    rdf:type owl:Class
+                                                  ] ;
+                              rdfs:subClassOf :LocationClearedForScaleScreening ;
+                              :source_id "P4:pasal-3-lokasi-lindung" .
+
+
+###  https://example.org/enviropermit#ProtectedAreaActivity
+:ProtectedAreaActivity rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :MainActivity
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasLocationAssessment ;
+                                                                    owl:someValuesFrom [ owl:intersectionOf ( :LocationAssessment
+                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty :inProtectedArea ;
+                                                                                                                owl:hasValue "true"^^xsd:boolean
+                                                                                                              ]
+                                                                                                              [ rdf:type owl:Restriction ;
+                                                                                                                owl:onProperty :hasProtectedAreaException ;
+                                                                                                                owl:hasValue "false"^^xsd:boolean
+                                                                                                              ]
+                                                                                                            ) ;
+                                                                                         rdf:type owl:Class
+                                                                                       ]
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty :activityScreening ;
+                                         owl:hasValue :AMDAL
+                                       ] ;
+                       owl:disjointWith :LocationClearedForScaleScreening ;
+                       :source_id "P4:pasal-3-lokasi-lindung" .
+
+
+###  https://example.org/enviropermit#ProtectedAreaExemptActivity
+:ProtectedAreaExemptActivity rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( :MainActivity
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasLocationAssessment ;
+                                                                          owl:someValuesFrom [ owl:intersectionOf ( :LocationAssessment
+                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty :inProtectedArea ;
+                                                                                                                      owl:hasValue "true"^^xsd:boolean
+                                                                                                                    ]
+                                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                                      owl:onProperty :hasProtectedAreaException ;
+                                                                                                                      owl:hasValue "true"^^xsd:boolean
+                                                                                                                    ]
+                                                                                                                  ) ;
+                                                                                               rdf:type owl:Class
+                                                                                             ]
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] ;
+                             rdfs:subClassOf :LocationClearedForScaleScreening ;
+                             :source_id "P4:pasal-4-pengecualian-lindung" .
+
+
+###  https://example.org/enviropermit#FoodManufacturingSpplScale
+:FoodManufacturingSpplScale rdf:type owl:Class ;
+                            owl:equivalentClass [ owl:intersectionOf ( :FoodManufacturingActivity
+                                                                       :LocationClearedForScaleScreening
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty :hasProductionCapacityTonPerYear ;
+                                                                         owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                              owl:onDatatype xsd:decimal ;
+                                                                                              owl:withRestrictions ( [ xsd:minExclusive "0.0"^^xsd:decimal ]
+                                                                                                                     [ xsd:maxExclusive "250.0"^^xsd:decimal ]
+                                                                                                                   )
+                                                                                            ]
+                                                                       ]
+                                                                     ) ;
+                                                  rdf:type owl:Class
+                                                ] ;
+                            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                              owl:onProperty :activityScreening ;
+                                              owl:hasValue :SPPL
+                                            ] ;
+                            :source_id "P4:lampiran-i-pangan-sppl" .
+
+
+###  https://example.org/enviropermit#FoodManufacturingBoundaryAmbiguous
+:FoodManufacturingBoundaryAmbiguous rdf:type owl:Class ;
+                                    owl:equivalentClass [ owl:intersectionOf ( :FoodManufacturingActivity
+                                                                               :LocationClearedForScaleScreening
+                                                                               [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :hasProductionCapacityTonPerYear ;
+                                                                                 owl:hasValue "250.0"^^xsd:decimal
+                                                                               ]
+                                                                             ) ;
+                                                          rdf:type owl:Class
+                                                        ] ;
+                                    :source_id "P4:lampiran-i-pangan-batas" .
+
+
+###  https://example.org/enviropermit#FoodManufacturingUklScale
+:FoodManufacturingUklScale rdf:type owl:Class ;
+                           owl:equivalentClass [ owl:intersectionOf ( :FoodManufacturingActivity
+                                                                      :LocationClearedForScaleScreening
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :hasProductionCapacityTonPerYear ;
+                                                                        owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                             owl:onDatatype xsd:decimal ;
+                                                                                             owl:withRestrictions ( [ xsd:minExclusive "250.0"^^xsd:decimal ]
+                                                                                                                    [ xsd:maxExclusive "10000.0"^^xsd:decimal ]
+                                                                                                                  )
+                                                                                           ]
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :activityScreening ;
+                                             owl:hasValue :UKL
+                                           ] ;
+                           :source_id "P4:lampiran-i-pangan-ukl" .
+
+
+###  https://example.org/enviropermit#FoodManufacturingAmdalScale
+:FoodManufacturingAmdalScale rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( :FoodManufacturingActivity
+                                                                        :LocationClearedForScaleScreening
+                                                                        [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty :hasProductionCapacityTonPerYear ;
+                                                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                               owl:onDatatype xsd:decimal ;
+                                                                                               owl:withRestrictions ( [ xsd:minInclusive "10000.0"^^xsd:decimal ] )
+                                                                                             ]
+                                                                        ]
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] ;
+                             rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                               owl:onProperty :activityScreening ;
+                                               owl:hasValue :AMDAL
+                                             ] ;
+                             :source_id "P4:lampiran-i-pangan-amdal" .
+
+
+###  https://example.org/enviropermit#ScenarioWithAmdalActivity
+:ScenarioWithAmdalActivity rdf:type owl:Class ;
+                           owl:equivalentClass [ owl:intersectionOf ( :Scenario
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :hasActivity ;
+                                                                        owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                             owl:onProperty :activityScreening ;
+                                                                                             owl:hasValue :AMDAL
+                                                                                           ]
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :hasScreening ;
+                                             owl:hasValue :AMDAL
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :scenarioObligation ;
+                                             owl:hasValue :prepare_amdal
+                                           ] ;
+                           :source_id "P4:penapisan-industri" .
+
+
+###  https://example.org/enviropermit#ScenarioWithUklActivity
+:ScenarioWithUklActivity rdf:type owl:Class ;
+                         owl:equivalentClass [ owl:intersectionOf ( :Scenario
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty :hasActivity ;
+                                                                      owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty :activityScreening ;
+                                                                                           owl:hasValue :UKL
+                                                                                         ]
+                                                                    ]
+                                                                  ) ;
+                                               rdf:type owl:Class
+                                             ] ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty :hasScreening ;
+                                           owl:hasValue :UKL
+                                         ] ,
+                                         [ rdf:type owl:Restriction ;
+                                           owl:onProperty :scenarioObligation ;
+                                           owl:hasValue :prepare_ukl_upl
+                                         ] ;
+                         :source_id "P4:penapisan-industri" .
+
+
+###  https://example.org/enviropermit#ScenarioWithSpplActivity
+:ScenarioWithSpplActivity rdf:type owl:Class ;
+                          owl:equivalentClass [ owl:intersectionOf ( :Scenario
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :hasActivity ;
+                                                                       owl:someValuesFrom [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty :activityScreening ;
+                                                                                            owl:hasValue :SPPL
+                                                                                          ]
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                            owl:onProperty :hasScreening ;
+                                            owl:hasValue :SPPL
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty :scenarioObligation ;
+                                            owl:hasValue :register_sppl
+                                          ] ;
+                          :source_id "P4:penapisan-industri" .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -547,12 +838,34 @@
 ###  https://example.org/enviropermit#AMDAL
 :AMDAL rdf:type owl:NamedIndividual ,
                 :Screening ;
-       owl:differentFrom :UKL .
+       owl:differentFrom :SPPL ,
+                         :UKL .
+
+
+###  https://example.org/enviropermit#SPPL
+:SPPL rdf:type owl:NamedIndividual ,
+               :Screening ;
+      owl:differentFrom :UKL .
 
 
 ###  https://example.org/enviropermit#UKL
 :UKL rdf:type owl:NamedIndividual ,
               :Screening .
+
+
+###  https://example.org/enviropermit#prepare_amdal
+:prepare_amdal rdf:type owl:NamedIndividual ,
+                        :ObligationKind .
+
+
+###  https://example.org/enviropermit#prepare_ukl_upl
+:prepare_ukl_upl rdf:type owl:NamedIndividual ,
+                          :ObligationKind .
+
+
+###  https://example.org/enviropermit#register_sppl
+:register_sppl rdf:type owl:NamedIndividual ,
+                        :ObligationKind .
 
 
 ###  https://example.org/enviropermit#amend_environmental_approval
@@ -695,6 +1008,19 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
    :subjectClass :WaterActivity ; :whenProperty :hasWaterTechnicalChange ;
    :missingProperty :hasCurrentPertek ;
    :missingEvidence "prior_water_pertek_or_initial_application_route" .
+:screening_document_route a owl:NamedIndividual, :DecisionQuery ;
+   :subjectClass :FoodManufacturingActivity ;
+   :branchClass :ProtectedAreaActivity, :FoodManufacturingAmdalScale, :FoodManufacturingUklScale, :FoodManufacturingSpplScale ;
+   :missingEvidence "screening_scale_or_location_evidence" .
+:location_screening_evidence a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :FoodManufacturingActivity ; :missingProperty :hasLocationAssessment ;
+   :missingEvidence "protected_area_location_verification" .
+:scale_screening_evidence a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :FoodManufacturingActivity ; :missingProperty :hasScaleAssessment ;
+   :missingEvidence "production_capacity_measurement" .
+:boundary_ambiguity_gap a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :FoodManufacturingBoundaryAmbiguous ; :missingProperty :hasBoundaryClarification ;
+   :missingEvidence "source_boundary_issue:P4:lampiran-i-pangan-batas:250_ton_per_year" .
 
 #################################################################
 # Sources, version intervals, scopes, and rule mappings (T2)
@@ -863,7 +1189,69 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ;
  :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ :ruleId "ScenarioWithAmdalActivity", "ScenarioWithSpplActivity", "ScenarioWithUklActivity" ;
+ :caseId "screening_above_amdal", "screening_below_sppl", "screening_boundary_10000_amdal", "screening_mixed_changes", "screening_protected_area", "screening_ukl_equivalent_unit" ;
  rdfs:comment "Mandatory AMDAL, UKL-UPL, or SPPL screening criteria by KBLI, scale, and location sensitivity." .
+
+:provision_p4_lokasi a owl:NamedIndividual, :Provision ;
+ :source_id "P4:pasal-3-lokasi-lindung" ; :documentId "PERMEN_LHK_4_2021" ;
+ :locator "Pasal 3(1)-(2) Permen LHK 4/2021 (Lokasi di dalam/berbatasan kawasan lindung)" ;
+ :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ :ruleId "OutsideProtectedAreaActivity", "ProtectedAreaActivity" ;
+ :caseId "screening_below_sppl", "screening_protected_area", "screening_ukl_equivalent_unit" ;
+ rdfs:comment "Activities inside or directly bordering protected areas require AMDAL unless exempted; activities outside protected areas proceed to scale-based screening." .
+
+:provision_p4_pengecualian_lokasi a owl:NamedIndividual, :Provision ;
+ :source_id "P4:pasal-4-pengecualian-lindung" ; :documentId "PERMEN_LHK_4_2021" ;
+ :locator "Pasal 4 Permen LHK 4/2021 (Pengecualian kegiatan di kawasan lindung)" ;
+ :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ :ruleId "ProtectedAreaExemptActivity" ;
+ :caseId "screening_protected_area" ;
+ rdfs:comment "Explicitly evidenced statutory exception for protected area location allows scale-based screening." .
+
+:provision_p4_pangan_sppl a owl:NamedIndividual, :Provision ;
+ :source_id "P4:lampiran-i-pangan-sppl" ; :documentId "PERMEN_LHK_4_2021" ;
+ :locator "Pasal 2, Lampiran I Bidang Perindustrian KBLI 10799 (< 250 ton/tahun)" ;
+ :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ :ruleId "FoodManufacturingSpplScale" ;
+ :caseId "screening_below_sppl" ;
+ rdfs:comment "Food manufacturing production capacity strictly below 250 ton/year outside protected areas follows the SPPL route." .
+
+:provision_p4_pangan_batas a owl:NamedIndividual, :Provision ;
+ :source_id "P4:lampiran-i-pangan-batas" ; :documentId "PERMEN_LHK_4_2021" ;
+ :locator "Lampiran I Bidang Perindustrian KBLI 10799 (batas ambang 250 ton/tahun)" ;
+ :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ :ruleId "FoodManufacturingBoundaryAmbiguous" ;
+ :caseId "screening_boundary_250" ;
+ rdfs:comment "Exact 250.0 ton/year boundary between SPPL and UKL-UPL is kept UNRESOLVED without guessing until boundary interpretation is clarified." .
+
+:provision_p4_pangan_ukl a owl:NamedIndividual, :Provision ;
+ :source_id "P4:lampiran-i-pangan-ukl" ; :documentId "PERMEN_LHK_4_2021" ;
+ :locator "Pasal 2, Lampiran I Bidang Perindustrian KBLI 10799 (> 250 s/d < 10.000 ton/tahun)" ;
+ :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ :ruleId "FoodManufacturingUklScale" ;
+ :caseId "screening_ukl_equivalent_unit" ;
+ rdfs:comment "Food manufacturing production capacity above 250 ton/year and below 10,000 ton/year outside protected areas requires UKL-UPL." .
+
+:provision_p4_pangan_amdal a owl:NamedIndividual, :Provision ;
+ :source_id "P4:lampiran-i-pangan-amdal" ; :documentId "PERMEN_LHK_4_2021" ;
+ :locator "Pasal 2, Lampiran I Bidang Perindustrian KBLI 10799 (>= 10.000 ton/tahun)" ;
+ :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ :ruleId "FoodManufacturingAmdalScale" ;
+ :caseId "screening_above_amdal", "screening_boundary_10000_amdal", "screening_mixed_changes" ;
+ rdfs:comment "Food manufacturing production capacity of at least 10,000 ton/year requires AMDAL." .
 
 :provision_p5_emisi a owl:NamedIndividual, :Provision ;
  :source_id "P5:28-emisi" ; :documentId "PERMEN_LHK_5_2021" ;

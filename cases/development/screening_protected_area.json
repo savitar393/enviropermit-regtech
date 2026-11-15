@@ -1,0 +1,58 @@
+{
+  "context": {
+    "assessment_id": "assessment-screening-protected-area",
+    "scenario_id": "scenario-screening-protected-area",
+    "evidence_snapshot_id": "snapshot-screening-protected-area",
+    "assessed_on": "2026-11-14",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Produksi makanan berbatasan langsung dengan kawasan lindung",
+  "period_id": "proposed-configuration",
+  "location": "Berbatasan langsung dengan kawasan lindung",
+  "activities": [
+    {
+      "id": "prod-1",
+      "kind": "FoodManufacturingActivity",
+      "scope_id": "line-1",
+      "kbli": "10799"
+    }
+  ],
+  "observations": [
+    {
+      "id": "loc-1",
+      "context": {
+        "assessment_id": "assessment-screening-protected-area",
+        "scenario_id": "scenario-screening-protected-area",
+        "evidence_snapshot_id": "snapshot-screening-protected-area",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "prod-1",
+      "scope_id": "line-1",
+      "period_id": "proposed-configuration",
+      "in_protected_area": [true],
+      "protected_area_exception": [false],
+      "origin": "OBSERVED"
+    }
+  ],
+  "measurements": [
+    {
+      "id": "cap-1",
+      "context": {
+        "assessment_id": "assessment-screening-protected-area",
+        "scenario_id": "scenario-screening-protected-area",
+        "evidence_snapshot_id": "snapshot-screening-protected-area",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "prod-1",
+      "scope_id": "line-1",
+      "period_id": "proposed-configuration",
+      "metric": "production_capacity",
+      "value": 200.0,
+      "unit": "ton/year",
+      "origin": "HYPOTHETICAL"
+    }
+  ]
+}

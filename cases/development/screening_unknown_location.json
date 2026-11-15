@@ -1,0 +1,40 @@
+{
+  "context": {
+    "assessment_id": "assessment-screening-unknown-location",
+    "scenario_id": "scenario-screening-unknown-location",
+    "evidence_snapshot_id": "snapshot-screening-unknown-location",
+    "assessed_on": "2026-11-14",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Produksi makanan dengan lokasi kawasan lindung belum diverifikasi",
+  "period_id": "proposed-configuration",
+  "activities": [
+    {
+      "id": "prod-1",
+      "kind": "FoodManufacturingActivity",
+      "scope_id": "line-1",
+      "kbli": "10799"
+    }
+  ],
+  "observations": [],
+  "measurements": [
+    {
+      "id": "cap-1",
+      "context": {
+        "assessment_id": "assessment-screening-unknown-location",
+        "scenario_id": "scenario-screening-unknown-location",
+        "evidence_snapshot_id": "snapshot-screening-unknown-location",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "prod-1",
+      "scope_id": "line-1",
+      "period_id": "proposed-configuration",
+      "metric": "production_capacity",
+      "value": 500.0,
+      "unit": "ton/year",
+      "origin": "HYPOTHETICAL"
+    }
+  ]
+}

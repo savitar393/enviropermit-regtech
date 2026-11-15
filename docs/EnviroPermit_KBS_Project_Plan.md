@@ -315,16 +315,16 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 
 ### T3 — Penapisan dan perubahan proyek
 
-**Files:** `kb/modules/screening.owl`, `kb/rules/screening.swrl`, `normalization.py`, `tests/test_screening.py`, `cases/development/screening_*.json`.
+**Files:** `kb/enviropermit.ttl`, `normalization.py`, `tests/test_screening.py`, `cases/development/screening_*.json`.
 
 **Consumes:** T1/T2; ukuran dan bukti lokasi pada `CaseSnapshot`.  
 **Produces:** fakta jalur dokumen, pemicu perubahan, dan evidence gaps melalui `infer()`.
 
-- [ ] Tulis kasus di bawah/tepat/di atas setiap ambang terpilih, satuan berbeda yang ekuivalen, lokasi tidak diketahui, serta identity+capacity. Expected merujuk locator sumber.
-- [ ] Jalankan `pytest tests/test_screening.py -q`; pastikan threshold dan exception belum terimplementasi gagal.
-- [ ] Implementasikan normalisasi satuan sebagai adapter dan kriteria dalam OWL/SWRL/KB; jangan menulis angka hukum dalam controller Python. Bukti lokasi yang kurang menghasilkan UNRESOLVED.
-- [ ] Jalankan kembali screening dan regression suite. Nilai tepat pada batas yang sumbernya belum jelas harus UNRESOLVED dengan issue sumber tertentu.
-- [ ] Commit `feat: reason about project screening and changes`.
+- [x] Tulis kasus di bawah/tepat/di atas setiap ambang terpilih, satuan berbeda yang ekuivalen, lokasi tidak diketahui, serta identity+capacity. Expected merujuk locator sumber.
+- [x] Jalankan `pytest tests/test_screening.py -q`; pastikan threshold dan exception belum terimplementasi gagal.
+- [x] Implementasikan normalisasi satuan sebagai adapter dan kriteria dalam OWL/SWRL/KB; jangan menulis angka hukum dalam controller Python. Bukti lokasi yang kurang menghasilkan UNRESOLVED.
+- [x] Jalankan kembali screening dan regression suite. Nilai tepat pada batas yang sumbernya belum jelas harus UNRESOLVED dengan issue sumber tertentu.
+- [x] Commit `feat: reason about project screening and changes`.
 
 ### T4 — Kewajiban air limbah dan emisi
 

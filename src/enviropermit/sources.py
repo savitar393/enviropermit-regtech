@@ -146,6 +146,11 @@ def snapshot_scopes(snapshot: CaseSnapshot) -> tuple[str, ...]:
     scopes: list[str] = []
     if snapshot.existing_environmental_approval or snapshot.project_changes:
         scopes.append("environmental_approval_change")
+    if any(
+        activity.kind in ("MainActivity", "FoodManufacturingActivity")
+        for activity in snapshot.activities
+    ):
+        scopes.append("activity_screening")
     if any(activity.kind == "WaterActivity" for activity in snapshot.activities):
         scopes.append("wastewater_pertek")
     scopes.append("modeling_assumption")

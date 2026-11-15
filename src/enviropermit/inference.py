@@ -15,6 +15,7 @@ from urllib.parse import quote
 
 from .contracts import (NS, RDF_TYPE, XSD, CaseSnapshot, Closure, FactBundle,
                         FactProvenance, InferenceResult, KBRelease, ReasoningRequest, Triple)
+from .normalization import normalize_measurement
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -46,6 +47,8 @@ def prepare_facts(snapshot: CaseSnapshot) -> FactBundle:
         raise ValueError("Activity IDs must be unique in a snapshot")
     if len({e.id for e in snapshot.observations}) != len(snapshot.observations):
         raise ValueError("Observation IDs must be unique in a snapshot")
+    if len({m.id for m in snapshot.measurements}) != len(snapshot.measurements):
+        raise ValueError("Measurement IDs must be unique in a snapshot")
 
     project = typed("project-" + snapshot.project_id, "Project")
     scenario = typed("scenario", "Scenario")
@@ -72,7 +75,8 @@ def prepare_facts(snapshot: CaseSnapshot) -> FactBundle:
 
     activity_map = {}
     for activity in snapshot.activities:
-        subject = typed("activity-" + activity.id, activity.kind)
+        act_kind = "FoodManufacturingActivity" if (activity.kind == "MainActivity" and activity.kbli == "10799") else activity.kind
+        subject = typed("activity-" + activity.id, act_kind)
         scope = typed("scope-" + activity.scope_id, "WastewaterOutlet" if activity.kind == "WaterActivity" else "Scope")
         activity_map[activity.id] = (activity, subject)
         add(scenario, NS + "hasActivity", subject)
@@ -105,9 +109,42 @@ def prepare_facts(snapshot: CaseSnapshot) -> FactBundle:
             for value in observation.extent_changes:
                 add(evidence, NS + "extentChanges", str(value).lower(), observation.id,
                     XSD + "boolean", observation.origin)
+        if observation.in_protected_area:
+            loc_evidence = typed("location-" + observation.id, "LocationAssessment")
+            add(matching[1], NS + "hasLocationAssessment", loc_evidence, observation.id, origin=observation.origin)
+            for value in observation.in_protected_area:
+                add(loc_evidence, NS + "inProtectedArea", str(value).lower(), observation.id,
+                    XSD + "boolean", observation.origin)
+            exceptions = observation.protected_area_exception or ((False,) if True in observation.in_protected_area else ())
+            for exc_value in exceptions:
+                add(loc_evidence, NS + "hasProtectedAreaException", str(exc_value).lower(), observation.id,
+                    XSD + "boolean", observation.origin)
+
+    normalized_values = []
+    for measurement in snapshot.measurements:
+        matching = activity_map.get(measurement.subject_id)
+        if (measurement.context != context or measurement.period_id != snapshot.period_id
+                or not matching or matching[0].scope_id != measurement.scope_id):
+            issues.append("EVIDENCE_SCOPE_MISMATCH:" + measurement.id)
+            continue
+        if measurement.origin == "EXPECTED_EFFECT":
+            issues.append("EXPECTED_EFFECT_NOT_EVIDENCE:" + measurement.id)
+            continue
+        normalized = normalize_measurement(measurement)
+        normalized_values.append(normalized.model_dump(mode="json"))
+        if normalized.status != "NORMALIZED" or normalized.predicate is None or normalized.normalized_value is None:
+            if normalized.issue:
+                issues.append(normalized.issue)
+            continue
+        add(matching[1], normalized.predicate, normalized.normalized_value,
+            measurement.id, XSD + "decimal", measurement.origin)
+        if normalized.metric.strip().lower() == "production_capacity":
+            scale_ev = typed("scale-" + measurement.id, "ScaleAssessment")
+            add(matching[1], NS + "hasScaleAssessment", scale_ev, measurement.id, origin=measurement.origin)
 
     return FactBundle(context=context, namespace=namespace, project_iri=project,
                       assessment_iri=assessment, asserted_triples=tuple(triples),
+                      normalized_values=tuple(normalized_values),
                       provenance=tuple(provenance), named_candidates=tuple(sorted(names)),
                       closures=tuple(closures), input_issues=tuple(sorted(set(issues))))
 

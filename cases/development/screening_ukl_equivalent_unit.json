@@ -1,0 +1,57 @@
+{
+  "context": {
+    "assessment_id": "assessment-screening-ukl-kg",
+    "scenario_id": "scenario-screening-ukl-kg",
+    "evidence_snapshot_id": "snapshot-screening-ukl-kg",
+    "assessed_on": "2026-11-14",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Produksi makanan menengah dengan satuan kg/tahun",
+  "period_id": "proposed-configuration",
+  "location": "Kawasan peruntukan industri non-lindung",
+  "activities": [
+    {
+      "id": "prod-1",
+      "kind": "FoodManufacturingActivity",
+      "scope_id": "line-1",
+      "kbli": "10799"
+    }
+  ],
+  "observations": [
+    {
+      "id": "loc-1",
+      "context": {
+        "assessment_id": "assessment-screening-ukl-kg",
+        "scenario_id": "scenario-screening-ukl-kg",
+        "evidence_snapshot_id": "snapshot-screening-ukl-kg",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "prod-1",
+      "scope_id": "line-1",
+      "period_id": "proposed-configuration",
+      "in_protected_area": [false],
+      "origin": "OBSERVED"
+    }
+  ],
+  "measurements": [
+    {
+      "id": "cap-1",
+      "context": {
+        "assessment_id": "assessment-screening-ukl-kg",
+        "scenario_id": "scenario-screening-ukl-kg",
+        "evidence_snapshot_id": "snapshot-screening-ukl-kg",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "prod-1",
+      "scope_id": "line-1",
+      "period_id": "proposed-configuration",
+      "metric": "production_capacity",
+      "value": 500000.0,
+      "unit": "kg/tahun",
+      "origin": "HYPOTHETICAL"
+    }
+  ]
+}
