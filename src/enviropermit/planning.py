@@ -174,13 +174,16 @@ def build_plans(result: AssessmentResult, max_candidates: int = 8) -> list[PlanC
                 if tpl.id in or_member_all_ids:
                     continue
                 if set(tpl.for_obligations).intersection(obs_map):
-                    # Skip verify_*_slo if no corresponding amendment is active and pertek is already satisfied
-                    if tpl.id == "verify_water_slo" and "amend_water_pertek" not in obs_map:
-                        if fulfillment_by_scope.get(scope_key, {}).get("water_pertek_required") == Fulfillment.SATISFIED:
-                            continue
-                    if tpl.id == "verify_emission_slo" and "amend_emission_pertek" not in obs_map:
-                        if fulfillment_by_scope.get(scope_key, {}).get("emission_pertek_required") == Fulfillment.SATISFIED:
-                            continue
+                    if (
+                        tpl.kind == "MILESTONE"
+                        and tpl.preconditions
+                        and not any(
+                            set(template_by_id[pre_id].for_obligations).intersection(obs_map)
+                            for pre_id in tpl.preconditions
+                            if pre_id in template_by_id
+                        )
+                    ):
+                        continue
                     planned_items.append((scope_key, tpl, False))
 
             for tpl in templates:

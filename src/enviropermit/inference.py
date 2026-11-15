@@ -75,8 +75,9 @@ def prepare_facts(snapshot: CaseSnapshot) -> FactBundle:
 
     activity_map = {}
     for activity in snapshot.activities:
-        act_kind = "FoodManufacturingActivity" if (activity.kind == "MainActivity" and activity.kbli == "10799") else activity.kind
-        subject = typed("activity-" + activity.id, act_kind)
+        subject = typed("activity-" + activity.id, activity.kind)
+        if activity.kbli:
+            add(subject, NS + "hasKBLI", activity.kbli, datatype=XSD + "string")
         scope_kind = (
             "WastewaterOutlet" if activity.kind == "WaterActivity"
             else "EmissionSource" if activity.kind == "AirActivity"

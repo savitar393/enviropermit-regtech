@@ -116,14 +116,16 @@ def assess(
             continue
         seen_keys.add(dedup_key)
 
-        if "study" in ob_kind and triple.subject in fired_by_subject:
-            for r_id in sorted(fired_by_subject[triple.subject]):
-                if r_id not in matching_rules:
-                    matching_rules.append(r_id)
-
         provisions: set[str] = set()
         for r_id in matching_rules:
             provisions.update(rule_sources.get(r_id, ()))
+
+        if triple.subject in fired_by_subject:
+            for r_id in sorted(fired_by_subject[triple.subject]):
+                r_sources = set(rule_sources.get(r_id, ()))
+                if r_id not in matching_rules and r_sources.intersection(provisions):
+                    matching_rules.append(r_id)
+                    provisions.update(r_sources)
 
         fulfillment = (
             Fulfillment.SATISFIED

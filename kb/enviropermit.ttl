@@ -182,6 +182,12 @@
                      rdfs:range xsd:boolean .
 
 
+###  https://example.org/enviropermit#hasKBLI
+:hasKBLI rdf:type owl:DatatypeProperty ,
+                  owl:FunctionalProperty ;
+         rdfs:range xsd:string .
+
+
 ###  https://example.org/enviropermit#hasLandAreaHa
 :hasLandAreaHa rdf:type owl:DatatypeProperty ,
                         owl:FunctionalProperty ;
@@ -619,7 +625,16 @@
 
 ###  https://example.org/enviropermit#FoodManufacturingActivity
 :FoodManufacturingActivity rdf:type owl:Class ;
-                           rdfs:subClassOf :MainActivity .
+                           owl:equivalentClass [ owl:intersectionOf ( :MainActivity
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :hasKBLI ;
+                                                                        owl:hasValue "10799"
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                           rdfs:subClassOf :MainActivity ;
+                           :source_id "P4:penapisan-industri" .
 
 
 ###  https://example.org/enviropermit#LocationAssessment
@@ -1537,7 +1552,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ;
  :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
- :ruleId "ScenarioWithAmdalActivity", "ScenarioWithSpplActivity", "ScenarioWithUklActivity" ;
+ :ruleId "FoodManufacturingActivity", "ScenarioWithAmdalActivity", "ScenarioWithSpplActivity", "ScenarioWithUklActivity" ;
  :caseId "screening_above_amdal", "screening_below_sppl", "screening_boundary_10000_amdal", "screening_mixed_changes", "screening_protected_area", "screening_ukl_equivalent_unit" ;
  rdfs:comment "Mandatory AMDAL, UKL-UPL, or SPPL screening criteria by KBLI, scale, and location sensitivity." .
 
