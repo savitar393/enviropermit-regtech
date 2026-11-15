@@ -1,0 +1,402 @@
+@prefix ns1: <https://example.org/enviropermit-spike/2026-11-14#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://anonymous> a owl:Ontology .
+
+<http://inferrences> a owl:Ontology .
+
+<https://example.org/enviropermit-spike/2026-11-14> a owl:Ontology .
+
+ns1:CapacityIncrease a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:NewDocChange .
+
+ns1:ConcurrentSubmissionPermitted a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:InteractingAmendments,
+        ns1:ScreenedCase ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:InteractingAmendments [ a owl:Restriction ;
+                        owl:hasValue ns1:AMDAL ;
+                        owl:onProperty ns1:hasScreening ] ) ] ;
+    ns1:source_id "P5:16.2"^^xsd:string,
+        "P5:8.1"^^xsd:string .
+
+ns1:IdentityChange a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:NoNewDocChange .
+
+ns1:TechnicalStudyBranch a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:prepare_technical_study ;
+            owl:onProperty ns1:activityObligation ],
+        owl:Thing,
+        ns1:WaterTechnicalRevision ;
+    owl:disjointWith ns1:TechnicalStandardBranch ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:WaterTechnicalRevision [ a owl:Restriction ;
+                        owl:onProperty ns1:hasImpactAssessment ;
+                        owl:someValuesFrom [ a owl:Class ;
+                                owl:intersectionOf ( ns1:ImpactAssessment [ a owl:Restriction ;
+                                            owl:hasValue true ;
+                                            owl:onProperty ns1:extentChanges ] ) ] ] ) ] ;
+    ns1:source_id "P5:16.1.a"^^xsd:string .
+
+ns1:TreatmentDesignChange a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:TechnicalWaterChange .
+
+ns1:WithNewEnvironmentalDocumentation a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:prepare_new_environmental_documentation ;
+            owl:onProperty ns1:caseObligation ],
+        owl:Thing,
+        ns1:EnvironmentalAmendment ;
+    owl:disjointWith ns1:WithoutNewEnvironmentalDocumentation ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:EnvironmentalAmendment [ a owl:Restriction ;
+                        owl:onProperty ns1:hasProjectChange ;
+                        owl:someValuesFrom ns1:NewDocChange ] ) ] ;
+    ns1:source_id "PP22:89-90"^^xsd:string .
+
+ns1:edgeAfter a owl:ObjectProperty .
+
+ns1:edgeBefore a owl:ObjectProperty .
+
+ns1:hasWaterTechnicalChange a owl:ObjectProperty ;
+    rdfs:subPropertyOf ns1:hasTechnicalChange .
+
+ns1:source_id a owl:AnnotationProperty .
+
+ns1:ManagementTechnicalDependency a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:InteractingAmendments,
+        ns1:WithoutNewEnvironmentalDocumentation ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:WithoutNewEnvironmentalDocumentation [ a owl:Restriction ;
+                        owl:onProperty ns1:hasProjectChange ;
+                        owl:someValuesFrom ns1:ManagementMonitoringChange ] [ a owl:Restriction ;
+                        owl:onProperty ns1:hasActivity ;
+                        owl:someValuesFrom ns1:WaterTechnicalRevision ] ) ] ;
+    ns1:source_id "PP22:93.2"^^xsd:string .
+
+ns1:RegulatedSurfaceDischarge a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:water_pertek_required ;
+            owl:onProperty ns1:activityObligation ],
+        [ a owl:Restriction ;
+            owl:hasValue ns1:water_slo_required ;
+            owl:onProperty ns1:activityObligation ],
+        owl:Thing,
+        ns1:WaterActivity ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:WaterActivity [ a owl:Restriction ;
+                        owl:onProperty ns1:dischargesTo ;
+                        owl:someValuesFrom ns1:SurfaceWater ] [ a owl:Restriction ;
+                        owl:onProperty ns1:isActivityOf ;
+                        owl:someValuesFrom ns1:ScreenedCase ] ) ] ;
+    ns1:source_id "P5:3"^^xsd:string .
+
+ns1:UKLSubmissionSequence a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:ukl_application_order ;
+            owl:onProperty ns1:hasPlanEdge ],
+        owl:Thing,
+        ns1:InteractingAmendments,
+        ns1:ScreenedCase ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:InteractingAmendments [ a owl:Restriction ;
+                        owl:hasValue ns1:UKL ;
+                        owl:onProperty ns1:hasScreening ] ) ] ;
+    ns1:source_id "P5:16.2"^^xsd:string,
+        "P5:8.2"^^xsd:string .
+
+ns1:WastewaterManagementChange a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:TechnicalWaterChange .
+
+ns1:case_M a [ a owl:Restriction ;
+            owl:allValuesFrom [ a owl:Class ;
+                    owl:oneOf ( ns1:project_change_0 ) ] ;
+            owl:onProperty ns1:hasProjectChange ],
+        owl:NamedIndividual,
+        ns1:Case,
+        ns1:ManagementTechnicalDependency,
+        ns1:UKLSubmissionSequence ;
+    ns1:caseObligation ns1:amend_environmental_approval,
+        ns1:amend_water_pertek,
+        ns1:prepare_standard_technical_documentation,
+        ns1:water_pertek_required,
+        ns1:water_slo_required ;
+    ns1:hasActivity ns1:water_activity_M ;
+    ns1:hasExistingApproval ns1:existing_env_approval ;
+    ns1:hasPlanEdge ns1:technical_issue_before_environmental_issue,
+        ns1:ukl_application_order ;
+    ns1:hasProjectChange ns1:project_change_0 ;
+    ns1:hasScreening ns1:UKL ;
+    ns1:hasSnapshot ns1:snapshot_M .
+
+ns1:environmental_change_issued a owl:NamedIndividual,
+        ns1:StepKind .
+
+ns1:existing_env_approval a owl:NamedIndividual,
+        ns1:EnvironmentalApproval .
+
+ns1:existing_water_pertek a owl:NamedIndividual,
+        ns1:WaterPertek .
+
+ns1:hasCurrentPertek a owl:ObjectProperty .
+
+ns1:hasExistingApproval a owl:ObjectProperty .
+
+ns1:hasSnapshot a owl:ObjectProperty .
+
+ns1:impact_assessment a owl:NamedIndividual,
+        ns1:ImpactAssessment ;
+    ns1:extentChanges false .
+
+ns1:prepare_new_environmental_documentation a owl:NamedIndividual,
+        ns1:ObligationKind .
+
+ns1:prepare_technical_study a owl:NamedIndividual,
+        ns1:ObligationKind .
+
+ns1:receiving_surface_water a owl:NamedIndividual,
+        ns1:SurfaceWater .
+
+ns1:snapshot_M a owl:NamedIndividual,
+        ns1:Snapshot .
+
+ns1:submit_environmental_change a owl:NamedIndividual,
+        ns1:StepKind .
+
+ns1:submit_water_pertek_change a owl:NamedIndividual,
+        ns1:StepKind .
+
+ns1:water_activity_M a owl:NamedIndividual,
+        ns1:RegulatedSurfaceDischarge,
+        ns1:TechnicalStandardBranch,
+        ns1:WaterActivity,
+        ns1:WaterTechnicalRevision ;
+    ns1:activityObligation ns1:amend_water_pertek,
+        ns1:prepare_standard_technical_documentation,
+        ns1:water_pertek_required,
+        ns1:water_slo_required ;
+    ns1:dischargesTo ns1:receiving_surface_water ;
+    ns1:hasCurrentPertek ns1:existing_water_pertek ;
+    ns1:hasImpactAssessment ns1:impact_assessment ;
+    ns1:hasWaterTechnicalChange ns1:water_change ;
+    ns1:isActivityOf ns1:case_M .
+
+ns1:water_change a owl:NamedIndividual,
+        ns1:WastewaterManagementChange .
+
+ns1:water_pertek_change_issued a owl:NamedIndividual,
+        ns1:StepKind .
+
+ns1:EnvironmentalApproval a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:ManagementMonitoringChange a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:NoNewDocChange .
+
+ns1:NewDocChange a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:ProjectChange ;
+    owl:disjointWith ns1:NoNewDocChange .
+
+ns1:PlanEdge a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:Screening a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:Snapshot a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:TechnicalStandardBranch a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:prepare_standard_technical_documentation ;
+            owl:onProperty ns1:activityObligation ],
+        owl:Thing,
+        ns1:WaterTechnicalRevision ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:WaterTechnicalRevision [ a owl:Restriction ;
+                        owl:onProperty ns1:hasImpactAssessment ;
+                        owl:someValuesFrom [ a owl:Class ;
+                                owl:intersectionOf ( ns1:ImpactAssessment [ a owl:Restriction ;
+                                            owl:hasValue false ;
+                                            owl:onProperty ns1:extentChanges ] ) ] ] ) ] ;
+    ns1:source_id "P5:16.1.b"^^xsd:string .
+
+ns1:WaterPertek a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:amend_environmental_approval a owl:NamedIndividual,
+        ns1:ObligationKind .
+
+ns1:caseObligation a owl:ObjectProperty ;
+    owl:propertyChainAxiom ( ns1:hasActivity ns1:activityObligation ) .
+
+ns1:dischargesTo a owl:ObjectProperty .
+
+ns1:extentChanges a owl:DatatypeProperty,
+        owl:FunctionalProperty ;
+    rdfs:range xsd:boolean .
+
+ns1:hasImpactAssessment a owl:ObjectProperty .
+
+ns1:hasPlanEdge a owl:ObjectProperty .
+
+ns1:hasTechnicalChange a owl:ObjectProperty .
+
+ns1:isActivityOf a owl:ObjectProperty ;
+    owl:inverseOf ns1:hasActivity .
+
+ns1:project_change_0 a owl:NamedIndividual,
+        ns1:ManagementMonitoringChange .
+
+ns1:technical_issue_before_environmental_issue a owl:NamedIndividual,
+        ns1:PlanEdge ;
+    ns1:edgeAfter ns1:environmental_change_issued ;
+    ns1:edgeBefore ns1:water_pertek_change_issued ;
+    ns1:source_id "P5:14"^^xsd:string .
+
+ns1:ukl_application_order a owl:NamedIndividual,
+        ns1:PlanEdge ;
+    ns1:edgeAfter ns1:submit_environmental_change ;
+    ns1:edgeBefore ns1:submit_water_pertek_change ;
+    ns1:source_id "P5:16.2"^^xsd:string,
+        "P5:8.2"^^xsd:string .
+
+ns1:AMDAL a owl:NamedIndividual,
+        ns1:Screening .
+
+ns1:ImpactAssessment a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:ProjectChange a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:ScreenedCase a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:Case ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:Case [ a owl:Restriction ;
+                        owl:onProperty ns1:hasScreening ;
+                        owl:someValuesFrom [ a owl:Class ;
+                                owl:oneOf ( ns1:UKL ns1:AMDAL ) ] ] ) ] ;
+    ns1:source_id "MODEL:screening"^^xsd:string .
+
+ns1:SurfaceWater a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:TechnicalWaterChange a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:WithoutNewEnvironmentalDocumentation a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:EnvironmentalAmendment ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:EnvironmentalAmendment [ a owl:Restriction ;
+                        owl:onProperty ns1:hasProjectChange ;
+                        owl:someValuesFrom ns1:NoNewDocChange ] [ a owl:Restriction ;
+                        owl:allValuesFrom ns1:NoNewDocChange ;
+                        owl:onProperty ns1:hasProjectChange ] ) ] ;
+    ns1:source_id "MODEL:closure"^^xsd:string,
+        "PP22:89-90"^^xsd:string .
+
+ns1:amend_water_pertek a owl:NamedIndividual,
+        ns1:ObligationKind .
+
+ns1:hasScreening a owl:ObjectProperty .
+
+ns1:prepare_standard_technical_documentation a owl:NamedIndividual,
+        ns1:ObligationKind .
+
+ns1:water_pertek_required a owl:NamedIndividual,
+        ns1:ObligationKind .
+
+ns1:water_slo_required a owl:NamedIndividual,
+        ns1:ObligationKind .
+
+ns1:StepKind a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:UKL a owl:NamedIndividual,
+        ns1:Screening .
+
+ns1:hasActivity a owl:ObjectProperty ;
+    owl:inverseOf ns1:isActivityOf .
+
+ns1:Case a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass ns1:Snapshot ;
+            owl:onProperty ns1:hasSnapshot ;
+            owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ],
+        owl:Thing .
+
+ns1:InteractingAmendments a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:technical_issue_before_environmental_issue ;
+            owl:onProperty ns1:hasPlanEdge ],
+        owl:Thing,
+        ns1:EnvironmentalAmendment ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:EnvironmentalAmendment [ a owl:Restriction ;
+                        owl:onProperty ns1:hasActivity ;
+                        owl:someValuesFrom ns1:WaterTechnicalRevision ] ) ] ;
+    ns1:source_id "P5:14"^^xsd:string,
+        "P5:15"^^xsd:string .
+
+ns1:NoNewDocChange a owl:Class ;
+    rdfs:subClassOf owl:Thing,
+        ns1:ProjectChange .
+
+ns1:WaterActivity a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:EnvironmentalAmendment a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:amend_environmental_approval ;
+            owl:onProperty ns1:caseObligation ],
+        owl:Thing,
+        ns1:Case ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:Case [ a owl:Restriction ;
+                        owl:onProperty ns1:hasExistingApproval ;
+                        owl:someValuesFrom ns1:EnvironmentalApproval ] [ a owl:Restriction ;
+                        owl:onProperty ns1:hasProjectChange ;
+                        owl:someValuesFrom ns1:ProjectChange ] ) ] ;
+    ns1:source_id "PP22:89-90"^^xsd:string .
+
+ns1:activityObligation a owl:ObjectProperty .
+
+ns1:hasProjectChange a owl:ObjectProperty .
+
+ns1:ObligationKind a owl:Class ;
+    rdfs:subClassOf owl:Thing .
+
+ns1:WaterTechnicalRevision a owl:Class ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:hasValue ns1:amend_water_pertek ;
+            owl:onProperty ns1:activityObligation ],
+        owl:Thing,
+        ns1:WaterActivity ;
+    owl:equivalentClass [ a owl:Class ;
+            owl:intersectionOf ( ns1:WaterActivity [ a owl:Restriction ;
+                        owl:onProperty ns1:dischargesTo ;
+                        owl:someValuesFrom ns1:SurfaceWater ] [ a owl:Restriction ;
+                        owl:onProperty ns1:hasCurrentPertek ;
+                        owl:someValuesFrom ns1:WaterPertek ] [ a owl:Restriction ;
+                        owl:onProperty ns1:hasTechnicalChange ;
+                        owl:someValuesFrom ns1:TechnicalWaterChange ] ) ] ;
+    ns1:source_id "P5:15"^^xsd:string .
+
+[] a owl:AllDifferent ;
+    owl:distinctMembers ( ns1:UKL ns1:AMDAL ) .
+

@@ -1,0 +1,210 @@
+{
+  "verified_on": "2026-11-15",
+  "timezone": "Asia/Jakarta",
+  "command": ".venv/Scripts/python.exe scripts/verify.py --output artifacts/t1-final",
+  "pytest": {
+    "tests": "46",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "288.033"
+  },
+  "core_profile": {
+    "axiom_count": 169,
+    "in_owl2_dl_profile": true,
+    "violations": []
+  },
+  "cases": {
+    "A": {
+      "context": {
+        "assessment_id": "assessment-A",
+        "scenario_id": "scenario-A",
+        "evidence_snapshot_id": "snapshot-A",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v1"
+      },
+      "consistency_status": "CONSISTENT",
+      "project_obligations": [
+        "amend_environmental_approval",
+        "amend_water_pertek",
+        "prepare_new_environmental_documentation",
+        "prepare_technical_study",
+        "water_pertek_required",
+        "water_slo_required"
+      ],
+      "decisions": [
+        {
+          "id": "water_document_route",
+          "subject_id": "urn:enviropermit:b6cef881ea5157d87c4683f067edf541214550270a93e02d7abb278b044906d3:activity-water-1",
+          "applicability": "APPLICABLE",
+          "fulfillment": "UNKNOWN",
+          "branches": [
+            "TechnicalStudyBranch"
+          ],
+          "evidence_gaps": []
+        }
+      ],
+      "profiles": {
+        "core": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 169
+        },
+        "asserted": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 213
+        },
+        "post_rules": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 214
+        }
+      },
+      "fired_rules": [
+        {
+          "rule_id": "water-study-candidate",
+          "iteration": 1,
+          "conclusions": [
+            {
+              "subject": "urn:enviropermit:b6cef881ea5157d87c4683f067edf541214550270a93e02d7abb278b044906d3:study-candidate-water-1",
+              "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+              "object": "https://example.org/enviropermit#TechnicalStudyAttachmentCandidate",
+              "datatype": null
+            }
+          ]
+        }
+      ],
+      "project_slo_asserted": false,
+      "project_slo_inferred_by_hermit": true
+    },
+    "B": {
+      "context": {
+        "assessment_id": "assessment-B",
+        "scenario_id": "scenario-B",
+        "evidence_snapshot_id": "snapshot-B",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v1"
+      },
+      "consistency_status": "CONSISTENT",
+      "project_obligations": [
+        "amend_environmental_approval",
+        "amend_water_pertek",
+        "prepare_new_environmental_documentation",
+        "prepare_standard_technical_documentation",
+        "water_pertek_required",
+        "water_slo_required"
+      ],
+      "decisions": [
+        {
+          "id": "water_document_route",
+          "subject_id": "urn:enviropermit:0614fe79ce79617af2ed449fc07fec791ab4b6a6971f3dda1051e1eaac8da5a0:activity-water-1",
+          "applicability": "APPLICABLE",
+          "fulfillment": "UNKNOWN",
+          "branches": [
+            "TechnicalStandardBranch"
+          ],
+          "evidence_gaps": []
+        }
+      ],
+      "profiles": {
+        "core": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 169
+        },
+        "asserted": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 213
+        },
+        "post_rules": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 213
+        }
+      },
+      "fired_rules": [],
+      "project_slo_asserted": false,
+      "project_slo_inferred_by_hermit": true
+    },
+    "U": {
+      "context": {
+        "assessment_id": "assessment-U",
+        "scenario_id": "scenario-U",
+        "evidence_snapshot_id": "snapshot-U",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v1"
+      },
+      "consistency_status": "CONSISTENT",
+      "project_obligations": [
+        "amend_environmental_approval",
+        "amend_water_pertek",
+        "prepare_new_environmental_documentation",
+        "water_pertek_required",
+        "water_slo_required"
+      ],
+      "decisions": [
+        {
+          "id": "water_document_route",
+          "subject_id": "urn:enviropermit:7b171ee294c29d1654d4813f993e7bfe6c9c1a371ade888bcb71430098d58b2a:activity-water-1",
+          "applicability": "UNRESOLVED",
+          "fulfillment": "UNKNOWN",
+          "branches": [],
+          "evidence_gaps": [
+            "impact_extent_assessment"
+          ]
+        }
+      ],
+      "profiles": {
+        "core": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 169
+        },
+        "asserted": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 209
+        },
+        "post_rules": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 209
+        }
+      },
+      "fired_rules": [],
+      "project_slo_asserted": false,
+      "project_slo_inferred_by_hermit": true
+    },
+    "C": {
+      "context": {
+        "assessment_id": "assessment-C",
+        "scenario_id": "scenario-C",
+        "evidence_snapshot_id": "snapshot-C",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v1"
+      },
+      "consistency_status": "INCONSISTENT",
+      "project_obligations": [],
+      "decisions": [],
+      "profiles": {
+        "core": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 169
+        },
+        "asserted": {
+          "in_owl2_dl_profile": true,
+          "violations": [],
+          "axiom_count": 214
+        }
+      },
+      "fired_rules": [],
+      "project_slo_asserted": false,
+      "project_slo_inferred_by_hermit": false
+    }
+  },
+  "artifacts": "artifacts/t1-final",
+  "review": "docs/implementation/T1-review.md"
+}

@@ -1,0 +1,643 @@
+{
+  "A": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_technical_study",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStudyBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "explanation": [
+      {
+        "subject": "case_A",
+        "conclusion": "EnvironmentalAmendment",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "case_A",
+        "conclusion": "InteractingAmendments",
+        "sources": [
+          "P5:14",
+          "P5:15"
+        ]
+      },
+      {
+        "subject": "case_A",
+        "conclusion": "ScreenedCase",
+        "sources": [
+          "MODEL:screening"
+        ]
+      },
+      {
+        "subject": "case_A",
+        "conclusion": "UKLSubmissionSequence",
+        "sources": [
+          "P5:8.2",
+          "P5:16.2"
+        ]
+      },
+      {
+        "subject": "case_A",
+        "conclusion": "WithNewEnvironmentalDocumentation",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "water_activity_A",
+        "conclusion": "RegulatedSurfaceDischarge",
+        "sources": [
+          "P5:3"
+        ]
+      },
+      {
+        "subject": "water_activity_A",
+        "conclusion": "TechnicalStudyBranch",
+        "sources": [
+          "P5:16.1.a"
+        ]
+      },
+      {
+        "subject": "water_activity_A",
+        "conclusion": "WaterTechnicalRevision",
+        "sources": [
+          "P5:15"
+        ]
+      }
+    ],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": true
+  },
+  "B": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_standard_technical_documentation",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStandardBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "explanation": [
+      {
+        "subject": "case_B",
+        "conclusion": "EnvironmentalAmendment",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "case_B",
+        "conclusion": "InteractingAmendments",
+        "sources": [
+          "P5:14",
+          "P5:15"
+        ]
+      },
+      {
+        "subject": "case_B",
+        "conclusion": "ScreenedCase",
+        "sources": [
+          "MODEL:screening"
+        ]
+      },
+      {
+        "subject": "case_B",
+        "conclusion": "UKLSubmissionSequence",
+        "sources": [
+          "P5:8.2",
+          "P5:16.2"
+        ]
+      },
+      {
+        "subject": "case_B",
+        "conclusion": "WithNewEnvironmentalDocumentation",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "water_activity_B",
+        "conclusion": "RegulatedSurfaceDischarge",
+        "sources": [
+          "P5:3"
+        ]
+      },
+      {
+        "subject": "water_activity_B",
+        "conclusion": "TechnicalStandardBranch",
+        "sources": [
+          "P5:16.1.b"
+        ]
+      },
+      {
+        "subject": "water_activity_B",
+        "conclusion": "WaterTechnicalRevision",
+        "sources": [
+          "P5:15"
+        ]
+      }
+    ],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": true
+  },
+  "U": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [
+      "impact_extent_assessment"
+    ],
+    "explanation": [
+      {
+        "subject": "case_U",
+        "conclusion": "EnvironmentalAmendment",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "case_U",
+        "conclusion": "InteractingAmendments",
+        "sources": [
+          "P5:14",
+          "P5:15"
+        ]
+      },
+      {
+        "subject": "case_U",
+        "conclusion": "ScreenedCase",
+        "sources": [
+          "MODEL:screening"
+        ]
+      },
+      {
+        "subject": "case_U",
+        "conclusion": "UKLSubmissionSequence",
+        "sources": [
+          "P5:8.2",
+          "P5:16.2"
+        ]
+      },
+      {
+        "subject": "case_U",
+        "conclusion": "WithNewEnvironmentalDocumentation",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "water_activity_U",
+        "conclusion": "RegulatedSurfaceDischarge",
+        "sources": [
+          "P5:3"
+        ]
+      },
+      {
+        "subject": "water_activity_U",
+        "conclusion": "WaterTechnicalRevision",
+        "sources": [
+          "P5:15"
+        ]
+      }
+    ],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": true
+  },
+  "M": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_standard_technical_documentation",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "ManagementTechnicalDependency",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStandardBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithoutNewEnvironmentalDocumentation"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "explanation": [
+      {
+        "subject": "case_M",
+        "conclusion": "EnvironmentalAmendment",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "case_M",
+        "conclusion": "InteractingAmendments",
+        "sources": [
+          "P5:14",
+          "P5:15"
+        ]
+      },
+      {
+        "subject": "case_M",
+        "conclusion": "ManagementTechnicalDependency",
+        "sources": [
+          "PP22:93.2"
+        ]
+      },
+      {
+        "subject": "case_M",
+        "conclusion": "ScreenedCase",
+        "sources": [
+          "MODEL:screening"
+        ]
+      },
+      {
+        "subject": "case_M",
+        "conclusion": "UKLSubmissionSequence",
+        "sources": [
+          "P5:8.2",
+          "P5:16.2"
+        ]
+      },
+      {
+        "subject": "case_M",
+        "conclusion": "WithoutNewEnvironmentalDocumentation",
+        "sources": [
+          "PP22:89-90",
+          "MODEL:closure"
+        ]
+      },
+      {
+        "subject": "water_activity_M",
+        "conclusion": "RegulatedSurfaceDischarge",
+        "sources": [
+          "P5:3"
+        ]
+      },
+      {
+        "subject": "water_activity_M",
+        "conclusion": "TechnicalStandardBranch",
+        "sources": [
+          "P5:16.1.b"
+        ]
+      },
+      {
+        "subject": "water_activity_M",
+        "conclusion": "WaterTechnicalRevision",
+        "sources": [
+          "P5:15"
+        ]
+      }
+    ],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": true
+  },
+  "I": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "Thing",
+      "WaterActivity",
+      "WithoutNewEnvironmentalDocumentation"
+    ],
+    "precedence": [],
+    "evidence_gaps": [],
+    "explanation": [
+      {
+        "subject": "case_I",
+        "conclusion": "EnvironmentalAmendment",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "case_I",
+        "conclusion": "ScreenedCase",
+        "sources": [
+          "MODEL:screening"
+        ]
+      },
+      {
+        "subject": "case_I",
+        "conclusion": "WithoutNewEnvironmentalDocumentation",
+        "sources": [
+          "PP22:89-90",
+          "MODEL:closure"
+        ]
+      },
+      {
+        "subject": "water_activity_I",
+        "conclusion": "RegulatedSurfaceDischarge",
+        "sources": [
+          "P5:3"
+        ]
+      }
+    ],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": true
+  },
+  "X": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_technical_study",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStudyBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "explanation": [
+      {
+        "subject": "case_X",
+        "conclusion": "EnvironmentalAmendment",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "case_X",
+        "conclusion": "InteractingAmendments",
+        "sources": [
+          "P5:14",
+          "P5:15"
+        ]
+      },
+      {
+        "subject": "case_X",
+        "conclusion": "ScreenedCase",
+        "sources": [
+          "MODEL:screening"
+        ]
+      },
+      {
+        "subject": "case_X",
+        "conclusion": "UKLSubmissionSequence",
+        "sources": [
+          "P5:8.2",
+          "P5:16.2"
+        ]
+      },
+      {
+        "subject": "case_X",
+        "conclusion": "WithNewEnvironmentalDocumentation",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "water_activity_X",
+        "conclusion": "RegulatedSurfaceDischarge",
+        "sources": [
+          "P5:3"
+        ]
+      },
+      {
+        "subject": "water_activity_X",
+        "conclusion": "TechnicalStudyBranch",
+        "sources": [
+          "P5:16.1.a"
+        ]
+      },
+      {
+        "subject": "water_activity_X",
+        "conclusion": "WaterTechnicalRevision",
+        "sources": [
+          "P5:15"
+        ]
+      }
+    ],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": true
+  },
+  "D": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_technical_study",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "conclusions": [
+      "Case",
+      "ConcurrentSubmissionPermitted",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStudyBranch",
+      "Thing",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ],
+    "precedence": [
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "explanation": [
+      {
+        "subject": "case_D",
+        "conclusion": "ConcurrentSubmissionPermitted",
+        "sources": [
+          "P5:8.1",
+          "P5:16.2"
+        ]
+      },
+      {
+        "subject": "case_D",
+        "conclusion": "EnvironmentalAmendment",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "case_D",
+        "conclusion": "InteractingAmendments",
+        "sources": [
+          "P5:14",
+          "P5:15"
+        ]
+      },
+      {
+        "subject": "case_D",
+        "conclusion": "ScreenedCase",
+        "sources": [
+          "MODEL:screening"
+        ]
+      },
+      {
+        "subject": "case_D",
+        "conclusion": "WithNewEnvironmentalDocumentation",
+        "sources": [
+          "PP22:89-90"
+        ]
+      },
+      {
+        "subject": "water_activity_D",
+        "conclusion": "RegulatedSurfaceDischarge",
+        "sources": [
+          "P5:3"
+        ]
+      },
+      {
+        "subject": "water_activity_D",
+        "conclusion": "TechnicalStudyBranch",
+        "sources": [
+          "P5:16.1.a"
+        ]
+      },
+      {
+        "subject": "water_activity_D",
+        "conclusion": "WaterTechnicalRevision",
+        "sources": [
+          "P5:15"
+        ]
+      }
+    ],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": true
+  },
+  "C": {
+    "status": "INCONSISTENT",
+    "obligations": [],
+    "conclusions": [],
+    "precedence": [],
+    "evidence_gaps": [],
+    "explanation": [],
+    "case_obligations_asserted_before_reasoning": false,
+    "inverse_membership_inferred": false
+  }
+}

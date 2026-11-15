@@ -1,0 +1,23 @@
+{
+  "checked_on": "2026-11-14",
+  "scope": "Bounded hypothetical manufacturing amendment cases; industrial surface-water discharge, not domestic wastewater or feed production. Not a complete regulatory applicability audit.",
+  "documents": {
+    "PP22": {"title": "PP 22 Tahun 2021", "url": "https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf", "status_url": "https://peraturan.bpk.go.id/Details/161852/pp-no-22-tahun-2021"},
+    "P5": {"title": "Permen LHK 5 Tahun 2021", "url": "https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf", "status_url": "https://peraturan.bpk.go.id/Details/210999/"},
+    "P2_2026": {"title": "Permen LH/BPLH 2 Tahun 2026", "url": "https://peraturan.bpk.go.id/Details/347119/permen-lhbplh-no-2-tahun-2026", "note": "Partial repeal for specific feed-sector provisions; does not justify treating all of P5 as repealed or unchanged. The affected drain/formation provisions are not encoded in this spike."}
+  },
+  "provisions": {
+    "PP22:89-90": {"document": "PP22", "locator": "Pasal 89(1), 89(2)(b),(h),(j), 90(1)-(3), 91", "use": "Environmental approval amendment; capacity increase needs the new-environmental-documentation route, while a complete set of encoded administrative/management changes follows the route without a new environmental document. The latter does not mean no paperwork or no approval. Mixed changes are not treated as administrative-only."},
+    "PP22:93.2": {"document": "PP22", "locator": "Pasal 93(2)", "use": "Management/monitoring changes requiring technical approval are based on a technical approval change."},
+    "P5:3": {"document": "P5", "locator": "Pasal 3(1)-(2)(a)", "use": "AMDAL/UKL-UPL activities conducting surface-water wastewater discharge must have technical approval and SLO. Obligation existence does not mean a new issuance is always needed or already satisfied."},
+    "P5:15": {"document": "P5", "locator": "Pasal 15(1)-(2)", "use": "Technical wastewater changes including treatment design and wastewater management require technical approval amendment. The spike assumes evidenced prior Pertek and a direct surface-water discharge route."},
+    "P5:16.1.a": {"document": "P5", "locator": "Pasal 16(1)(a)", "use": "Changed impact-spread extent leads to technical study attachment. The physical finding is input evidence, not predicted by OWL."},
+    "P5:16.1.b": {"document": "P5", "locator": "Pasal 16(1)(b)", "use": "Explicit unchanged impact-spread extent leads to standards-compliance technical documentation. Unknown is not unchanged."},
+    "P5:16.2": {"document": "P5", "locator": "Pasal 16(2)", "use": "Articles 8-12 apply mutatis mutandis to technical approval amendment."},
+    "P5:8.1": {"document": "P5", "locator": "Pasal 8(1)", "use": "AMDAL technical application can be concurrent with or precede environmental application; no strict before-only rule."},
+    "P5:8.2": {"document": "P5", "locator": "Pasal 8(2)", "use": "UKL-UPL technical application precedes environmental application. Application is distinguished from issuance."},
+    "P5:14": {"document": "P5", "locator": "Pasal 14(1)", "use": "Technical approval is a prerequisite for environmental approval issuance. Not a claim that every technical approval must be issued before environmental application."},
+    "MODEL:closure": {"document": null, "locator": "Modeling assumption, not legislation", "use": "Universal closure over project changes is asserted only if the fixture explicitly certifies a complete inventory. Open-world absence does not establish exclusivity."},
+    "MODEL:screening": {"document": null, "locator": "Modeling assumption, not legislation", "use": "Proposed-project AMDAL/UKL screening is supplied as a hypothetical verified input. Historical approval does not automatically establish the changed project's regime."}
+  }
+}

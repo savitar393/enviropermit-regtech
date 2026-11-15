@@ -1,0 +1,21 @@
+test_amdal_does_not_inherit_ukl_strict_application_order (test_enviro.Acceptance.test_amdal_does_not_inherit_ukl_strict_application_order) ... ok
+test_conflicting_impact_evidence_is_quarantined (test_enviro.Acceptance.test_conflicting_impact_evidence_is_quarantined) ... ok
+test_expansion_combines_environmental_and_water_obligations (test_enviro.Acceptance.test_expansion_combines_environmental_and_water_obligations) ... ok
+test_explanations_include_applicable_provisions (test_enviro.Acceptance.test_explanations_include_applicable_provisions) ... ok
+test_fresh_snapshot_does_not_keep_previous_document_branch (test_enviro.Acceptance.test_fresh_snapshot_does_not_keep_previous_document_branch) ... ok
+test_identity_only_is_narrow_exception (test_enviro.Acceptance.test_identity_only_is_narrow_exception) ... ok
+test_incomplete_change_inventory_does_not_prove_identity_only (test_enviro.Acceptance.test_incomplete_change_inventory_does_not_prove_identity_only) ... ok
+test_management_only_still_has_interacting_technical_dependency (test_enviro.Acceptance.test_management_only_still_has_interacting_technical_dependency) ... ok
+test_missing_prior_pertek_does_not_use_amendment_route (test_enviro.Acceptance.test_missing_prior_pertek_does_not_use_amendment_route) ... ok
+test_mixed_identity_and_capacity_does_not_erase_new_documentation (test_enviro.Acceptance.test_mixed_identity_and_capacity_does_not_erase_new_documentation) ... ok
+test_outsourcing_does_not_become_automatic_exemption (test_enviro.Acceptance.test_outsourcing_does_not_become_automatic_exemption) ... ok
+test_property_chain_creates_unasserted_case_obligation (test_enviro.Acceptance.test_property_chain_creates_unasserted_case_obligation) ... ok
+test_second_design_selects_standard_documentation (test_enviro.Acceptance.test_second_design_selects_standard_documentation) ... ok
+test_two_distinct_snapshots_conflict_with_one_snapshot_contract (test_enviro.Acceptance.test_two_distinct_snapshots_conflict_with_one_snapshot_contract) ... ok
+test_unknown_extent_never_defaults_to_no_change (test_enviro.Acceptance.test_unknown_extent_never_defaults_to_no_change) ... ok
+test_unknown_proposed_screening_does_not_copy_old_regime (test_enviro.Acceptance.test_unknown_proposed_screening_does_not_copy_old_regime) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 9.781s
+
+OK

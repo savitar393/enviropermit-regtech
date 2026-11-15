@@ -1,0 +1,52 @@
+{
+  "status": "CONSISTENT",
+  "obligations": [
+    "amend_environmental_approval",
+    "water_pertek_required",
+    "water_slo_required"
+  ],
+  "conclusions": [
+    "Case",
+    "EnvironmentalAmendment",
+    "RegulatedSurfaceDischarge",
+    "ScreenedCase",
+    "Thing",
+    "WaterActivity",
+    "WithoutNewEnvironmentalDocumentation"
+  ],
+  "precedence": [],
+  "evidence_gaps": [],
+  "explanation": [
+    {
+      "subject": "case_I",
+      "conclusion": "EnvironmentalAmendment",
+      "sources": [
+        "PP22:89-90"
+      ]
+    },
+    {
+      "subject": "case_I",
+      "conclusion": "ScreenedCase",
+      "sources": [
+        "MODEL:screening"
+      ]
+    },
+    {
+      "subject": "case_I",
+      "conclusion": "WithoutNewEnvironmentalDocumentation",
+      "sources": [
+        "PP22:89-90",
+        "MODEL:closure"
+      ]
+    },
+    {
+      "subject": "water_activity_I",
+      "conclusion": "RegulatedSurfaceDischarge",
+      "sources": [
+        "P5:3"
+      ]
+    }
+  ],
+  "case_obligations_asserted_before_reasoning": false,
+  "inverse_membership_inferred": true
+}

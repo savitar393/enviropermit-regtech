@@ -1,0 +1,234 @@
+{
+  "A": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_technical_study",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStudyBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ]
+  },
+  "B": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_standard_technical_documentation",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStandardBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ]
+  },
+  "U": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [
+      "impact_extent_assessment"
+    ],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ]
+  },
+  "M": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_standard_technical_documentation",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "ManagementTechnicalDependency",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStandardBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithoutNewEnvironmentalDocumentation"
+    ]
+  },
+  "I": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "precedence": [],
+    "evidence_gaps": [],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "Thing",
+      "WaterActivity",
+      "WithoutNewEnvironmentalDocumentation"
+    ]
+  },
+  "X": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_technical_study",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "precedence": [
+      [
+        "submit_water_pertek_change",
+        "submit_environmental_change"
+      ],
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "conclusions": [
+      "Case",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStudyBranch",
+      "Thing",
+      "UKLSubmissionSequence",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ]
+  },
+  "D": {
+    "status": "CONSISTENT",
+    "obligations": [
+      "amend_environmental_approval",
+      "amend_water_pertek",
+      "prepare_new_environmental_documentation",
+      "prepare_technical_study",
+      "water_pertek_required",
+      "water_slo_required"
+    ],
+    "precedence": [
+      [
+        "water_pertek_change_issued",
+        "environmental_change_issued"
+      ]
+    ],
+    "evidence_gaps": [],
+    "conclusions": [
+      "Case",
+      "ConcurrentSubmissionPermitted",
+      "EnvironmentalAmendment",
+      "InteractingAmendments",
+      "RegulatedSurfaceDischarge",
+      "ScreenedCase",
+      "TechnicalStudyBranch",
+      "Thing",
+      "WaterActivity",
+      "WaterTechnicalRevision",
+      "WithNewEnvironmentalDocumentation"
+    ]
+  },
+  "C": {
+    "status": "INCONSISTENT",
+    "obligations": [],
+    "precedence": [],
+    "evidence_gaps": [],
+    "conclusions": []
+  }
+}

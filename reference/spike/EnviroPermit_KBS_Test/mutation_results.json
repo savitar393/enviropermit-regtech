@@ -1,0 +1,30 @@
+[
+  {
+    "mutation": "remove_case_obligation_property_chain",
+    "test": "test_property_chain_creates_unasserted_case_obligation",
+    "detected": true,
+    "failures": 1,
+    "errors": 0
+  },
+  {
+    "mutation": "remove_water_change_property_hierarchy",
+    "test": "test_expansion_combines_environmental_and_water_obligations",
+    "detected": true,
+    "failures": 1,
+    "errors": 0
+  },
+  {
+    "mutation": "treat_incomplete_inventory_as_complete",
+    "test": "test_incomplete_change_inventory_does_not_prove_identity_only",
+    "detected": true,
+    "failures": 1,
+    "errors": 0
+  },
+  {
+    "mutation": "turn_unknown_extent_into_false",
+    "test": "test_unknown_extent_never_defaults_to_no_change",
+    "detected": true,
+    "failures": 1,
+    "errors": 0
+  }
+]

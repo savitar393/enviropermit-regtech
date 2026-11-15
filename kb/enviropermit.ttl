@@ -1,0 +1,739 @@
+@prefix : <https://example.org/enviropermit#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <https://example.org/enviropermit#> .
+
+<https://example.org/enviropermit/core/t1> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  https://example.org/enviropermit#source_id
+:source_id rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://example.org/enviropermit#activityObligation
+:activityObligation rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#assessesScenario
+:assessesScenario rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#dischargesTo
+:dischargesTo rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#edgeAfter
+:edgeAfter rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#edgeBefore
+:edgeBefore rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasActivity
+:hasActivity rdf:type owl:ObjectProperty ;
+             owl:inverseOf :isActivityOf .
+
+
+###  https://example.org/enviropermit#hasAssessment
+:hasAssessment rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasCurrentPertek
+:hasCurrentPertek rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasExistingApproval
+:hasExistingApproval rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasImpactAssessment
+:hasImpactAssessment rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasPlanEdge
+:hasPlanEdge rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasProjectChange
+:hasProjectChange rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasScenario
+:hasScenario rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasScreening
+:hasScreening rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasSnapshot
+:hasSnapshot rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasStudyCandidate
+:hasStudyCandidate rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasTechnicalChange
+:hasTechnicalChange rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#hasWaterTechnicalChange
+:hasWaterTechnicalChange rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :hasTechnicalChange .
+
+
+###  https://example.org/enviropermit#isActivityOf
+:isActivityOf rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#ofSubject
+:ofSubject rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#onScope
+:onScope rdf:type owl:ObjectProperty .
+
+
+###  https://example.org/enviropermit#projectObligation
+:projectObligation rdf:type owl:ObjectProperty ;
+                   owl:propertyChainAxiom ( :hasScenario
+                                            :scenarioObligation
+                                          ) .
+
+
+###  https://example.org/enviropermit#requiresStep
+:requiresStep rdf:type owl:ObjectProperty ,
+                       owl:TransitiveProperty .
+
+
+###  https://example.org/enviropermit#scenarioObligation
+:scenarioObligation rdf:type owl:ObjectProperty ;
+                    owl:propertyChainAxiom ( :hasActivity
+                                             :activityObligation
+                                           ) .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://example.org/enviropermit#extentChanges
+:extentChanges rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:range xsd:boolean .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  https://example.org/enviropermit#Activity
+:Activity rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#Assessment
+:Assessment rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :assessesScenario ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :Scenario
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasSnapshot ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onClass :EvidenceSnapshot
+                            ] .
+
+
+###  https://example.org/enviropermit#CapacityIncrease
+:CapacityIncrease rdf:type owl:Class ;
+                  rdfs:subClassOf :NewDocChange .
+
+
+###  https://example.org/enviropermit#ConcurrentSubmissionPermitted
+:ConcurrentSubmissionPermitted rdf:type owl:Class ;
+                               owl:equivalentClass [ owl:intersectionOf ( :InteractingAmendments
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasScreening ;
+                                                                            owl:hasValue :AMDAL
+                                                                          ]
+                                                                        ) ;
+                                                     rdf:type owl:Class
+                                                   ] ;
+                               :source_id "P5:16.2" ,
+                                          "P5:8.1" .
+
+
+###  https://example.org/enviropermit#EnvironmentalAmendment
+:EnvironmentalAmendment rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :Scenario
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasExistingApproval ;
+                                                                     owl:someValuesFrom :EnvironmentalApproval
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasProjectChange ;
+                                                                     owl:someValuesFrom :ProjectChange
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty :scenarioObligation ;
+                                          owl:hasValue :amend_environmental_approval
+                                        ] ;
+                        :source_id "PP22:89-90" .
+
+
+###  https://example.org/enviropermit#EnvironmentalApproval
+:EnvironmentalApproval rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#EvidenceSnapshot
+:EvidenceSnapshot rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#IdentityChange
+:IdentityChange rdf:type owl:Class ;
+                rdfs:subClassOf :NoNewDocChange .
+
+
+###  https://example.org/enviropermit#ImpactAssessment
+:ImpactAssessment rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#InteractingAmendments
+:InteractingAmendments rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :EnvironmentalAmendment
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasActivity ;
+                                                                    owl:someValuesFrom :WaterTechnicalRevision
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasPlanEdge ;
+                                         owl:hasValue :technical_issue_before_environmental_issue
+                                       ] ;
+                       :source_id "P5:14" ,
+                                  "P5:15" .
+
+
+###  https://example.org/enviropermit#MainActivity
+:MainActivity rdf:type owl:Class ;
+              rdfs:subClassOf :Activity .
+
+
+###  https://example.org/enviropermit#ManagementMonitoringChange
+:ManagementMonitoringChange rdf:type owl:Class ;
+                            rdfs:subClassOf :NoNewDocChange .
+
+
+###  https://example.org/enviropermit#ManagementTechnicalDependency
+:ManagementTechnicalDependency rdf:type owl:Class ;
+                               owl:equivalentClass [ owl:intersectionOf ( :WithoutNewEnvironmentalDocumentation
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasActivity ;
+                                                                            owl:someValuesFrom :WaterTechnicalRevision
+                                                                          ]
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasProjectChange ;
+                                                                            owl:someValuesFrom :ManagementMonitoringChange
+                                                                          ]
+                                                                        ) ;
+                                                     rdf:type owl:Class
+                                                   ] ;
+                               :source_id "PP22:93.2" .
+
+
+###  https://example.org/enviropermit#NewDocChange
+:NewDocChange rdf:type owl:Class ;
+              rdfs:subClassOf :ProjectChange ;
+              owl:disjointWith :NoNewDocChange .
+
+
+###  https://example.org/enviropermit#NoNewDocChange
+:NoNewDocChange rdf:type owl:Class ;
+                rdfs:subClassOf :ProjectChange .
+
+
+###  https://example.org/enviropermit#ObligationCandidate
+:ObligationCandidate rdf:type owl:Class ;
+                     rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                       owl:onProperty :hasAssessment ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :Assessment
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :ofSubject ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :Activity
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :onScope ;
+                                       owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :Scope
+                                     ] .
+
+
+###  https://example.org/enviropermit#ObligationKind
+:ObligationKind rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#PlanEdge
+:PlanEdge rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#Project
+:Project rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#ProjectChange
+:ProjectChange rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#RegulatedSurfaceDischarge
+:RegulatedSurfaceDischarge rdf:type owl:Class ;
+                           owl:equivalentClass [ owl:intersectionOf ( :WaterActivity
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :dischargesTo ;
+                                                                        owl:someValuesFrom :SurfaceWater
+                                                                      ]
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :isActivityOf ;
+                                                                        owl:someValuesFrom :ScreenedCase
+                                                                      ]
+                                                                    ) ;
+                                                 rdf:type owl:Class
+                                               ] ;
+                           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                             owl:onProperty :activityObligation ;
+                                             owl:hasValue :water_pertek_required
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty :activityObligation ;
+                                             owl:hasValue :water_slo_required
+                                           ] ;
+                           :source_id "P5:3" .
+
+
+###  https://example.org/enviropermit#ReviewableCandidate
+:ReviewableCandidate rdf:type owl:Class ;
+                     rdfs:subClassOf :ObligationCandidate .
+
+
+###  https://example.org/enviropermit#Scenario
+:Scenario rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#Scope
+:Scope rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#ScreenedCase
+:ScreenedCase rdf:type owl:Class ;
+              owl:equivalentClass [ owl:intersectionOf ( :Scenario
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty :hasScreening ;
+                                                           owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                                owl:oneOf ( :AMDAL
+                                                                                            :UKL
+                                                                                          )
+                                                                              ]
+                                                         ]
+                                                       ) ;
+                                    rdf:type owl:Class
+                                  ] ;
+              :source_id "MODEL:screening" .
+
+
+###  https://example.org/enviropermit#Screening
+:Screening rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#StepKind
+:StepKind rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#SupportingActivity
+:SupportingActivity rdf:type owl:Class ;
+                    rdfs:subClassOf :Activity .
+
+
+###  https://example.org/enviropermit#SurfaceWater
+:SurfaceWater rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#TechnicalStandardBranch
+:TechnicalStandardBranch rdf:type owl:Class ;
+                         owl:equivalentClass [ owl:intersectionOf ( :WaterTechnicalRevision
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty :hasImpactAssessment ;
+                                                                      owl:someValuesFrom [ owl:intersectionOf ( :ImpactAssessment
+                                                                                                                [ rdf:type owl:Restriction ;
+                                                                                                                  owl:onProperty :extentChanges ;
+                                                                                                                  owl:hasValue "false"^^xsd:boolean
+                                                                                                                ]
+                                                                                                              ) ;
+                                                                                           rdf:type owl:Class
+                                                                                         ]
+                                                                    ]
+                                                                  ) ;
+                                               rdf:type owl:Class
+                                             ] ;
+                         rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                           owl:onProperty :activityObligation ;
+                                           owl:hasValue :prepare_standard_technical_documentation
+                                         ] ;
+                         owl:disjointWith :TechnicalStudyBranch ;
+                         :source_id "P5:16.1.b" .
+
+
+###  https://example.org/enviropermit#TechnicalStudyAttachmentCandidate
+:TechnicalStudyAttachmentCandidate rdf:type owl:Class ;
+                                   rdfs:subClassOf :ReviewableCandidate .
+
+
+###  https://example.org/enviropermit#TechnicalStudyBranch
+:TechnicalStudyBranch rdf:type owl:Class ;
+                      owl:equivalentClass [ owl:intersectionOf ( :WaterTechnicalRevision
+                                                                 [ rdf:type owl:Restriction ;
+                                                                   owl:onProperty :hasImpactAssessment ;
+                                                                   owl:someValuesFrom [ owl:intersectionOf ( :ImpactAssessment
+                                                                                                             [ rdf:type owl:Restriction ;
+                                                                                                               owl:onProperty :extentChanges ;
+                                                                                                               owl:hasValue "true"^^xsd:boolean
+                                                                                                             ]
+                                                                                                           ) ;
+                                                                                        rdf:type owl:Class
+                                                                                      ]
+                                                                 ]
+                                                               ) ;
+                                            rdf:type owl:Class
+                                          ] ;
+                      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                        owl:onProperty :activityObligation ;
+                                        owl:hasValue :prepare_technical_study
+                                      ] ;
+                      :source_id "P5:16.1.a" .
+
+
+###  https://example.org/enviropermit#TechnicalWaterChange
+:TechnicalWaterChange rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#TreatmentDesignChange
+:TreatmentDesignChange rdf:type owl:Class ;
+                       rdfs:subClassOf :TechnicalWaterChange .
+
+
+###  https://example.org/enviropermit#UKLSubmissionSequence
+:UKLSubmissionSequence rdf:type owl:Class ;
+                       owl:equivalentClass [ owl:intersectionOf ( :InteractingAmendments
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty :hasScreening ;
+                                                                    owl:hasValue :UKL
+                                                                  ]
+                                                                ) ;
+                                             rdf:type owl:Class
+                                           ] ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty :hasPlanEdge ;
+                                         owl:hasValue :ukl_application_order
+                                       ] ;
+                       :source_id "P5:16.2" ,
+                                  "P5:8.2" .
+
+
+###  https://example.org/enviropermit#WastewaterManagementChange
+:WastewaterManagementChange rdf:type owl:Class ;
+                            rdfs:subClassOf :TechnicalWaterChange .
+
+
+###  https://example.org/enviropermit#WastewaterOutlet
+:WastewaterOutlet rdf:type owl:Class ;
+                  rdfs:subClassOf :Scope .
+
+
+###  https://example.org/enviropermit#WaterActivity
+:WaterActivity rdf:type owl:Class ;
+               rdfs:subClassOf :SupportingActivity .
+
+
+###  https://example.org/enviropermit#WaterPertek
+:WaterPertek rdf:type owl:Class .
+
+
+###  https://example.org/enviropermit#WaterTechnicalRevision
+:WaterTechnicalRevision rdf:type owl:Class ;
+                        owl:equivalentClass [ owl:intersectionOf ( :WaterActivity
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :dischargesTo ;
+                                                                     owl:someValuesFrom :SurfaceWater
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasCurrentPertek ;
+                                                                     owl:someValuesFrom :WaterPertek
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty :hasTechnicalChange ;
+                                                                     owl:someValuesFrom :TechnicalWaterChange
+                                                                   ]
+                                                                 ) ;
+                                              rdf:type owl:Class
+                                            ] ;
+                        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                          owl:onProperty :activityObligation ;
+                                          owl:hasValue :amend_water_pertek
+                                        ] ;
+                        :source_id "P5:15" .
+
+
+###  https://example.org/enviropermit#WithNewEnvironmentalDocumentation
+:WithNewEnvironmentalDocumentation rdf:type owl:Class ;
+                                   owl:equivalentClass [ owl:intersectionOf ( :EnvironmentalAmendment
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :hasProjectChange ;
+                                                                                owl:someValuesFrom :NewDocChange
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ] ;
+                                   rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :scenarioObligation ;
+                                                     owl:hasValue :prepare_new_environmental_documentation
+                                                   ] ;
+                                   owl:disjointWith :WithoutNewEnvironmentalDocumentation ;
+                                   :source_id "PP22:89-90" .
+
+
+###  https://example.org/enviropermit#WithoutNewEnvironmentalDocumentation
+:WithoutNewEnvironmentalDocumentation rdf:type owl:Class ;
+                                      owl:equivalentClass [ owl:intersectionOf ( :EnvironmentalAmendment
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasProjectChange ;
+                                                                                   owl:someValuesFrom :NoNewDocChange
+                                                                                 ]
+                                                                                 [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty :hasProjectChange ;
+                                                                                   owl:allValuesFrom :NoNewDocChange
+                                                                                 ]
+                                                                               ) ;
+                                                            rdf:type owl:Class
+                                                          ] ;
+                                      :source_id "MODEL:closure" ,
+                                                 "PP22:89-90" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://example.org/enviropermit#AMDAL
+:AMDAL rdf:type owl:NamedIndividual ,
+                :Screening ;
+       owl:differentFrom :UKL .
+
+
+###  https://example.org/enviropermit#UKL
+:UKL rdf:type owl:NamedIndividual ,
+              :Screening .
+
+
+###  https://example.org/enviropermit#amend_environmental_approval
+:amend_environmental_approval rdf:type owl:NamedIndividual ,
+                                       :ObligationKind .
+
+
+###  https://example.org/enviropermit#amend_water_pertek
+:amend_water_pertek rdf:type owl:NamedIndividual ,
+                             :ObligationKind .
+
+
+###  https://example.org/enviropermit#environmental_change_issued
+:environmental_change_issued rdf:type owl:NamedIndividual ,
+                                      :StepKind .
+
+
+###  https://example.org/enviropermit#prepare_new_environmental_documentation
+:prepare_new_environmental_documentation rdf:type owl:NamedIndividual ,
+                                                  :ObligationKind .
+
+
+###  https://example.org/enviropermit#prepare_standard_technical_documentation
+:prepare_standard_technical_documentation rdf:type owl:NamedIndividual ,
+                                                   :ObligationKind .
+
+
+###  https://example.org/enviropermit#prepare_technical_study
+:prepare_technical_study rdf:type owl:NamedIndividual ,
+                                  :ObligationKind .
+
+
+###  https://example.org/enviropermit#submit_environmental_change
+:submit_environmental_change rdf:type owl:NamedIndividual ,
+                                      :StepKind .
+
+
+###  https://example.org/enviropermit#submit_water_pertek_change
+:submit_water_pertek_change rdf:type owl:NamedIndividual ,
+                                     :StepKind .
+
+
+###  https://example.org/enviropermit#technical_issue_before_environmental_issue
+:technical_issue_before_environmental_issue rdf:type owl:NamedIndividual ,
+                                                     :PlanEdge ;
+                                            :edgeAfter :environmental_change_issued ;
+                                            :edgeBefore :water_pertek_change_issued .
+
+
+###  https://example.org/enviropermit#ukl_application_order
+:ukl_application_order rdf:type owl:NamedIndividual ,
+                                :PlanEdge ;
+                       :edgeAfter :submit_environmental_change ;
+                       :edgeBefore :submit_water_pertek_change .
+
+
+###  https://example.org/enviropermit#water_pertek_change_issued
+:water_pertek_change_issued rdf:type owl:NamedIndividual ,
+                                     :StepKind .
+
+
+###  https://example.org/enviropermit#water_pertek_required
+:water_pertek_required rdf:type owl:NamedIndividual ,
+                                :ObligationKind .
+
+
+###  https://example.org/enviropermit#water_slo_required
+:water_slo_required rdf:type owl:NamedIndividual ,
+                             :ObligationKind .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Activity
+                :Assessment
+                :EvidenceSnapshot
+                :ObligationCandidate
+                :Project
+                :Scenario
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
+@prefix swrl: <http://www.w3.org/2003/11/swrl#> .
+@prefix swrla: <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#> .
+
+#################################################################
+# SWRL rules — edit in Protege Rules tab; never sent to HermiT
+#################################################################
+swrla:isRuleEnabled a owl:AnnotationProperty .
+:activity a swrl:Variable .
+:candidate a swrl:Variable .
+[] a swrl:Imp ;
+   rdfs:label "water-study-candidate" ;
+   rdfs:comment "Kandidat lampiran kajian teknis untuk review, bukan dokumen yang sudah diterbitkan." ;
+   :source_id "P5:16.1.a", "MODEL:candidate-workflow" ;
+   swrla:isRuleEnabled true ;
+   swrl:body (
+     [ a swrl:ClassAtom ; swrl:classPredicate :TechnicalStudyBranch ; swrl:argument1 :activity ]
+     [ a swrl:IndividualPropertyAtom ; swrl:propertyPredicate :hasStudyCandidate ; swrl:argument1 :activity ; swrl:argument2 :candidate ]
+   ) ;
+   swrl:head (
+     [ a swrl:ClassAtom ; swrl:classPredicate :TechnicalStudyAttachmentCandidate ; swrl:argument1 :candidate ]
+   ) .
+
+#################################################################
+# Decision and evidence requirements — annotation metadata
+# Absence requests evidence; it never proves a legal exemption.
+#################################################################
+:DecisionQuery a owl:Class .
+:EvidenceRequirement a owl:Class .
+:subjectClass a owl:AnnotationProperty .
+:branchClass a owl:AnnotationProperty .
+:missingEvidence a owl:AnnotationProperty .
+:whenProperty a owl:AnnotationProperty .
+:missingProperty a owl:AnnotationProperty .
+:whenBooleanProperty a owl:AnnotationProperty .
+:requiredBooleanProperty a owl:AnnotationProperty .
+:changesInventoryComplete a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+:outsourcingClaim a owl:DatatypeProperty ; rdfs:range xsd:boolean .
+
+:water_document_route a owl:NamedIndividual, :DecisionQuery ;
+   :subjectClass :WaterTechnicalRevision ;
+   :branchClass :TechnicalStudyBranch, :TechnicalStandardBranch ;
+   :missingEvidence "impact_extent_assessment" .
+:screening_evidence a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :Scenario ; :missingProperty :hasScreening ;
+   :missingEvidence "proposed_activity_screening" .
+:complete_inventory a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :Scenario ; :requiredBooleanProperty :changesInventoryComplete ;
+   :missingEvidence "complete_project_change_inventory" .
+:outsourcing_scope a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :Scenario ; :whenBooleanProperty :outsourcingClaim ;
+   :missingEvidence "outsourced_wastewater_route_outside_verified_slice" .
+:prior_pertek a owl:NamedIndividual, :EvidenceRequirement ;
+   :subjectClass :WaterActivity ; :whenProperty :hasWaterTechnicalChange ;
+   :missingProperty :hasCurrentPertek ;
+   :missingEvidence "prior_water_pertek_or_initial_application_route" .
+
+#################################################################
+# Sources and interpretation notes inherited from the spike
+#################################################################
+:Provision a owl:Class .
+:locator a owl:AnnotationProperty .
+:sourceURL a owl:AnnotationProperty .
+:provision_0 a owl:NamedIndividual, :Provision ;
+ :source_id "PP22:89-90" ; :locator "Pasal 89(1), 89(2)(b),(h),(j), 90(1)-(3), 91" ;
+ rdfs:comment "Environmental approval amendment; capacity increase needs the new-environmental-documentation route, while a complete set of encoded administrative/management changes follows the route without a new environmental document. The latter does not mean no paperwork or no approval. Mixed changes are not treated as administrative-only." ; :sourceURL <https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf> .
+:provision_1 a owl:NamedIndividual, :Provision ;
+ :source_id "PP22:93.2" ; :locator "Pasal 93(2)" ;
+ rdfs:comment "Management/monitoring changes requiring technical approval are based on a technical approval change." ; :sourceURL <https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf> .
+:provision_2 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:3" ; :locator "Pasal 3(1)-(2)(a)" ;
+ rdfs:comment "AMDAL/UKL-UPL activities conducting surface-water wastewater discharge must have technical approval and SLO. Obligation existence does not mean a new issuance is always needed or already satisfied." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_3 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:15" ; :locator "Pasal 15(1)-(2)" ;
+ rdfs:comment "Technical wastewater changes including treatment design and wastewater management require technical approval amendment. The spike assumes evidenced prior Pertek and a direct surface-water discharge route." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_4 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:16.1.a" ; :locator "Pasal 16(1)(a)" ;
+ rdfs:comment "Changed impact-spread extent leads to technical study attachment. The physical finding is input evidence, not predicted by OWL." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_5 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:16.1.b" ; :locator "Pasal 16(1)(b)" ;
+ rdfs:comment "Explicit unchanged impact-spread extent leads to standards-compliance technical documentation. Unknown is not unchanged." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_6 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:16.2" ; :locator "Pasal 16(2)" ;
+ rdfs:comment "Articles 8-12 apply mutatis mutandis to technical approval amendment." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_7 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:8.1" ; :locator "Pasal 8(1)" ;
+ rdfs:comment "AMDAL technical application can be concurrent with or precede environmental application; no strict before-only rule." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_8 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:8.2" ; :locator "Pasal 8(2)" ;
+ rdfs:comment "UKL-UPL technical application precedes environmental application. Application is distinguished from issuance." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_9 a owl:NamedIndividual, :Provision ;
+ :source_id "P5:14" ; :locator "Pasal 14(1)" ;
+ rdfs:comment "Technical approval is a prerequisite for environmental approval issuance. Not a claim that every technical approval must be issued before environmental application." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+:provision_10 a owl:NamedIndividual, :Provision ;
+ :source_id "MODEL:closure" ; :locator "Modeling assumption, not legislation" ;
+ rdfs:comment "Universal closure over project changes is asserted only if the fixture explicitly certifies a complete inventory. Open-world absence does not establish exclusivity." .
+:provision_11 a owl:NamedIndividual, :Provision ;
+ :source_id "MODEL:screening" ; :locator "Modeling assumption, not legislation" ;
+ rdfs:comment "Proposed-project AMDAL/UKL screening is supplied as a hypothetical verified input. Historical approval does not automatically establish the changed project's regime." .
+:candidate_workflow_source a owl:NamedIndividual, :Provision ; :source_id "MODEL:candidate-workflow" ; rdfs:comment "Persiapan kandidat bernama untuk review, bukan bukti pemenuhan atau penerbitan." .

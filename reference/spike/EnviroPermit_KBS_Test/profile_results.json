@@ -1,0 +1,50 @@
+[
+  {
+    "file": "outputs/A_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 202,
+    "violations": []
+  },
+  {
+    "file": "outputs/B_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 202,
+    "violations": []
+  },
+  {
+    "file": "outputs/C_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 203,
+    "violations": []
+  },
+  {
+    "file": "outputs/D_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 202,
+    "violations": []
+  },
+  {
+    "file": "outputs/I_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 195,
+    "violations": []
+  },
+  {
+    "file": "outputs/M_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 202,
+    "violations": []
+  },
+  {
+    "file": "outputs/U_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 198,
+    "violations": []
+  },
+  {
+    "file": "outputs/X_asserted.owl",
+    "in_owl2_dl_profile": true,
+    "axioms": 206,
+    "violations": []
+  }
+]

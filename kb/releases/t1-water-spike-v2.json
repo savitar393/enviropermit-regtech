@@ -1,0 +1,23 @@
+{
+  "id": "t1-water-spike-v2",
+  "provision_ids": [
+    "PP22:89-90",
+    "PP22:93.2",
+    "P5:3",
+    "P5:15",
+    "P5:16.1.a",
+    "P5:16.1.b",
+    "P5:16.2",
+    "P5:8.1",
+    "P5:8.2",
+    "P5:14",
+    "MODEL:closure",
+    "MODEL:screening",
+    "MODEL:candidate-workflow"
+  ],
+  "supported_scope": "Synthetic industrial surface-water amendment cases from the 2026-11-14 spike; no legal-version selection",
+  "knowledge_base_path": "kb/enviropermit.ttl",
+  "checksums": {
+    "knowledge_base": "c68a98b739349610dc48c09f27b5524b801d88ddfaebf0c2769fa82fe4227974"
+  }
+}

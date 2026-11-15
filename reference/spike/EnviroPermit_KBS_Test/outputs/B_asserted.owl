@@ -1,0 +1,599 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="https://example.org/enviropermit-spike/2026-11-14"
+         xmlns="https://example.org/enviropermit-spike/2026-11-14#">
+
+<owl:Ontology rdf:about="https://example.org/enviropermit-spike/2026-11-14"/>
+
+<owl:ObjectProperty rdf:about="#hasSnapshot"/>
+
+<owl:ObjectProperty rdf:about="#hasExistingApproval"/>
+
+<owl:ObjectProperty rdf:about="#hasScreening"/>
+
+<owl:ObjectProperty rdf:about="#hasProjectChange"/>
+
+<owl:ObjectProperty rdf:about="#hasActivity">
+  <owl:inverseOf rdf:resource="#isActivityOf"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#isActivityOf">
+  <owl:inverseOf rdf:resource="#hasActivity"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#dischargesTo"/>
+
+<owl:ObjectProperty rdf:about="#hasCurrentPertek"/>
+
+<owl:ObjectProperty rdf:about="#hasTechnicalChange"/>
+
+<owl:ObjectProperty rdf:about="#hasWaterTechnicalChange">
+  <rdfs:subPropertyOf rdf:resource="#hasTechnicalChange"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasImpactAssessment"/>
+
+<owl:ObjectProperty rdf:about="#caseObligation">
+  <owl:propertyChainAxiom>
+    <rdf:Description>
+      <rdf:first rdf:resource="#hasActivity"/>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first rdf:resource="#activityObligation"/>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </owl:propertyChainAxiom>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#activityObligation"/>
+
+<owl:ObjectProperty rdf:about="#hasPlanEdge"/>
+
+<owl:ObjectProperty rdf:about="#edgeBefore"/>
+
+<owl:ObjectProperty rdf:about="#edgeAfter"/>
+
+<owl:DatatypeProperty rdf:about="#extentChanges">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:AnnotationProperty rdf:about="#source_id"/>
+
+<owl:Class rdf:about="#Case">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasSnapshot"/>
+      <owl:onClass rdf:resource="#Snapshot"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Snapshot">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#EnvironmentalApproval">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#WaterPertek">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Screening">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ProjectChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NewDocChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="#ProjectChange"/>
+  <owl:disjointWith rdf:resource="#NoNewDocChange"/>
+</owl:Class>
+
+<owl:Class rdf:about="#NoNewDocChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="#ProjectChange"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CapacityIncrease">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="#NewDocChange"/>
+</owl:Class>
+
+<owl:Class rdf:about="#IdentityChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="#NoNewDocChange"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ManagementMonitoringChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="#NoNewDocChange"/>
+</owl:Class>
+
+<owl:Class rdf:about="#WaterActivity">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SurfaceWater">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TechnicalWaterChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TreatmentDesignChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="#TechnicalWaterChange"/>
+</owl:Class>
+
+<owl:Class rdf:about="#WastewaterManagementChange">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf rdf:resource="#TechnicalWaterChange"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ImpactAssessment">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ObligationKind">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PlanEdge">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#StepKind">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#EnvironmentalAmendment">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Case"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasExistingApproval"/>
+          <owl:someValuesFrom rdf:resource="#EnvironmentalApproval"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasProjectChange"/>
+          <owl:someValuesFrom rdf:resource="#ProjectChange"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#caseObligation"/>
+      <owl:hasValue rdf:resource="#amend_environmental_approval"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PP22:89-90</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#WithNewEnvironmentalDocumentation">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#EnvironmentalAmendment"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasProjectChange"/>
+          <owl:someValuesFrom rdf:resource="#NewDocChange"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#caseObligation"/>
+      <owl:hasValue rdf:resource="#prepare_new_environmental_documentation"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <owl:disjointWith rdf:resource="#WithoutNewEnvironmentalDocumentation"/>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PP22:89-90</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#WithoutNewEnvironmentalDocumentation">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#EnvironmentalAmendment"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasProjectChange"/>
+          <owl:someValuesFrom rdf:resource="#NoNewDocChange"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasProjectChange"/>
+          <owl:allValuesFrom rdf:resource="#NoNewDocChange"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MODEL:closure</source_id>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PP22:89-90</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#ScreenedCase">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#Case"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasScreening"/>
+          <owl:someValuesFrom>
+            <owl:Class>
+              <owl:oneOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#UKL"/>
+                <rdf:Description rdf:about="#AMDAL"/>
+              </owl:oneOf>
+            </owl:Class>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">MODEL:screening</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#RegulatedSurfaceDischarge">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#WaterActivity"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#dischargesTo"/>
+          <owl:someValuesFrom rdf:resource="#SurfaceWater"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#isActivityOf"/>
+          <owl:someValuesFrom rdf:resource="#ScreenedCase"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#activityObligation"/>
+      <owl:hasValue rdf:resource="#water_pertek_required"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#activityObligation"/>
+      <owl:hasValue rdf:resource="#water_slo_required"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:3</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#WaterTechnicalRevision">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#WaterActivity"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#dischargesTo"/>
+          <owl:someValuesFrom rdf:resource="#SurfaceWater"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasCurrentPertek"/>
+          <owl:someValuesFrom rdf:resource="#WaterPertek"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasTechnicalChange"/>
+          <owl:someValuesFrom rdf:resource="#TechnicalWaterChange"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#activityObligation"/>
+      <owl:hasValue rdf:resource="#amend_water_pertek"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:15</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#TechnicalStudyBranch">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#WaterTechnicalRevision"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasImpactAssessment"/>
+          <owl:someValuesFrom>
+            <owl:Class>
+              <owl:intersectionOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#ImpactAssessment"/>
+                <owl:Restriction>
+                  <owl:onProperty rdf:resource="#extentChanges"/>
+                  <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:hasValue>
+                </owl:Restriction>
+              </owl:intersectionOf>
+            </owl:Class>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#activityObligation"/>
+      <owl:hasValue rdf:resource="#prepare_technical_study"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <owl:disjointWith rdf:resource="#TechnicalStandardBranch"/>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:16.1.a</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#TechnicalStandardBranch">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#WaterTechnicalRevision"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasImpactAssessment"/>
+          <owl:someValuesFrom>
+            <owl:Class>
+              <owl:intersectionOf rdf:parseType="Collection">
+                <rdf:Description rdf:about="#ImpactAssessment"/>
+                <owl:Restriction>
+                  <owl:onProperty rdf:resource="#extentChanges"/>
+                  <owl:hasValue rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</owl:hasValue>
+                </owl:Restriction>
+              </owl:intersectionOf>
+            </owl:Class>
+          </owl:someValuesFrom>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#activityObligation"/>
+      <owl:hasValue rdf:resource="#prepare_standard_technical_documentation"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:16.1.b</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#InteractingAmendments">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#EnvironmentalAmendment"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasActivity"/>
+          <owl:someValuesFrom rdf:resource="#WaterTechnicalRevision"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasPlanEdge"/>
+      <owl:hasValue rdf:resource="#technical_issue_before_environmental_issue"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:15</source_id>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:14</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#UKLSubmissionSequence">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#InteractingAmendments"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasScreening"/>
+          <owl:hasValue rdf:resource="#UKL"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasPlanEdge"/>
+      <owl:hasValue rdf:resource="#ukl_application_order"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:16.2</source_id>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:8.2</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#ConcurrentSubmissionPermitted">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#InteractingAmendments"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasScreening"/>
+          <owl:hasValue rdf:resource="#AMDAL"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:8.1</source_id>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:16.2</source_id>
+</owl:Class>
+
+<owl:Class rdf:about="#ManagementTechnicalDependency">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass>
+    <owl:Class>
+      <owl:intersectionOf rdf:parseType="Collection">
+        <rdf:Description rdf:about="#WithoutNewEnvironmentalDocumentation"/>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasProjectChange"/>
+          <owl:someValuesFrom rdf:resource="#ManagementMonitoringChange"/>
+        </owl:Restriction>
+        <owl:Restriction>
+          <owl:onProperty rdf:resource="#hasActivity"/>
+          <owl:someValuesFrom rdf:resource="#WaterTechnicalRevision"/>
+        </owl:Restriction>
+      </owl:intersectionOf>
+    </owl:Class>
+  </owl:equivalentClass>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">PP22:93.2</source_id>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#UKL">
+  <rdf:type rdf:resource="#Screening"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#AMDAL">
+  <rdf:type rdf:resource="#Screening"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#amend_environmental_approval">
+  <rdf:type rdf:resource="#ObligationKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#prepare_new_environmental_documentation">
+  <rdf:type rdf:resource="#ObligationKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#water_pertek_required">
+  <rdf:type rdf:resource="#ObligationKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#water_slo_required">
+  <rdf:type rdf:resource="#ObligationKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#amend_water_pertek">
+  <rdf:type rdf:resource="#ObligationKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#prepare_technical_study">
+  <rdf:type rdf:resource="#ObligationKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#prepare_standard_technical_documentation">
+  <rdf:type rdf:resource="#ObligationKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#submit_water_pertek_change">
+  <rdf:type rdf:resource="#StepKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#submit_environmental_change">
+  <rdf:type rdf:resource="#StepKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#water_pertek_change_issued">
+  <rdf:type rdf:resource="#StepKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#environmental_change_issued">
+  <rdf:type rdf:resource="#StepKind"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#technical_issue_before_environmental_issue">
+  <rdf:type rdf:resource="#PlanEdge"/>
+  <edgeBefore rdf:resource="#water_pertek_change_issued"/>
+  <edgeAfter rdf:resource="#environmental_change_issued"/>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:14</source_id>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#ukl_application_order">
+  <rdf:type rdf:resource="#PlanEdge"/>
+  <edgeBefore rdf:resource="#submit_water_pertek_change"/>
+  <edgeAfter rdf:resource="#submit_environmental_change"/>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:16.2</source_id>
+  <source_id rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P5:8.2</source_id>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#case_B">
+  <rdf:type rdf:resource="#Case"/>
+  <hasSnapshot rdf:resource="#snapshot_B"/>
+  <hasExistingApproval rdf:resource="#existing_env_approval"/>
+  <hasScreening rdf:resource="#UKL"/>
+  <hasProjectChange rdf:resource="#project_change_0"/>
+  <rdf:type>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasProjectChange"/>
+      <owl:allValuesFrom>
+        <owl:Class>
+          <owl:oneOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="#project_change_0"/>
+          </owl:oneOf>
+        </owl:Class>
+      </owl:allValuesFrom>
+    </owl:Restriction>
+  </rdf:type>
+  <hasActivity rdf:resource="#water_activity_B"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#snapshot_B">
+  <rdf:type rdf:resource="#Snapshot"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#existing_env_approval">
+  <rdf:type rdf:resource="#EnvironmentalApproval"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#project_change_0">
+  <rdf:type rdf:resource="#CapacityIncrease"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#water_activity_B">
+  <rdf:type rdf:resource="#WaterActivity"/>
+  <dischargesTo rdf:resource="#receiving_surface_water"/>
+  <hasCurrentPertek rdf:resource="#existing_water_pertek"/>
+  <hasWaterTechnicalChange rdf:resource="#water_change"/>
+  <hasImpactAssessment rdf:resource="#impact_assessment"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#receiving_surface_water">
+  <rdf:type rdf:resource="#SurfaceWater"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#existing_water_pertek">
+  <rdf:type rdf:resource="#WaterPertek"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#water_change">
+  <rdf:type rdf:resource="#TreatmentDesignChange"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#impact_assessment">
+  <rdf:type rdf:resource="#ImpactAssessment"/>
+  <extentChanges rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</extentChanges>
+</owl:NamedIndividual>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#UKL"/>
+    <rdf:Description rdf:about="#AMDAL"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+
+</rdf:RDF>

@@ -1,0 +1,97 @@
+{
+  "status": "CONSISTENT",
+  "obligations": [
+    "amend_environmental_approval",
+    "amend_water_pertek",
+    "prepare_new_environmental_documentation",
+    "prepare_technical_study",
+    "water_pertek_required",
+    "water_slo_required"
+  ],
+  "conclusions": [
+    "Case",
+    "EnvironmentalAmendment",
+    "InteractingAmendments",
+    "RegulatedSurfaceDischarge",
+    "ScreenedCase",
+    "TechnicalStudyBranch",
+    "Thing",
+    "UKLSubmissionSequence",
+    "WaterActivity",
+    "WaterTechnicalRevision",
+    "WithNewEnvironmentalDocumentation"
+  ],
+  "precedence": [
+    [
+      "submit_water_pertek_change",
+      "submit_environmental_change"
+    ],
+    [
+      "water_pertek_change_issued",
+      "environmental_change_issued"
+    ]
+  ],
+  "evidence_gaps": [],
+  "explanation": [
+    {
+      "subject": "case_X",
+      "conclusion": "EnvironmentalAmendment",
+      "sources": [
+        "PP22:89-90"
+      ]
+    },
+    {
+      "subject": "case_X",
+      "conclusion": "InteractingAmendments",
+      "sources": [
+        "P5:14",
+        "P5:15"
+      ]
+    },
+    {
+      "subject": "case_X",
+      "conclusion": "ScreenedCase",
+      "sources": [
+        "MODEL:screening"
+      ]
+    },
+    {
+      "subject": "case_X",
+      "conclusion": "UKLSubmissionSequence",
+      "sources": [
+        "P5:8.2",
+        "P5:16.2"
+      ]
+    },
+    {
+      "subject": "case_X",
+      "conclusion": "WithNewEnvironmentalDocumentation",
+      "sources": [
+        "PP22:89-90"
+      ]
+    },
+    {
+      "subject": "water_activity_X",
+      "conclusion": "RegulatedSurfaceDischarge",
+      "sources": [
+        "P5:3"
+      ]
+    },
+    {
+      "subject": "water_activity_X",
+      "conclusion": "TechnicalStudyBranch",
+      "sources": [
+        "P5:16.1.a"
+      ]
+    },
+    {
+      "subject": "water_activity_X",
+      "conclusion": "WaterTechnicalRevision",
+      "sources": [
+        "P5:15"
+      ]
+    }
+  ],
+  "case_obligations_asserted_before_reasoning": false,
+  "inverse_membership_inferred": true
+}

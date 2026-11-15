@@ -1,0 +1,157 @@
+test_amdal_does_not_inherit_ukl_strict_application_order (test_enviro.Acceptance.test_amdal_does_not_inherit_ukl_strict_application_order) ... FAIL
+test_conflicting_impact_evidence_is_quarantined (test_enviro.Acceptance.test_conflicting_impact_evidence_is_quarantined) ... FAIL
+test_expansion_combines_environmental_and_water_obligations (test_enviro.Acceptance.test_expansion_combines_environmental_and_water_obligations) ... FAIL
+test_explanations_include_applicable_provisions (test_enviro.Acceptance.test_explanations_include_applicable_provisions) ... FAIL
+test_fresh_snapshot_does_not_keep_previous_document_branch (test_enviro.Acceptance.test_fresh_snapshot_does_not_keep_previous_document_branch) ... FAIL
+test_identity_only_is_narrow_exception (test_enviro.Acceptance.test_identity_only_is_narrow_exception) ... FAIL
+test_incomplete_change_inventory_does_not_prove_identity_only (test_enviro.Acceptance.test_incomplete_change_inventory_does_not_prove_identity_only) ... FAIL
+test_management_only_still_has_interacting_technical_dependency (test_enviro.Acceptance.test_management_only_still_has_interacting_technical_dependency) ... FAIL
+test_missing_prior_pertek_does_not_use_amendment_route (test_enviro.Acceptance.test_missing_prior_pertek_does_not_use_amendment_route) ... FAIL
+test_mixed_identity_and_capacity_does_not_erase_new_documentation (test_enviro.Acceptance.test_mixed_identity_and_capacity_does_not_erase_new_documentation) ... FAIL
+test_outsourcing_does_not_become_automatic_exemption (test_enviro.Acceptance.test_outsourcing_does_not_become_automatic_exemption) ... FAIL
+test_property_chain_creates_unasserted_case_obligation (test_enviro.Acceptance.test_property_chain_creates_unasserted_case_obligation) ... FAIL
+test_second_design_selects_standard_documentation (test_enviro.Acceptance.test_second_design_selects_standard_documentation) ... FAIL
+test_two_distinct_snapshots_conflict_with_one_snapshot_contract (test_enviro.Acceptance.test_two_distinct_snapshots_conflict_with_one_snapshot_contract) ... FAIL
+test_unknown_extent_never_defaults_to_no_change (test_enviro.Acceptance.test_unknown_extent_never_defaults_to_no_change) ... FAIL
+test_unknown_proposed_screening_does_not_copy_old_regime (test_enviro.Acceptance.test_unknown_proposed_screening_does_not_copy_old_regime) ... FAIL
+
+======================================================================
+FAIL: test_amdal_does_not_inherit_ukl_strict_application_order (test_enviro.Acceptance.test_amdal_does_not_inherit_ukl_strict_application_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 70, in test_amdal_does_not_inherit_ukl_strict_application_order
+    self.assertIn('ConcurrentSubmissionPermitted', r['conclusions'])
+AssertionError: 'ConcurrentSubmissionPermitted' not found in []
+
+======================================================================
+FAIL: test_conflicting_impact_evidence_is_quarantined (test_enviro.Acceptance.test_conflicting_impact_evidence_is_quarantined)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 75, in test_conflicting_impact_evidence_is_quarantined
+    self.assertEqual(r['status'], 'INCONSISTENT')
+AssertionError: 'CONSISTENT' != 'INCONSISTENT'
+- CONSISTENT
++ INCONSISTENT
+? ++
+
+
+======================================================================
+FAIL: test_expansion_combines_environmental_and_water_obligations (test_enviro.Acceptance.test_expansion_combines_environmental_and_water_obligations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 25, in test_expansion_combines_environmental_and_water_obligations
+    self.assertTrue({'amend_environmental_approval', 'prepare_new_environmental_documentation',
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_explanations_include_applicable_provisions (test_enviro.Acceptance.test_explanations_include_applicable_provisions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 113, in test_explanations_include_applicable_provisions
+    self.assertTrue({'PP22:89-90', 'P5:15', 'P5:16.1.a', 'P5:3'} <= sources)
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_fresh_snapshot_does_not_keep_previous_document_branch (test_enviro.Acceptance.test_fresh_snapshot_does_not_keep_previous_document_branch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 102, in test_fresh_snapshot_does_not_keep_previous_document_branch
+    self.assertIn('prepare_technical_study', before['obligations'])
+AssertionError: 'prepare_technical_study' not found in []
+
+======================================================================
+FAIL: test_identity_only_is_narrow_exception (test_enviro.Acceptance.test_identity_only_is_narrow_exception)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 52, in test_identity_only_is_narrow_exception
+    self.assertIn('amend_environmental_approval', r['obligations'])
+AssertionError: 'amend_environmental_approval' not found in []
+
+======================================================================
+FAIL: test_incomplete_change_inventory_does_not_prove_identity_only (test_enviro.Acceptance.test_incomplete_change_inventory_does_not_prove_identity_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 60, in test_incomplete_change_inventory_does_not_prove_identity_only
+    self.assertIn('complete_project_change_inventory', r['evidence_gaps'])
+AssertionError: 'complete_project_change_inventory' not found in []
+
+======================================================================
+FAIL: test_management_only_still_has_interacting_technical_dependency (test_enviro.Acceptance.test_management_only_still_has_interacting_technical_dependency)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 44, in test_management_only_still_has_interacting_technical_dependency
+    self.assertIn('WithoutNewEnvironmentalDocumentation', r['conclusions'])
+AssertionError: 'WithoutNewEnvironmentalDocumentation' not found in []
+
+======================================================================
+FAIL: test_missing_prior_pertek_does_not_use_amendment_route (test_enviro.Acceptance.test_missing_prior_pertek_does_not_use_amendment_route)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 97, in test_missing_prior_pertek_does_not_use_amendment_route
+    self.assertIn('prior_water_pertek_or_initial_application_route', r['evidence_gaps'])
+AssertionError: 'prior_water_pertek_or_initial_application_route' not found in []
+
+======================================================================
+FAIL: test_mixed_identity_and_capacity_does_not_erase_new_documentation (test_enviro.Acceptance.test_mixed_identity_and_capacity_does_not_erase_new_documentation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 64, in test_mixed_identity_and_capacity_does_not_erase_new_documentation
+    self.assertIn('prepare_new_environmental_documentation', r['obligations'])
+AssertionError: 'prepare_new_environmental_documentation' not found in []
+
+======================================================================
+FAIL: test_outsourcing_does_not_become_automatic_exemption (test_enviro.Acceptance.test_outsourcing_does_not_become_automatic_exemption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 92, in test_outsourcing_does_not_become_automatic_exemption
+    self.assertIn('outsourced_wastewater_route_outside_verified_slice', r['evidence_gaps'])
+AssertionError: 'outsourced_wastewater_route_outside_verified_slice' not found in []
+
+======================================================================
+FAIL: test_property_chain_creates_unasserted_case_obligation (test_enviro.Acceptance.test_property_chain_creates_unasserted_case_obligation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 81, in test_property_chain_creates_unasserted_case_obligation
+    self.assertIn('water_slo_required', r['obligations'])
+AssertionError: 'water_slo_required' not found in []
+
+======================================================================
+FAIL: test_second_design_selects_standard_documentation (test_enviro.Acceptance.test_second_design_selects_standard_documentation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 31, in test_second_design_selects_standard_documentation
+    self.assertIn('prepare_standard_technical_documentation', r['obligations'])
+AssertionError: 'prepare_standard_technical_documentation' not found in []
+
+======================================================================
+FAIL: test_two_distinct_snapshots_conflict_with_one_snapshot_contract (test_enviro.Acceptance.test_two_distinct_snapshots_conflict_with_one_snapshot_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 108, in test_two_distinct_snapshots_conflict_with_one_snapshot_contract
+    self.assertEqual(r['status'], 'INCONSISTENT')
+AssertionError: 'CONSISTENT' != 'INCONSISTENT'
+- CONSISTENT
++ INCONSISTENT
+? ++
+
+
+======================================================================
+FAIL: test_unknown_extent_never_defaults_to_no_change (test_enviro.Acceptance.test_unknown_extent_never_defaults_to_no_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 36, in test_unknown_extent_never_defaults_to_no_change
+    self.assertIn('amend_water_pertek', r['obligations'])
+AssertionError: 'amend_water_pertek' not found in []
+
+======================================================================
+FAIL: test_unknown_proposed_screening_does_not_copy_old_regime (test_enviro.Acceptance.test_unknown_proposed_screening_does_not_copy_old_regime)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/0038d25bba16/enviro_test/test_enviro.py", line 87, in test_unknown_proposed_screening_does_not_copy_old_regime
+    self.assertIn('proposed_activity_screening', r['evidence_gaps'])
+AssertionError: 'proposed_activity_screening' not found in []
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.002s
+
+FAILED (failures=16)

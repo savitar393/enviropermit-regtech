@@ -1,0 +1,120 @@
+{
+  "A": {
+    "id": "A",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "CapacityIncrease"
+    ],
+    "changes_complete": true,
+    "screening": "UKL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": "TreatmentDesignChange",
+    "impact_extent": [
+      true
+    ]
+  },
+  "B": {
+    "id": "B",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "CapacityIncrease"
+    ],
+    "changes_complete": true,
+    "screening": "UKL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": "TreatmentDesignChange",
+    "impact_extent": [
+      false
+    ]
+  },
+  "U": {
+    "id": "U",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "CapacityIncrease"
+    ],
+    "changes_complete": true,
+    "screening": "UKL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": "TreatmentDesignChange",
+    "impact_extent": []
+  },
+  "M": {
+    "id": "M",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "ManagementMonitoringChange"
+    ],
+    "changes_complete": true,
+    "screening": "UKL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": "WastewaterManagementChange",
+    "impact_extent": [
+      false
+    ]
+  },
+  "I": {
+    "id": "I",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "IdentityChange"
+    ],
+    "changes_complete": true,
+    "screening": "UKL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": null,
+    "impact_extent": []
+  },
+  "X": {
+    "id": "X",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "IdentityChange",
+      "CapacityIncrease"
+    ],
+    "changes_complete": true,
+    "screening": "UKL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": "TreatmentDesignChange",
+    "impact_extent": [
+      true
+    ]
+  },
+  "D": {
+    "id": "D",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "CapacityIncrease"
+    ],
+    "changes_complete": true,
+    "screening": "AMDAL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": "TreatmentDesignChange",
+    "impact_extent": [
+      true
+    ]
+  },
+  "C": {
+    "id": "C",
+    "existing_environmental_approval": true,
+    "project_changes": [
+      "CapacityIncrease"
+    ],
+    "changes_complete": true,
+    "screening": "UKL",
+    "surface_discharge": true,
+    "existing_water_pertek": true,
+    "water_change": "TreatmentDesignChange",
+    "impact_extent": [
+      true,
+      false
+    ]
+  }
+}

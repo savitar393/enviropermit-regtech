@@ -1,0 +1,47 @@
+{
+  "context": {
+    "assessment_id": "assessment-A",
+    "scenario_id": "scenario-A",
+    "evidence_snapshot_id": "snapshot-A",
+    "assessed_on": "2026-11-14",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Peningkatan kapasitas produksi makanan",
+  "period_id": "proposed-configuration",
+  "activities": [
+    {
+      "id": "water-1",
+      "scope_id": "outlet-1",
+      "kind": "WaterActivity",
+      "surface_discharge": true,
+      "existing_water_pertek": true,
+      "water_change": "TreatmentDesignChange"
+    }
+  ],
+  "observations": [
+    {
+      "id": "impact-1",
+      "context": {
+        "assessment_id": "assessment-A",
+        "scenario_id": "scenario-A",
+        "evidence_snapshot_id": "snapshot-A",
+        "assessed_on": "2026-11-14",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "water-1",
+      "scope_id": "outlet-1",
+      "period_id": "proposed-configuration",
+      "extent_changes": [
+        true
+      ],
+      "origin": "HYPOTHETICAL"
+    }
+  ],
+  "project_changes": [
+    "CapacityIncrease"
+  ],
+  "changes_complete": true,
+  "screening": "UKL",
+  "existing_environmental_approval": true
+}
