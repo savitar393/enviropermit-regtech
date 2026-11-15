@@ -404,7 +404,9 @@
 
 ###  https://example.org/enviropermit#TechnicalStudyAttachmentCandidate
 :TechnicalStudyAttachmentCandidate rdf:type owl:Class ;
-                                   rdfs:subClassOf :ReviewableCandidate .
+                                   rdfs:subClassOf :ReviewableCandidate ;
+                                   :source_id "MODEL:candidate-workflow" ,
+                                              "P5:16.1.a" .
 
 
 ###  https://example.org/enviropermit#TechnicalStudyBranch
@@ -695,45 +697,186 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
    :missingEvidence "prior_water_pertek_or_initial_application_route" .
 
 #################################################################
-# Sources and interpretation notes inherited from the spike
+# Sources, version intervals, scopes, and rule mappings (T2)
 #################################################################
 :Provision a owl:Class .
+:documentId a owl:AnnotationProperty .
 :locator a owl:AnnotationProperty .
 :sourceURL a owl:AnnotationProperty .
+:effectiveFrom a owl:AnnotationProperty .
+:effectiveTo a owl:AnnotationProperty .
+:provisionScope a owl:AnnotationProperty .
+:supersedes a owl:AnnotationProperty .
+:reviewStatus a owl:AnnotationProperty .
+:ruleId a owl:AnnotationProperty .
+:caseId a owl:AnnotationProperty .
+
 :provision_0 a owl:NamedIndividual, :Provision ;
- :source_id "PP22:89-90" ; :locator "Pasal 89(1), 89(2)(b),(h),(j), 90(1)-(3), 91" ;
- rdfs:comment "Environmental approval amendment; capacity increase needs the new-environmental-documentation route, while a complete set of encoded administrative/management changes follows the route without a new environmental document. The latter does not mean no paperwork or no approval. Mixed changes are not treated as administrative-only." ; :sourceURL <https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf> .
+ :source_id "PP22:89-90" ; :documentId "PP22_2021" ;
+ :locator "Pasal 89(1), 89(2)(b),(h),(j), 90(1)-(3), 91" ;
+ :sourceURL <https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf> ;
+ :effectiveFrom "2021-02-02"^^xsd:date ; :provisionScope "environmental_approval_change" ; :reviewStatus "VERIFIED" ;
+ :ruleId "EnvironmentalAmendment", "WithNewEnvironmentalDocumentation", "WithoutNewEnvironmentalDocumentation" ;
+ :caseId "A", "B", "U", "M", "I", "X", "D", "C" ;
+ rdfs:comment "Environmental approval amendment; capacity increase needs the new-environmental-documentation route, while a complete set of encoded administrative/management changes follows the route without a new environmental document. The latter does not mean no paperwork or no approval. Mixed changes are not treated as administrative-only." .
+
 :provision_1 a owl:NamedIndividual, :Provision ;
- :source_id "PP22:93.2" ; :locator "Pasal 93(2)" ;
- rdfs:comment "Management/monitoring changes requiring technical approval are based on a technical approval change." ; :sourceURL <https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf> .
+ :source_id "PP22:93.2" ; :documentId "PP22_2021" ;
+ :locator "Pasal 93(2)" ;
+ :sourceURL <https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf> ;
+ :effectiveFrom "2021-02-02"^^xsd:date ; :provisionScope "environmental_approval_change" ; :reviewStatus "VERIFIED" ;
+ :ruleId "ManagementTechnicalDependency" ;
+ :caseId "M" ;
+ rdfs:comment "Management/monitoring changes requiring technical approval are based on a technical approval change." .
+
 :provision_2 a owl:NamedIndividual, :Provision ;
- :source_id "P5:3" ; :locator "Pasal 3(1)-(2)(a)" ;
- rdfs:comment "AMDAL/UKL-UPL activities conducting surface-water wastewater discharge must have technical approval and SLO. Obligation existence does not mean a new issuance is always needed or already satisfied." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:3" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 3(1)-(2)(a)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "RegulatedSurfaceDischarge" ;
+ :caseId "A", "B", "U", "M", "X", "D", "C" ;
+ rdfs:comment "AMDAL/UKL-UPL activities conducting surface-water wastewater discharge must have technical approval and SLO. Obligation existence does not mean a new issuance is always needed or already satisfied." .
+
 :provision_3 a owl:NamedIndividual, :Provision ;
- :source_id "P5:15" ; :locator "Pasal 15(1)-(2)" ;
- rdfs:comment "Technical wastewater changes including treatment design and wastewater management require technical approval amendment. The spike assumes evidenced prior Pertek and a direct surface-water discharge route." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:15" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 15(1)-(2)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "InteractingAmendments", "WaterTechnicalRevision" ;
+ :caseId "A", "B", "U", "M", "X", "D", "C" ;
+ rdfs:comment "Technical wastewater changes including treatment design and wastewater management require technical approval amendment. The spike assumes evidenced prior Pertek and a direct surface-water discharge route." .
+
 :provision_4 a owl:NamedIndividual, :Provision ;
- :source_id "P5:16.1.a" ; :locator "Pasal 16(1)(a)" ;
- rdfs:comment "Changed impact-spread extent leads to technical study attachment. The physical finding is input evidence, not predicted by OWL." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:16.1.a" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 16(1)(a)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "TechnicalStudyAttachmentCandidate", "TechnicalStudyBranch", "water-study-candidate" ;
+ :caseId "A", "D", "M", "X" ;
+ rdfs:comment "Changed impact-spread extent leads to technical study attachment. The physical finding is input evidence, not predicted by OWL." .
+
 :provision_5 a owl:NamedIndividual, :Provision ;
- :source_id "P5:16.1.b" ; :locator "Pasal 16(1)(b)" ;
- rdfs:comment "Explicit unchanged impact-spread extent leads to standards-compliance technical documentation. Unknown is not unchanged." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:16.1.b" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 16(1)(b)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "TechnicalStandardBranch" ;
+ :caseId "B" ;
+ rdfs:comment "Explicit unchanged impact-spread extent leads to standards-compliance technical documentation. Unknown is not unchanged." .
+
 :provision_6 a owl:NamedIndividual, :Provision ;
- :source_id "P5:16.2" ; :locator "Pasal 16(2)" ;
- rdfs:comment "Articles 8-12 apply mutatis mutandis to technical approval amendment." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:16.2" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 16(2)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "ConcurrentSubmissionPermitted", "UKLSubmissionSequence" ;
+ :caseId "A", "B", "U", "M", "X", "D" ;
+ rdfs:comment "Articles 8-12 apply mutatis mutandis to technical approval amendment." .
+
 :provision_7 a owl:NamedIndividual, :Provision ;
- :source_id "P5:8.1" ; :locator "Pasal 8(1)" ;
- rdfs:comment "AMDAL technical application can be concurrent with or precede environmental application; no strict before-only rule." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:8.1" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 8(1)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "ConcurrentSubmissionPermitted" ;
+ :caseId "D" ;
+ rdfs:comment "AMDAL technical application can be concurrent with or precede environmental application; no strict before-only rule." .
+
 :provision_8 a owl:NamedIndividual, :Provision ;
- :source_id "P5:8.2" ; :locator "Pasal 8(2)" ;
- rdfs:comment "UKL-UPL technical application precedes environmental application. Application is distinguished from issuance." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:8.2" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 8(2)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "UKLSubmissionSequence" ;
+ :caseId "A", "B", "U", "M", "X" ;
+ rdfs:comment "UKL-UPL technical application precedes environmental application. Application is distinguished from issuance." .
+
 :provision_9 a owl:NamedIndividual, :Provision ;
- :source_id "P5:14" ; :locator "Pasal 14(1)" ;
- rdfs:comment "Technical approval is a prerequisite for environmental approval issuance. Not a claim that every technical approval must be issued before environmental application." ; :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> .
+ :source_id "P5:14" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 14(1)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
+ :ruleId "InteractingAmendments" ;
+ :caseId "A", "B", "U", "M", "X", "D" ;
+ rdfs:comment "Technical approval is a prerequisite for environmental approval issuance. Not a claim that every technical approval must be issued before environmental application." .
+
 :provision_10 a owl:NamedIndividual, :Provision ;
- :source_id "MODEL:closure" ; :locator "Modeling assumption, not legislation" ;
+ :source_id "MODEL:closure" ; :documentId "MODEL_ASSUMPTION" ;
+ :locator "Modeling assumption, not legislation" ;
+ :provisionScope "modeling_assumption" ; :reviewStatus "MODEL_ASSUMPTION" ;
+ :ruleId "WithoutNewEnvironmentalDocumentation" ;
+ :caseId "I", "M", "X" ;
  rdfs:comment "Universal closure over project changes is asserted only if the fixture explicitly certifies a complete inventory. Open-world absence does not establish exclusivity." .
+
 :provision_11 a owl:NamedIndividual, :Provision ;
- :source_id "MODEL:screening" ; :locator "Modeling assumption, not legislation" ;
+ :source_id "MODEL:screening" ; :documentId "MODEL_ASSUMPTION" ;
+ :locator "Modeling assumption, not legislation" ;
+ :provisionScope "modeling_assumption" ; :reviewStatus "MODEL_ASSUMPTION" ;
+ :ruleId "ScreenedCase" ;
+ :caseId "A", "B", "U", "M", "X", "D", "C" ;
  rdfs:comment "Proposed-project AMDAL/UKL screening is supplied as a hypothetical verified input. Historical approval does not automatically establish the changed project's regime." .
-:candidate_workflow_source a owl:NamedIndividual, :Provision ; :source_id "MODEL:candidate-workflow" ; rdfs:comment "Persiapan kandidat bernama untuk review, bukan bukti pemenuhan atau penerbitan." .
+
+:candidate_workflow_source a owl:NamedIndividual, :Provision ;
+ :source_id "MODEL:candidate-workflow" ; :documentId "MODEL_ASSUMPTION" ;
+ :locator "Modeling assumption, not legislation" ;
+ :provisionScope "modeling_assumption" ; :reviewStatus "MODEL_ASSUMPTION" ;
+ :ruleId "TechnicalStudyAttachmentCandidate", "water-study-candidate" ;
+ :caseId "A", "D", "M", "X" ;
+ rdfs:comment "Persiapan kandidat bernama untuk review, bukan bukti pemenuhan atau penerbitan." .
+
+:provision_feed_repealed a owl:NamedIndividual, :Provision ;
+ :source_id "P5:feed-sector" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Ketentuan teknis air limbah sektor pakan yang dicabut sebagian" ;
+ :sourceURL <https://peraturan.bpk.go.id/Details/210999/> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ; :effectiveTo "2026-01-19"^^xsd:date ;
+ :provisionScope "feed_sector_wastewater" ; :reviewStatus "VERIFIED" ;
+ rdfs:comment "Partial repeal of specific feed-sector wastewater provisions in Permen LHK 5/2021; industrial surface-water Pertek clauses remain unaffected." .
+
+:provision_feed_2026 a owl:NamedIndividual, :Provision ;
+ :source_id "P2_2026:feed-sector" ; :documentId "PERMEN_LH_2_2026" ;
+ :locator "Ketentuan pengganti sektor pakan pada Permen LH/BPLH 2/2026" ;
+ :sourceURL <https://peraturan.bpk.go.id/Details/347119/permen-lhbplh-no-2-tahun-2026> ;
+ :effectiveFrom "2026-01-20"^^xsd:date ;
+ :provisionScope "feed_sector_wastewater" ; :supersedes "P5:feed-sector" ; :reviewStatus "VERIFIED" ;
+ rdfs:comment "Replaces only the repealed feed-sector provisions of Permen LHK 5/2021 from its effective date." .
+
+:provision_pp5_2021 a owl:NamedIndividual, :Provision ;
+ :source_id "PP5_2021:perizinan-dasar" ; :documentId "PP5_2021" ;
+ :locator "Pasal 4-5 (Persyaratan dasar perizinan berusaha berbasis risiko)" ;
+ :sourceURL <https://peraturan.bpk.go.id/Details/161835/pp-no-5-tahun-2021> ;
+ :effectiveFrom "2021-02-02"^^xsd:date ; :effectiveTo "2025-06-04"^^xsd:date ;
+ :provisionScope "business_licensing_context" ; :reviewStatus "VERIFIED" ;
+ rdfs:comment "Initial risk-based business licensing framework prior to replacement by PP 28/2025." .
+
+:provision_pp28_2025 a owl:NamedIndividual, :Provision ;
+ :source_id "PP28_2025:perizinan-dasar" ; :documentId "PP28_2025" ;
+ :locator "Ketentuan persyaratan dasar persetujuan lingkungan dan perizinan berusaha" ;
+ :sourceURL <https://peraturan.bpk.go.id/Details/319773/pp-no-28-tahun-2025> ;
+ :effectiveFrom "2025-06-05"^^xsd:date ;
+ :provisionScope "business_licensing_context" ; :supersedes "PP5_2021:perizinan-dasar" ; :reviewStatus "VERIFIED" ;
+ rdfs:comment "Replaces PP 5/2021 for risk-based business licensing and basic environmental approval context." .
+
+:provision_p4_screening a owl:NamedIndividual, :Provision ;
+ :source_id "P4:penapisan-industri" ; :documentId "PERMEN_LHK_4_2021" ;
+ :locator "Pasal 2-4, Lampiran I Bidang Perindustrian" ;
+ :sourceURL <https://jdih.menlhk.go.id/kiosk/files/2021pmlhk004_menlhk_06082021103523.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "activity_screening" ; :reviewStatus "VERIFIED" ;
+ rdfs:comment "Mandatory AMDAL, UKL-UPL, or SPPL screening criteria by KBLI, scale, and location sensitivity." .
+
+:provision_p5_emisi a owl:NamedIndividual, :Provision ;
+ :source_id "P5:28-emisi" ; :documentId "PERMEN_LHK_5_2021" ;
+ :locator "Pasal 28-29 (Pertek dan SLO Pemenuhan Baku Mutu Emisi)" ;
+ :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
+ :effectiveFrom "2021-04-01"^^xsd:date ;
+ :provisionScope "emission_pertek" ; :reviewStatus "VERIFIED" ;
+ rdfs:comment "Stationary emission sources in mandatory AMDAL/UKL-UPL activities require emission technical approval and SLO." .
+
+:provision_p22_2025 a owl:NamedIndividual, :Provision ;
+ :source_id "P22_2025:kewenangan" ; :documentId "PERMEN_LH_22_2025" ;
+ :locator "Ketentuan kewenangan penerbitan persetujuan lingkungan" ;
+ :sourceURL <https://peraturan.bpk.go.id/Details/345674/permen-lhbplh-no-22-tahun-2025> ;
+ :effectiveFrom "2025-10-01"^^xsd:date ;
+ :provisionScope "approval_authority" ; :reviewStatus "VERIFIED" ;
+ rdfs:comment "Environmental approval issuance authority allocation under Permen LH/BPLH 22/2025." .

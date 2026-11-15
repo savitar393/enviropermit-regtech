@@ -182,7 +182,7 @@ public final class ReasoningCli {
       result.put("inferred_triples", OwlSupport.triples(finalDelta, namespace));
       result.put("consistency_status", "CONSISTENT"); result.put("conflicts", List.of());
       result.put("fired_rules", firings); result.put("stage_iterations", iterations);
-      project(result, reasoner, core, facts, queries);
+      project(result, reasoner, core, facts, queries, knowledge.provisions);
       return result;
     } finally { if (reasoner != null) reasoner.dispose(); manager.removeOntology(core); }
   }
@@ -201,7 +201,7 @@ public final class ReasoningCli {
 
   /** Generic projection: criteria/branch names and missing-evidence keys live in KB. */
   static void project(Map<String, Object> result, OWLReasoner reasoner, OWLOntology core,
-                      JsonNode facts, JsonNode queries) {
+                      JsonNode facts, JsonNode queries, Map<String, Map<String, Object>> provisions) {
     Map<String, List<String>> classifications = new TreeMap<>();
     Map<String, Set<String>> typeIRIs = new TreeMap<>();
     List<Map<String, Object>> traces = new ArrayList<>();
@@ -214,7 +214,11 @@ public final class ReasoningCli {
         List<String> sources = core.getAnnotationAssertionAxioms(c.getIRI()).stream()
           .filter(a -> a.getProperty().getIRI().toString().equals(OwlSupport.NS + "source_id"))
           .map(a -> ((OWLLiteral)a.getValue()).getLiteral()).sorted().toList();
-        if (!sources.isEmpty()) traces.add(Map.of("subject", name.asText(), "conclusion", OwlSupport.shortName(c.getIRI()), "sources", sources));
+        if (!sources.isEmpty()) {
+          List<Map<String, Object>> details = sources.stream().map(provisions::get).filter(Objects::nonNull).toList();
+          traces.add(Map.of("subject", name.asText(), "conclusion", OwlSupport.shortName(c.getIRI()),
+                            "sources", sources, "provisions", details));
+        }
       }
     }
     result.put("classifications", classifications);

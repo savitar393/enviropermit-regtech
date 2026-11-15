@@ -12,6 +12,7 @@ final class KnowledgeBase {
   final OWLOntology core;
   final List<Rule> rules = new ArrayList<>();
   final ObjectNode queries = ReasoningCli.JSON.createObjectNode();
+  final Map<String, Map<String, Object>> provisions = new TreeMap<>();
 
   KnowledgeBase(Path path) throws Exception {
     var manager = OWLManager.createOWLOntologyManager();
@@ -46,6 +47,42 @@ final class KnowledgeBase {
     queries.set("gaps", specs("EvidenceRequirement", Map.of("subjectClass", "subject_class", "missingEvidence", "missing_evidence",
         "whenProperty", "when_property", "missingProperty", "missing_property", "whenBooleanProperty", "when_boolean_property",
         "requiredBooleanProperty", "required_boolean_property"), false));
+    loadProvisions();
+  }
+
+  private void loadProvisions() {
+    for (var a : core.getClassAssertionAxioms(OwlSupport.cls("Provision"))) {
+      IRI subject = a.getIndividual().asOWLNamedIndividual().getIRI();
+      String id = singleLiteral(subject, OwlSupport.NS + "source_id", true);
+      if (provisions.containsKey(id)) throw new IllegalArgumentException("Duplicate provision source_id: " + id);
+      Map<String, Object> row = new LinkedHashMap<>();
+      row.put("id", id);
+      row.put("document_id", singleLiteral(subject, OwlSupport.NS + "documentId", false));
+      row.put("locator", singleLiteral(subject, OwlSupport.NS + "locator", false));
+      row.put("source_url", singleAnnotationText(subject, OwlSupport.NS + "sourceURL"));
+      row.put("effective_from", singleLiteral(subject, OwlSupport.NS + "effectiveFrom", false));
+      row.put("effective_to", singleLiteral(subject, OwlSupport.NS + "effectiveTo", false));
+      row.put("scope", singleLiteral(subject, OwlSupport.NS + "provisionScope", false));
+      row.put("review_status", singleLiteral(subject, OwlSupport.NS + "reviewStatus", false));
+      provisions.put(id, row);
+    }
+  }
+
+  private String singleLiteral(IRI subject, String propertyIri, boolean required) {
+    List<String> values = core.getAnnotationAssertionAxioms(subject).stream()
+      .filter(a -> a.getProperty().getIRI().toString().equals(propertyIri))
+      .map(a -> ((OWLLiteral)a.getValue()).getLiteral().trim()).toList();
+    if (values.size() > 1 || (required && (values.isEmpty() || values.get(0).isBlank())))
+      throw new IllegalArgumentException("Invalid provision annotation " + propertyIri + " on " + subject);
+    return values.isEmpty() ? null : values.get(0);
+  }
+
+  private String singleAnnotationText(IRI subject, String propertyIri) {
+    List<String> values = core.getAnnotationAssertionAxioms(subject).stream()
+      .filter(a -> a.getProperty().getIRI().toString().equals(propertyIri))
+      .map(a -> a.getValue() instanceof IRI iri ? iri.toString() : ((OWLLiteral)a.getValue()).getLiteral().trim()).toList();
+    if (values.size() > 1) throw new IllegalArgumentException("Ambiguous provision annotation " + propertyIri);
+    return values.isEmpty() ? null : values.get(0);
   }
 
   private ArrayNode specs(String type, Map<String, String> fields, boolean branches) {

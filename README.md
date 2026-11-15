@@ -2,7 +2,7 @@
 
 EnviroPermit-KBS adalah prototipe sistem pendukung keputusan untuk menilai kewajiban lingkungan dari kegiatan dan perubahan suatu proyek. Contoh yang dapat dijalankan saat ini menggunakan kasus sintetis perubahan pengelolaan air limbah.
 
-**Status pengembangan.** Tahap T1 menyediakan model kasus, CLI, dan rangkaian tes penalaran. Pemilihan versi ketentuan berdasarkan tanggal, penapisan lintas kegiatan, perencanaan, API, dan antarmuka web masih dalam rencana. [Rencana proyek](docs/EnviroPermit_KBS_Project_Plan.md)
+**Status pengembangan.** Tahap T1 dan T2 menyediakan model kasus, registry sumber dan pemilihan versi ketentuan berdasarkan tanggal/lingkup, CLI, serta rangkaian tes penalaran. Penapisan lintas kegiatan, perencanaan, API, dan antarmuka web masih dalam rencana. [Rencana proyek](docs/EnviroPermit_KBS_Project_Plan.md)
 
 ## Menjalankan contoh
 

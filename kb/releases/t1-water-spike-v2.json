@@ -18,6 +18,6 @@
   "supported_scope": "Synthetic industrial surface-water amendment cases from the 2026-11-14 spike; no legal-version selection",
   "knowledge_base_path": "kb/enviropermit.ttl",
   "checksums": {
-    "knowledge_base": "c68a98b739349610dc48c09f27b5524b801d88ddfaebf0c2769fa82fe4227974"
+    "knowledge_base": "49db9c0d575a0b6653a4c19c9f1f507c5cf36b6fe90eef3653bdd5d8dc40945f"
   }
 }

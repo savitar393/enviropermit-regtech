@@ -118,6 +118,21 @@ class KBRelease(Contract):
     supported_scope: str
 
 
+class ProvisionRecord(Contract):
+    id: str = Field(min_length=1)
+    document_id: str | None = None
+    locator: str = Field(min_length=1)
+    source_url: str | None = None
+    effective_from: date | None = None
+    effective_to: date | None = None
+    scope: str = Field(min_length=1)
+    supersedes: tuple[str, ...] = ()
+    interpretation_note: str = Field(min_length=1)
+    review_status: Literal["VERIFIED", "MODEL_ASSUMPTION", "DRAFT"] = "VERIFIED"
+    rule_ids: tuple[str, ...] = ()
+    case_ids: tuple[str, ...] = ()
+
+
 class ProfileReport(Contract):
     in_owl2_dl_profile: bool
     violations: tuple[str, ...] = ()
@@ -142,7 +157,7 @@ class FiredRuleRecord(Contract):
 class InferenceResult(Contract):
     schema_version: Literal["1.1"] = "1.1"
     context: ReasoningContext
-    consistency_status: Literal["CONSISTENT", "INCONSISTENT", "INVALID_PROFILE", "NONCONVERGENT"]
+    consistency_status: Literal["CONSISTENT", "INCONSISTENT", "INVALID_PROFILE", "NONCONVERGENT", "VERSION_CONFLICT"]
     inferred_triples: tuple[Triple, ...] = ()
     core_inferred_triples: tuple[Triple, ...] = ()
     classifications: dict[str, tuple[str, ...]] = Field(default_factory=dict)

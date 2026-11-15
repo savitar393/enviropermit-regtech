@@ -4,6 +4,7 @@ from pathlib import Path
 
 from .contracts import CaseSnapshot
 from .inference import infer, load_release, prepare_facts
+from .sources import select_release
 
 
 def main():
@@ -14,7 +15,7 @@ def main():
     parser.add_argument("--core-only", action="store_true")
     args = parser.parse_args()
     snapshot = CaseSnapshot.model_validate_json(args.case.read_text(encoding="utf-8"))
-    release = load_release(args.release) if args.release else load_release()
+    release = load_release(args.release) if args.release else select_release(snapshot)
     result = infer(prepare_facts(snapshot), release, artifact_dir=args.output, run_rules=not args.core_only)
     print(result.model_dump_json(indent=2))
     return 0 if result.consistency_status == "CONSISTENT" else 2

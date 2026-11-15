@@ -307,11 +307,11 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 **Consumes:** `CaseSnapshot`, `ProvisionRecord`, sumber bagian 6.  
 **Produces:** `select_release(snapshot: CaseSnapshot, registry: list[ProvisionRecord]) -> KBRelease`; melempar `VersionConflictError` bila ketentuan bertumpang tindih tanpa prioritas eksplisit. Deklarasikan `ProvisionRecord` sesuai schema bagian 6 di `contracts.py`.
 
-- [ ] Tulis `test_partial_repeal_preserves_unaffected_clause` dan `test_overlapping_versions_return_conflict`; expected provision IDs ditulis manual dari fixture.
-- [ ] Jalankan kedua test; pastikan selection yang salah tertangkap.
-- [ ] Ekstrak profil kegiatan dan ketentuan utama; rekam pengecualian, scope, dan effective dates. Buat source-to-rule mapping untuk screening, water, air, dan kewenangan.
-- [ ] Jalankan `pytest tests/test_source_selection.py -q`; periksa semua rule produksi mempunyai ketentuan atau label MODEL_ASSUMPTION yang eksplisit.
-- [ ] Commit `feat: version provisions and rule packs`.
+- [x] Tulis `test_partial_repeal_preserves_unaffected_clause` dan `test_overlapping_versions_return_conflict`; expected provision IDs ditulis manual dari fixture.
+- [x] Jalankan kedua test; pastikan selection yang salah tertangkap.
+- [x] Ekstrak profil kegiatan dan ketentuan utama; rekam pengecualian, scope, dan effective dates. Buat source-to-rule mapping untuk screening, water, air, dan kewenangan.
+- [x] Jalankan `pytest tests/test_source_selection.py -q`; periksa semua rule produksi mempunyai ketentuan atau label MODEL_ASSUMPTION yang eksplisit.
+- [x] Commit `feat: version provisions and rule packs`.
 
 ### T3 — Penapisan dan perubahan proyek
 
