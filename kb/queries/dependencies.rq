@@ -1,0 +1,7 @@
+PREFIX : <https://example.org/enviropermit#>
+
+SELECT ?afterStep ?beforeStep ?sourceId
+WHERE {
+  ?afterStep :requiresStep ?beforeStep .
+  OPTIONAL { ?afterStep :source_id ?sourceId . }
+}

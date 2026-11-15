@@ -396,6 +396,37 @@ class ScenarioDiff(Contract):
     explanation_links: tuple[dict, ...] = ()
 
 
+class SupportEdge(Contract):
+    from_node: str
+    to_node: str
+    relation: Literal[
+        "FACT_SUPPORTS_RULE",
+        "RULE_INFERS_CONCLUSION",
+        "PROVISION_BACKS_RULE",
+        "EVIDENCE_GAP_BLOCKS_DECISION",
+    ]
+
+
+class ExplanationTrace(Contract):
+    conclusion_id: str
+    subject_id: str
+    scope_id: str
+    obligation_kind: str
+    applicability: Applicability
+    fulfillment: Fulfillment
+    derivation_kind: Literal["SUPPORTING_PATH", "MINIMAL_JUSTIFICATION"] = "SUPPORTING_PATH"
+    supporting_fact_ids: tuple[str, ...] = ()
+    supporting_triples: tuple[Triple, ...] = ()
+    axiom_rule_ids: tuple[str, ...] = ()
+    fired_rule_ids: tuple[str, ...] = ()
+    support_edges: tuple[SupportEdge, ...] = ()
+    provision_ids: tuple[str, ...] = ()
+    provisions: tuple[ProvisionRecord, ...] = ()
+    assumptions: tuple[str, ...] = ()
+    unresolved_evidence_ids: tuple[str, ...] = ()
+    summary: str = ""
+
+
 class VersionConflictError(ValueError):
     def __init__(self, provision_ids: tuple[str, ...], assessed_on: date, scope: str):
         self.provision_ids, self.assessed_on, self.scope = provision_ids, assessed_on, scope

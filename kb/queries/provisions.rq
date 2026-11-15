@@ -1,0 +1,11 @@
+PREFIX : <https://example.org/enviropermit#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?provision ?sourceId ?locator ?scope ?reviewStatus
+WHERE {
+  ?provision rdf:type :Provision .
+  ?provision :source_id ?sourceId .
+  ?provision :locator ?locator .
+  ?provision :provisionScope ?scope .
+  OPTIONAL { ?provision :reviewStatus ?reviewStatus . }
+}

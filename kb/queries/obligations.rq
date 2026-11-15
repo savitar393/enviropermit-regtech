@@ -1,0 +1,11 @@
+PREFIX : <https://example.org/enviropermit#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?subject ?scope ?obligation ?ruleClass ?sourceId
+WHERE {
+  ?subject :onScope ?scope .
+  ?subject :activityObligation ?obligation .
+  ?subject rdf:type ?ruleClass .
+  ?ruleClass :entailsObligation ?obligation .
+  ?ruleClass :source_id ?sourceId .
+}

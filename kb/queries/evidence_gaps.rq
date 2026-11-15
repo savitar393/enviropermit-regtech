@@ -1,0 +1,10 @@
+PREFIX : <https://example.org/enviropermit#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT ?requirement ?decision ?message ?sourceId
+WHERE {
+  ?requirement rdf:type :EvidenceRequirement .
+  ?requirement :forDecision ?decision .
+  ?requirement :missingMessage ?message .
+  ?requirement :source_id ?sourceId .
+}

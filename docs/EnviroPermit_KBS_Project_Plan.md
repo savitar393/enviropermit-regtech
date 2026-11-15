@@ -385,11 +385,11 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 **Consumes:** facts, asserted/inferred triples, rule firings, source registry, plan.  
 **Produces:** `explain(result: AssessmentResult, conclusion_id: str) -> ExplanationTrace`; `render_report(result: AssessmentResult, plans: list[PlanCandidate]) -> str`.
 
-- [ ] Tulis `test_explanation_reaches_input_and_source`, `test_model_assumption_is_labeled`, dan `test_changed_conclusion_explains_changed_fact`.
-- [ ] Jalankan test; pastikan daftar sumber tanpa hubungan ke kesimpulan gagal.
-- [ ] Implementasikan trace terstruktur serta SPARQL untuk kewajiban, ketergantungan, bukti, dan sumber. Gunakan supporting paths dan rule records; bedakan dengan minimal logical justification bila belum tersedia.
-- [ ] Jalankan `pytest tests/test_explanations.py -q`; setiap kesimpulan utama di demo harus dapat dijelaskan dari input sampai sumber.
-- [ ] Commit `feat: expose decision traces and reports`.
+- [x] Tulis `test_explanation_reaches_input_and_source`, `test_model_assumption_is_labeled`, dan `test_changed_conclusion_explains_changed_fact`.
+- [x] Jalankan test; pastikan daftar sumber tanpa hubungan ke kesimpulan gagal.
+- [x] Implementasikan trace terstruktur serta SPARQL untuk kewajiban, ketergantungan, bukti, dan sumber. Gunakan supporting paths dan rule records; bedakan dengan minimal logical justification bila belum tersedia.
+- [x] Jalankan `pytest tests/test_explanations.py -q`; setiap kesimpulan utama di demo harus dapat dijelaskan dari input sampai sumber.
+- [x] Commit `feat: expose decision traces and reports`.
 
 ### T9 — Aplikasi konsultasi
 
