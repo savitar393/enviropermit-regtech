@@ -341,16 +341,16 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 
 ### T5 — Komposisi multiaktivitas dan fulfillment
 
-**Files:** `composition.py`, `kb/modules/composition.owl`, `kb/rules/composition.swrl`, `kb/shapes.ttl`, `tests/test_composition.py`.
+**Files:** `composition.py`, `kb/enviropermit.ttl`, `kb/shapes.ttl`, `tests/test_composition.py`.
 
 **Consumes:** obligation assessments, cakupan persetujuan, completeness assertions.  
 **Produces:** `compose(result: AssessmentResult) -> AssessmentResult`; `FulfillmentFinding` ditambahkan ke `contracts.py` dengan status, subject, scope, evidence IDs.
 
-- [ ] Tulis `test_same_obligation_kind_different_scope_stays_separate`, `test_shared_evidence_requires_matching_scope`, dan `test_incomplete_inventory_cannot_prove_no_other_changes`.
-- [ ] Jalankan test; pastikan deduplication berbasis nama saja gagal.
-- [ ] Implementasikan aturan komposisi dan pemenuhan eksplisit. Shapes melaporkan kelengkapan input; axioms/rules memutuskan konsekuensi domain.
-- [ ] Jalankan `pytest tests/test_composition.py -q`; periksa proyek yang memiliki water+air tetap mempertahankan dua cakupan dan satu konteks proyek.
-- [ ] Commit `feat: compose scoped obligations across activities`.
+- [x] Tulis `test_same_obligation_kind_different_scope_stays_separate`, `test_shared_evidence_requires_matching_scope`, dan `test_incomplete_inventory_cannot_prove_no_other_changes`.
+- [x] Jalankan test; pastikan deduplication berbasis nama saja gagal.
+- [x] Implementasikan aturan komposisi dan pemenuhan eksplisit. Shapes melaporkan kelengkapan input; axioms/rules memutuskan konsekuensi domain.
+- [x] Jalankan `pytest tests/test_composition.py -q`; periksa proyek yang memiliki water+air tetap mempertahankan dua cakupan dan satu konteks proyek.
+- [x] Commit `feat: compose scoped obligations across activities`.
 
 ### T6 — Rencana, ketergantungan, dan diagnosis hambatan
 

@@ -219,12 +219,22 @@ class ObligationAssessment(Contract):
     rule_ids: tuple[str, ...]
 
 
+class FulfillmentFinding(Contract):
+    subject_id: str
+    scope_id: str
+    obligation_kind: str = ""
+    status: Fulfillment
+    evidence_ids: tuple[str, ...] = ()
+    provision_ids: tuple[str, ...] = ()
+
+
 class AssessmentResult(Contract):
     assessment_id: str
     context: ReasoningContext
     kb_version: str
     consistency_status: Literal["CONSISTENT", "INCONSISTENT", "INVALID_PROFILE", "NONCONVERGENT", "VERSION_CONFLICT"]
     obligation_assessments: tuple[ObligationAssessment, ...] = ()
+    fulfillment_findings: tuple[FulfillmentFinding, ...] = ()
     project_obligations: tuple[str, ...] = ()
     decisions: tuple[DecisionFinding, ...] = ()
     precedence: tuple[tuple[str, str], ...] = ()
@@ -232,6 +242,7 @@ class AssessmentResult(Contract):
     conflicts: tuple[str, ...] = ()
     explanations: tuple[dict, ...] = ()
     input_issues: tuple[str, ...] = ()
+    facts: FactBundle | None = None
     inference: InferenceResult | None = None
 
 

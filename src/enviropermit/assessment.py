@@ -200,5 +200,6 @@ def assess(
         conflicts=inference.conflicts,
         explanations=inference.source_traces,
         input_issues=inference.input_issues,
+        facts=facts,
         inference=inference,
     )

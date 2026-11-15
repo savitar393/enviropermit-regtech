@@ -1080,6 +1080,36 @@
                                              "P5:29.2-emisi-kajian" .
 
 
+###  https://example.org/enviropermit#InteractingEmissionAmendments
+:InteractingEmissionAmendments rdf:type owl:Class ;
+                               owl:equivalentClass [ owl:intersectionOf ( :EnvironmentalAmendment
+                                                                          [ rdf:type owl:Restriction ;
+                                                                            owl:onProperty :hasActivity ;
+                                                                            owl:someValuesFrom :EmissionTechnicalRevision
+                                                                          ]
+                                                                        ) ;
+                                                     rdf:type owl:Class
+                                                   ] ;
+                               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                                 owl:onProperty :hasPlanEdge ;
+                                                 owl:hasValue :emission_technical_issue_before_environmental_issue
+                                               ] ;
+                               :source_id "P5:28-emisi" ,
+                                          "P5:40-emisi-perubahan" .
+
+
+###  https://example.org/enviropermit#MultiMediaAmendmentScenario
+:MultiMediaAmendmentScenario rdf:type owl:Class ;
+                             owl:equivalentClass [ owl:intersectionOf ( :InteractingAmendments
+                                                                        :InteractingEmissionAmendments
+                                                                      ) ;
+                                                   rdf:type owl:Class
+                                                 ] ;
+                             :source_id "P5:14" ,
+                                        "P5:28-emisi" ,
+                                        "PP22:89-90" .
+
+
 #################################################################
 #    Individuals
 #################################################################
@@ -1211,6 +1241,18 @@
                                                             :ObligationKind .
 
 
+###  https://example.org/enviropermit#emission_pertek_change_issued
+:emission_pertek_change_issued rdf:type owl:NamedIndividual ,
+                                        :StepKind .
+
+
+###  https://example.org/enviropermit#emission_technical_issue_before_environmental_issue
+:emission_technical_issue_before_environmental_issue rdf:type owl:NamedIndividual ,
+                                                              :PlanEdge ;
+                                                     :edgeAfter :environmental_change_issued ;
+                                                     :edgeBefore :emission_pertek_change_issued .
+
+
 #################################################################
 #    General axioms
 #################################################################
@@ -1340,8 +1382,8 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :locator "Pasal 89(1), 89(2)(b),(h),(j), 90(1)-(3), 91" ;
  :sourceURL <https://jdih.kemenkoinfra.go.id/cfind/source/files/pp/2021/1.-salinan-pp-nomor-22-tahun-2021.pdf> ;
  :effectiveFrom "2021-02-02"^^xsd:date ; :provisionScope "environmental_approval_change" ; :reviewStatus "VERIFIED" ;
- :ruleId "EnvironmentalAmendment", "WithNewEnvironmentalDocumentation", "WithoutNewEnvironmentalDocumentation" ;
- :caseId "A", "B", "U", "M", "I", "X", "D", "C" ;
+ :ruleId "EnvironmentalAmendment", "MultiMediaAmendmentScenario", "WithNewEnvironmentalDocumentation", "WithoutNewEnvironmentalDocumentation" ;
+ :caseId "A", "B", "U", "M", "I", "X", "D", "C", "media_water_and_air" ;
  rdfs:comment "Environmental approval amendment; capacity increase needs the new-environmental-documentation route, while a complete set of encoded administrative/management changes follows the route without a new environmental document. The latter does not mean no paperwork or no approval. Mixed changes are not treated as administrative-only." .
 
 :provision_1 a owl:NamedIndividual, :Provision ;
@@ -1421,8 +1463,8 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :locator "Pasal 14(1)" ;
  :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ; :provisionScope "wastewater_pertek" ; :reviewStatus "VERIFIED" ;
- :ruleId "InteractingAmendments" ;
- :caseId "A", "B", "U", "M", "X", "D" ;
+ :ruleId "InteractingAmendments", "MultiMediaAmendmentScenario" ;
+ :caseId "A", "B", "U", "M", "X", "D", "media_water_and_air" ;
  rdfs:comment "Technical approval is a prerequisite for environmental approval issuance. Not a claim that every technical approval must be issued before environmental application." .
 
 :provision_10 a owl:NamedIndividual, :Provision ;
@@ -1557,7 +1599,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ;
  :provisionScope "emission_pertek" ; :reviewStatus "VERIFIED" ;
- :ruleId "ExemptNonEmittingActivity", "MaintainedEmissionPertekActivity", "RegulatedStationaryEmission" ;
+ :ruleId "ExemptNonEmittingActivity", "InteractingEmissionAmendments", "MaintainedEmissionPertekActivity", "MultiMediaAmendmentScenario", "RegulatedStationaryEmission" ;
  :caseId "media_existing_emission_pertek", "media_unverified_emission", "media_water_and_air" ;
  rdfs:comment "Stationary emission sources in mandatory AMDAL/UKL-UPL activities require emission technical approval and SLO; existing valid Pertek without technical source changes satisfies the ongoing obligation without requiring re-issuance." .
 
@@ -1567,7 +1609,7 @@ swrla:isRuleEnabled a owl:AnnotationProperty .
  :sourceURL <https://jdih.menlhk.go.id/new/uploads/files/2021pmlhk005_menlhk_06082021104129.pdf> ;
  :effectiveFrom "2021-04-01"^^xsd:date ;
  :provisionScope "emission_pertek" ; :reviewStatus "VERIFIED" ;
- :ruleId "EmissionTechnicalRevision", "MaintainedEmissionPertekActivity" ;
+ :ruleId "EmissionTechnicalRevision", "InteractingEmissionAmendments", "MaintainedEmissionPertekActivity" ;
  :caseId "media_existing_emission_pertek", "media_water_and_air" ;
  rdfs:comment "Technical changes to stationary emission sources, including boiler additions, fuel switching, or control device modifications, require an emission technical approval amendment." .
 

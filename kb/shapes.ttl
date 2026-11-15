@@ -1,0 +1,51 @@
+@prefix : <https://example.org/enviropermit#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:ScenarioCompletenessShape
+    a sh:NodeShape ;
+    sh:targetClass :Scenario ;
+    sh:property [
+        sh:path :hasScreening ;
+        sh:minCount 1 ;
+        sh:message "proposed_activity_screening" ;
+    ] ;
+    sh:property [
+        sh:path :changesInventoryComplete ;
+        sh:hasValue "true"^^xsd:boolean ;
+        sh:message "complete_project_change_inventory" ;
+    ] .
+
+:FoodManufacturingCompletenessShape
+    a sh:NodeShape ;
+    sh:targetClass :FoodManufacturingActivity ;
+    sh:property [
+        sh:path :hasLocationAssessment ;
+        sh:minCount 1 ;
+        sh:message "protected_area_location_verification" ;
+    ] ;
+    sh:property [
+        sh:path :hasScaleAssessment ;
+        sh:minCount 1 ;
+        sh:message "production_capacity_measurement" ;
+    ] .
+
+:WaterActivityCompletenessShape
+    a sh:NodeShape ;
+    sh:targetClass :WaterActivity ;
+    sh:property [
+        sh:path :dischargesTo ;
+        sh:minCount 1 ;
+        sh:message "wastewater_receiving_media_declaration" ;
+    ] .
+
+:AirActivityCompletenessShape
+    a sh:NodeShape ;
+    sh:targetClass :AirActivity ;
+    sh:property [
+        sh:path :emitsFrom ;
+        sh:minCount 1 ;
+        sh:message "stationary_emission_or_exemption_evidence" ;
+    ] .
