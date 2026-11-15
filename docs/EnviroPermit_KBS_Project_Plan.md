@@ -372,11 +372,11 @@ Urutan default dikerjakan langsung dalam satu alur. Setiap task menghasilkan fun
 **Consumes:** base snapshot, perubahan terstruktur, T1–T6.  
 **Produces:** `fork_scenario(base: CaseSnapshot, changes: list[ScenarioChange]) -> CaseSnapshot`; `compare(left: AssessmentResult, right: AssessmentResult) -> ScenarioDiff`. `ScenarioChange` memiliki subject, field, operation, old/new value, dan evidence IDs.
 
-- [ ] Tulis `test_removed_source_does_not_leave_stale_obligation`, `test_shared_goal_different_configuration`, serta `test_different_kb_versions_are_flagged`.
-- [ ] Jalankan test; pastikan reuse graph hasil inferensi lama gagal.
-- [ ] Buat snapshot baru dan inference context baru. Perbandingan memisahkan perubahan fakta dari perubahan KB. Berikan alasan untuk added/removed/changed/unchanged obligations.
-- [ ] Jalankan `pytest tests/test_scenarios.py -q` terhadap A/B/C; tampilkan unresolved, jangan menyebutnya penghematan kewajiban.
-- [ ] Commit `feat: compare independent project scenarios`.
+- [x] Tulis `test_removed_source_does_not_leave_stale_obligation`, `test_shared_goal_different_configuration`, serta `test_different_kb_versions_are_flagged`.
+- [x] Jalankan test; pastikan reuse graph hasil inferensi lama gagal.
+- [x] Buat snapshot baru dan inference context baru. Perbandingan memisahkan perubahan fakta dari perubahan KB. Berikan alasan untuk added/removed/changed/unchanged obligations.
+- [x] Jalankan `pytest tests/test_scenarios.py -q` terhadap A/B/C; tampilkan unresolved, jangan menyebutnya penghematan kewajiban.
+- [x] Commit `feat: compare independent project scenarios`.
 
 ### T8 — Explanation dan laporan
 

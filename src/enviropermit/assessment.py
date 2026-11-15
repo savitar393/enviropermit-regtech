@@ -51,6 +51,8 @@ def assess(
             conflicts=inference.conflicts,
             explanations=inference.source_traces,
             input_issues=inference.input_issues,
+            snapshot=snapshot,
+            facts=facts,
             inference=inference,
         )
 
@@ -202,6 +204,7 @@ def assess(
         conflicts=inference.conflicts,
         explanations=inference.source_traces,
         input_issues=inference.input_issues,
+        snapshot=snapshot,
         facts=facts,
         inference=inference,
     )

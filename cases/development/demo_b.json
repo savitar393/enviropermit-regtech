@@ -1,0 +1,114 @@
+{
+  "context": {
+    "assessment_id": "assessment-demo-b",
+    "scenario_id": "scenario-demo-b",
+    "evidence_snapshot_id": "snapshot-demo-b",
+    "assessed_on": "2026-11-15",
+    "kb_release_id": "t1-water-spike-v2"
+  },
+  "project_id": "food-project",
+  "goal": "Peningkatan kapasitas produksi makanan dari 8.000 menjadi 12.000 ton/tahun",
+  "period_id": "proposed-configuration",
+  "location": "Kawasan Industri Cikarang",
+  "activities": [
+    {
+      "id": "food-main",
+      "scope_id": "plant-main",
+      "kind": "MainActivity",
+      "kbli": "10799"
+    },
+    {
+      "id": "water-1",
+      "scope_id": "outlet-1",
+      "kind": "WaterActivity",
+      "surface_discharge": true,
+      "existing_water_pertek": true,
+      "water_change": "TreatmentDesignChange"
+    },
+    {
+      "id": "air-1",
+      "scope_id": "boiler-stack-1",
+      "kind": "AirActivity",
+      "stationary_emission": false,
+      "existing_emission_pertek": false,
+      "emission_change": null
+    }
+  ],
+  "observations": [
+    {
+      "id": "obs-loc-b",
+      "context": {
+        "assessment_id": "assessment-demo-b",
+        "scenario_id": "scenario-demo-b",
+        "evidence_snapshot_id": "snapshot-demo-b",
+        "assessed_on": "2026-11-15",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "food-main",
+      "scope_id": "plant-main",
+      "period_id": "proposed-configuration",
+      "in_protected_area": [
+        false
+      ],
+      "origin": "OBSERVED"
+    },
+    {
+      "id": "obs-water-b",
+      "context": {
+        "assessment_id": "assessment-demo-b",
+        "scenario_id": "scenario-demo-b",
+        "evidence_snapshot_id": "snapshot-demo-b",
+        "assessed_on": "2026-11-15",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "water-1",
+      "scope_id": "outlet-1",
+      "period_id": "proposed-configuration",
+      "extent_changes": [
+        true
+      ],
+      "origin": "HYPOTHETICAL"
+    },
+    {
+      "id": "obs-air-b-electric",
+      "context": {
+        "assessment_id": "assessment-demo-b",
+        "scenario_id": "scenario-demo-b",
+        "evidence_snapshot_id": "snapshot-demo-b",
+        "assessed_on": "2026-11-15",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "air-1",
+      "scope_id": "boiler-stack-1",
+      "period_id": "proposed-configuration",
+      "non_emitting_source": [
+        true
+      ],
+      "origin": "OBSERVED"
+    }
+  ],
+  "measurements": [
+    {
+      "id": "meas-cap-b",
+      "context": {
+        "assessment_id": "assessment-demo-b",
+        "scenario_id": "scenario-demo-b",
+        "evidence_snapshot_id": "snapshot-demo-b",
+        "assessed_on": "2026-11-15",
+        "kb_release_id": "t1-water-spike-v2"
+      },
+      "subject_id": "food-main",
+      "scope_id": "plant-main",
+      "period_id": "proposed-configuration",
+      "metric": "production_capacity",
+      "value": 12000.0,
+      "unit": "ton/year",
+      "origin": "HYPOTHETICAL"
+    }
+  ],
+  "project_changes": [
+    "CapacityIncrease"
+  ],
+  "changes_complete": true,
+  "existing_environmental_approval": true
+}

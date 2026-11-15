@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from datetime import date
 from enum import StrEnum
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool
 
@@ -250,6 +250,7 @@ class AssessmentResult(Contract):
     conflicts: tuple[str, ...] = ()
     explanations: tuple[dict, ...] = ()
     input_issues: tuple[str, ...] = ()
+    snapshot: CaseSnapshot | None = None
     facts: FactBundle | None = None
     inference: InferenceResult | None = None
 
@@ -331,6 +332,68 @@ class PlanCandidate(Contract):
     step_statuses: dict[str, StepStatus] = Field(default_factory=dict)
     blockers: tuple[PlanBlocker, ...] = ()
     source_trace: tuple[dict, ...] = ()
+
+
+class ScenarioChange(Contract):
+    subject_id: str = Field(min_length=1)
+    field: str = Field(min_length=1)
+    operation: Literal["SET", "ADD", "REMOVE"] = "SET"
+    old_value: Any = None
+    new_value: Any = None
+    evidence_ids: tuple[str, ...] = ()
+
+
+class ObligationChange(Contract):
+    subject_id: str
+    scope_id: str
+    obligation_kind: str
+    change_kind: Literal[
+        "ADDED",
+        "REMOVED",
+        "CHANGED_STATUS",
+        "BECAME_UNRESOLVED",
+        "RESOLVED_FROM_UNRESOLVED",
+        "UNCHANGED",
+    ]
+    left_applicability: Applicability | None = None
+    right_applicability: Applicability | None = None
+    left_fulfillment: Fulfillment | None = None
+    right_fulfillment: Fulfillment | None = None
+    reason: str
+    is_obligation_saving: bool = False
+    provision_ids: tuple[str, ...] = ()
+    evidence_ids: tuple[str, ...] = ()
+
+
+class PlanDiffSummary(Contract):
+    added_steps: tuple[str, ...] = ()
+    removed_steps: tuple[str, ...] = ()
+    changed_step_statuses: dict[str, tuple[StepStatus, StepStatus]] = Field(default_factory=dict)
+    added_blockers: tuple[str, ...] = ()
+    removed_blockers: tuple[str, ...] = ()
+
+
+class ScenarioDiff(Contract):
+    left_assessment_id: str
+    right_assessment_id: str
+    left_scenario_id: str
+    right_scenario_id: str
+    shared_goal: bool = True
+    same_kb_version: bool = True
+    left_kb_version: str
+    right_kb_version: str
+    kb_version_warning: str | None = None
+    input_changes: tuple[ScenarioChange, ...] = ()
+    obligation_changes: tuple[ObligationChange, ...] = ()
+    added_obligations: tuple[ObligationChange, ...] = ()
+    removed_obligations: tuple[ObligationChange, ...] = ()
+    changed_obligations: tuple[ObligationChange, ...] = ()
+    unresolved_obligations: tuple[ObligationChange, ...] = ()
+    unchanged_obligations: tuple[ObligationChange, ...] = ()
+    added_evidence_gaps: tuple[str, ...] = ()
+    removed_evidence_gaps: tuple[str, ...] = ()
+    plan_changes: PlanDiffSummary = Field(default_factory=PlanDiffSummary)
+    explanation_links: tuple[dict, ...] = ()
 
 
 class VersionConflictError(ValueError):
